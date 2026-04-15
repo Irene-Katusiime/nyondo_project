@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background-color: #f4f7f6;
+    display: flex;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 260px;
+    background-color: #2c3e50;
+    height: 100vh;
+    position: fixed;
+    padding: 25px;
+}
+
+.sidebar h2 { color: #f39c12; margin-bottom: 30px; }
+
+.sidebar a {
+    display: block;
+    color: #bdc3c7;
+    text-decoration: none;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.sidebar a.active, .sidebar a:hover {
+    background-color: #34495e;
+    color: white;
+}
+
+/* Main Layout */
+.main {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+    padding: 40px;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.stats-mini {
+    background: #fff;
+    padding: 10px 20px;
+    border-radius: 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    color: #2c3e50;
+}
+
+/* Grid Layout for Form and Table */
+.deposit-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Form takes 1 part, Table takes 2 parts */
+    gap: 30px;
+}
+
+.form-card, .table-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+h2 {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    border-left: 4px solid #f39c12;
+    padding-left: 10px;
+}
+
+/* Form Styling */
+.form-group { margin-bottom: 15px; }
+
+label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #7f8c8d;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+}
+
+input:focus { border-color: #f39c12; }
+
+.btn-deposit {
+    width: 100%;
+    padding: 12px;
+    background-color: #27ae60; /* Green for "Money In" */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-deposit:hover { background-color: #219150; }
+
+/* Table Styling */
+table { width: 100%; border-collapse: collapse; }
+
+th {
+    text-align: left;
+    padding: 12px;
+    background: #f8f9fa;
+    color: #7f8c8d;
+    font-size: 0.85rem;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+}
+
+tr:hover { background-color: #fcfcfc; }

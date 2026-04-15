@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit Scheme - Nyondo Stock</title>
+    <link rel="stylesheet" href="deposits.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Nyondo Stock</h2>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="sales.html">Sales</a>
+        <a href="deposits.html" class="active">Deposit Scheme</a>
+        <a href="reports.html">Reports</a>
+        <a href="logout.html">Logout</a>
+    </div>
+
+    <div class="main">
+        <header class="top-bar">
+            <h1>Customer Deposit Scheme</h1>
+            <div class="stats-mini">
+                <span>Total Pool: <strong>UGX 12,450,000</strong></span>
+            </div>
+        </header>
+
+        <div class="deposit-grid">
+            
+            <div class="form-card">
+                <h2>Record New Deposit</h2>
+                <form>
+                    <div class="form-group">
+                        <label>Customer Name</label>
+                        <input type="text" placeholder="e.g. John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label>NIN Number</label>
+                        <input type="text" placeholder="CM000... (14 characters)" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" placeholder="07... (Uganda format)" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Amount to Deposit (UGX)</label>
+                        <input type="number" placeholder="Enter amount" required>
+                    </div>
+                    <button type="submit" class="btn-deposit">Confirm Deposit</button>
+                </form>
+            </div>
+
+            <div class="table-card">
+                <h2>Recent Contributions</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Customer</th>
+                            <th>Contact</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Kato Samuel</td>
+                            <td>0701xxxxxx</td>
+                            <td>50,000</td>
+                            <td>12-04-2026</td>
+                            <td><strong>450,000</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Namuli Sarah</td>
+                            <td>0782xxxxxx</td>
+                            <td>120,000</td>
+                            <td>10-04-2026</td>
+                            <td><strong>900,000</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

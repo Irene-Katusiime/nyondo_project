@@ -1,68 +1,95 @@
-body{
-    height:100vh;
-    background: linear-gradient(135deg, #4e73df, #1cc88a);
-    display:flex;
-    justify-content: center;
-    align-items: center;
+ /* 1. Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.container{
+/* 2. Body Styling */
+body {
+    background: linear-gradient(135deg, #2c3e50 0%, #000000 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;     /* Centers vertically */
+}
+
+/* 3. The Login Card */
+.container {
     background: white;
-    padding: 30px;
-    border-radius: 15px;
-    width: 300px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    width: 100%;
+    max-width: 400px; /* Keeps it from getting too wide */
 }
 
-.container h2{
+h2 {
     text-align: center;
-    margin-bottom: 20px;
-    color: #4e73df;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
 }
 
-.form-group{
-    margin-bottom: 15px;
+/* 4. Form Spacing */
+.form-group {
+    margin-bottom: 1.2rem;
 }
 
-.form-group label{
-    font-size: 14px;
-    margin-bottom: 5px;
+label {
     display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: 600;
 }
 
-.form-group input{
-    width:100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 14px;
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
 }
 
-.login-btn{
-    width:100%;
-    padding:10px;
-    background: #4e73df;
-    border: none;
-    border-radius: 8px;
+input:focus {
+    outline: none;
+    border-color: #f39c12; /* Nyondo accent color */
+}
+
+/* 5. The Login Button */
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #2c3e50;
     color: white;
-    font-size: 15px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
     cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.login-btn:hover{
-    background: #2e59d9;
+.login-btn:hover {
+    background-color: #f39c12;
+    transform: translateY(-2px); /* Slight lift on hover */
 }
 
-.extra{
+/* 6. Extra Links */
+.extra {
     text-align: center;
-    margin-top: 20px;
-    font-size: 15px;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
 }
 
-.extra a:hover{
-    /* text-decoration: underline; */
+.extra a {
+    color: #2c3e50;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-/* .form-group input:focus{
-    border-color: #4e73df;
-} */
+.extra a:hover {
+    text-decoration: underline;
+}
