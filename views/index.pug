@@ -1,0 +1,67 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title NyondoStock | Hardware Management System
+  link(rel='stylesheet' href='/css/index.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css')
+header
+  nav.container
+    .logo
+      | Nyondo
+      span Stock
+    ul
+      li
+        a(href='#features') Features
+      li
+        a(href='#roles') User Roles
+      li
+        a.btn-primary(href='#contact') Login
+section.hero
+  .container.hero-content
+    h1
+      | Digitizing 
+      span NYONDO General Hardware LTD
+    p
+      | A centralized system for stock tracking, supplier credit, sales, and the salary-earner deposit scheme.
+    .hero-btns
+      a.btn-primary(href='#features') Explore Modules
+      a.btn-secondary(href='#') Request Access
+section#features.features.container
+  h2.section-title Core Modules
+  .grid
+    .card
+      i.fas.fa-boxes
+      h3 Stock &amp; Sales
+      p
+        | Real-time inventory tracking and seamless sales processing with instant receipting.
+    .card
+      i.fas.fa-file-invoice-dollar
+      h3 Supplier Credit
+      p
+        | Accurately track and manage credit balances with suppliers to maintain healthy relationships.
+    .card
+      i.fas.fa-piggy-bank
+      h3 Deposit Scheme
+      p Specialized management for salary-earner deposits and installments.
+    .card
+      i.fas.fa-truck
+      h3 Transport Automation
+      p Automated calculation of transport charges based on delivery distance and load.
+section#roles.roles
+  .container
+    h2.section-title User Roles
+    .grid
+      .role-box
+        h4 Sales Attendant
+        p Record sales, issue receipts, and check stock levels instantly.
+      .role-box
+        h4 Store Manager
+        p Register new stock, set pricing, and manage inventory thresholds.
+      .role-box
+        h4 Accounts/Admin
+        p Track credit, manage deposit schemes, and generate financial reports.
+footer
+  .container
+    p &copy; 2026 NYONDO General Hardware LTD. All Rights Reserved.
+    p System compliant with NIN and Ugandan Telecom standards.

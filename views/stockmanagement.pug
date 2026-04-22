@@ -1,0 +1,90 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Stock Management - Nyondo Stock
+  link(rel='stylesheet' href='/css/stockmanagement.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css')
+.sidebar
+  h2 Nyondo Stock
+  a(href='#')
+    i.fas.fa-th-large
+    | Dashboard
+  a.active(href='#')
+    i.fas.fa-boxes
+    | Stock
+  a(href='#')
+    i.fas.fa-shopping-cart
+    | Sales
+  a(href='#')
+    i.fas.fa-truck
+    | Suppliers
+  a(href='#')
+    i.fas.fa-wallet
+    | Deposits
+  a(href='#')
+    i.fas.fa-chart-line
+    | Reports
+  a(href='#')
+    i.fas.fa-sign-out-alt
+    | Logout
+.main
+  header.header-section
+    h1 Inventory &amp; Stock
+    .search-bar
+      input(type='text' placeholder='Search items (e.g. Cement)...')
+  .stock-grid
+    .card.form-card
+      h2 Register New Stock
+      form(action='stockmanagement' method='post')
+        .form-group
+          label Item Name
+          input(type='text' name='itemName' placeholder='e.g. Iron Sheets (G28)')
+        .form-group-row
+          .form-group
+            label Category
+            select(name='category')
+              option Roofing
+              option Cement/Binding
+              option Plumbing
+              option Electrical
+          .form-group
+            label Quantity
+            input(type='number' name='quantity' placeholder='In Stock')
+        .form-group-row
+          .form-group
+            label Cost Price (UGX)
+            input(type='number' name='costprice' placeholder='Buying price')
+          .form-group
+            label Selling Price (UGX)
+            input(type='number' name='sellingprice' placeholder='Retail price')
+        button(type='submit') Update Inventory
+    .card.table-card
+      .table-header
+        h2 Current Inventory
+        span.stock-count Total Items: 142
+      table
+        thead
+          tr
+            th Item Name
+            th Category
+            th Stock Level
+            th Unit Price
+            th Action
+        tbody
+          tr
+            td Hima Cement (50kg)
+            td Binding
+            td
+              span.stock-status.normal 45 bags
+            td 34,000
+            td
+              button.btn-edit Edit
+          tr
+            td Nails (3-inch)
+            td Hardware
+            td
+              span.stock-status.low 5 kg
+            td 6,000
+            td
+              button.btn-edit Edit

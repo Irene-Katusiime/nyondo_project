@@ -1,0 +1,81 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Supplier Credit - Nyondo Stock
+  link(rel='stylesheet' href='/css/suppliers.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css')
+.sidebar
+  h2 Nyondo Stock
+  a(href='#')
+    i.fas.fa-th-large
+    | Dashboard
+  a(href='#')
+    i.fas.fa-boxes
+    | Stock
+  a.active(href='#')
+    i.fas.fa-shopping-cart
+    | Sales
+  a(href='#')
+    i.fas.fa-truck
+    | Suppliers
+  a(href='#')
+    i.fas.fa-wallet
+    | Deposits
+  a(href='#')
+    i.fas.fa-boxes
+    | Reports
+  a(href='#')
+    i.fas.fa-sign-out-alt
+    | Logout
+.main
+  header.header-flex
+    h1 Supplier Credit Management
+    .debt-summary
+      p Total Outstanding Debt
+      h2.debt-amount UGX 8,200,000
+  .content-grid
+    .card.form-card
+      h2 Record New Credit
+      form(action='suppliers' method='post')
+        .form-group
+          label Supplier Name
+          select(name='supplierName')
+            option Hima Cement Ltd
+            option Roofings Uganda
+            option Uganda Baati
+        .form-group
+          label Invoice Number
+          input(type='text' name='invoicenumber' placeholder='e.g., INV-9902')
+        .form-group
+          label Credit Amount (UGX)
+          input(type='number' name='creditamount(UGX)' placeholder='Amount owed')
+        .form-group
+          label Due Date
+          input(type='date' name='duedate')
+        button(type='submit') Add to Ledger
+    .card.table-card
+      h2 Supplier Ledger
+      table
+        thead
+          tr
+            th Supplier
+            th Invoice
+            th Owed (UGX)
+            th Due Date
+            th Status
+        tbody
+          tr
+            td Hima Cement
+            td #HC-442
+            td 4,500,000
+            td 20-04-2026
+            td
+              span.status-pill.warning Pending
+          tr
+            td Roofings Ltd
+            td #RF-102
+            td 3,700,000
+            td 15-04-2026
+            td
+              span.status-pill.danger Overdue

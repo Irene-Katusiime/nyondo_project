@@ -1,0 +1,77 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Nyondo sales
+  link(rel='stylesheet' href=' /css/sales.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css')
+// Sidebar
+.sidebar
+  h2 Nyondo Stock
+  a(href='#')
+    i.fas.fa-th-large
+    | Dashboard
+  a(href='#')
+    i.fas.fa-boxes
+    | Stock
+  a.active(href='#')
+    i.fas.fa-shopping-cart
+    | Sales
+  a(href='#')
+    i.fas.fa-truck
+    | Suppliers
+  a(href='#')
+    i.fas.fa-wallet
+    | Deposits
+  a(href='#')
+    i.fas.fa-chart-line
+    | Reports
+  a(href='#')
+    i.fas.fa-sign-out-alt
+    | Logout
+// Main content
+.main
+  h1 Sales Management
+  // sales form
+  .form-container
+    h2 Record Sale
+    form(action='sales' method='post')
+      .form-group
+        label Date
+        input(type='date' name='date')
+      .form-group
+        label Item Name
+        input(type='text' name='itemname' placeholder='Enter item name')
+      .form-group
+        label Quantity
+        input(type='number' name='quantity' placeholder='Enter quantity')
+      .form-group
+        label Unit Price (UGX)
+        input(type='number' name='unitprice' placeholder='Enter price')
+      .form-group
+        label Customer Name
+        input(type='text' name='customername' placeholder='Enter customer name')
+      .form-group
+        label Customer Contact
+        input(type='number' name='customercontact' placeholder='Enter customer contact')
+      button(type='submit') Add Sale
+  // Sales Table
+  .table-container
+    h2 Sales Records
+    table
+      tr
+        th Item
+        th Quantity
+        th Price (UGX)
+        th Total
+      tbody
+        tr
+          td Cement
+          td 10
+          td 15000
+          td 150000
+        tr
+          td Iron Sheets
+          td 5
+          td 40000
+          td 200000

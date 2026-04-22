@@ -1,0 +1,79 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Deposit Scheme - Nyondo Stock
+  link(rel='stylesheet' href='/css/deposits.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css')
+.sidebar
+  h2 Nyondo Stock
+  a(href='#')
+    i.fas.fa-th-large
+    | Dashboard
+  a(href='#')
+    i.fas.fa-boxes
+    | Stock
+  a(href='#')
+    i.fas.fa-shopping-cart
+    | Sales
+  a(href='#')
+    i.fas.fa-truck
+    | Suppliers
+  a.active(href='#')
+    i.fas.fa-wallet
+    | Deposits
+  a(href='#')
+    i.fas.fa-chart-line
+    | Reports
+  a(href='#')
+    i.fas.fa-sign-out-alt
+    | Logout
+.main
+  header.top-bar
+    h1 Customer Deposit Scheme
+    .stats-mini
+      span
+        | Total Pool: 
+        strong UGX 12,450,000
+  .deposit-grid
+    .form-card
+      h2 Record New Deposit
+      form(action='deposits' method='post')
+        .form-group
+          label Customer Name
+          input(type='text' name='Customername' placeholder='e.g. John Doe' required='')
+        .form-group
+          label NIN Number
+          input(type='text' name='NINnumber' placeholder='CM000... (14 characters)' required='')
+        .form-group
+          label Phone Number
+          input(type='tel' name='phonenumber' placeholder='07... (Uganda format)' required='')
+        .form-group
+          label Amount to Deposit (UGX)
+          input(type='number' name='amounttodeposit(UGX)' placeholder='Enter amount' required='')
+        button.btn-deposit(type='submit') Confirm Deposit
+    .table-card
+      h2 Recent Contributions
+      table
+        thead
+          tr
+            th Customer
+            th Contact
+            th Amount
+            th Date
+            th Balance
+        tbody
+          tr
+            td Kato Samuel
+            td 0701xxxxxx
+            td 50,000
+            td 12-04-2026
+            td
+              strong 450,000
+          tr
+            td Namuli Sarah
+            td 0782xxxxxx
+            td 120,000
+            td 10-04-2026
+            td
+              strong 900,000

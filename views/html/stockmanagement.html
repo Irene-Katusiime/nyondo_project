@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Management - Nyondo Stock</title>
+    <link rel="stylesheet" href="stockmanagement.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Nyondo Stock</h2>
+        <a href="#"><i class="fas fa-th-large"></i>Dashboard</a>
+        <a href="#" class="active"><i class="fas fa-boxes"></i>Stock</a>
+        <a href="#"><i class="fas fa-shopping-cart"></i>Sales</a>
+        <a href="#"><i class="fas fa-truck"></i>Suppliers</a>
+         <a href="#"><i class="fas fa-wallet"></i>Deposits</a>
+        <a href="#"><i class="fas fa-chart-line"></i>Reports</a>
+        <a href="#"><i class="fas fa-sign-out-alt"></i>Logout</a>
+    </div>
+
+    <div class="main">
+        <header class="header-section">
+            <h1>Inventory & Stock</h1>
+            <div class="search-bar">
+                <input type="text" placeholder="Search items (e.g. Cement)...">
+            </div>
+        </header>
+
+        <div class="stock-grid">
+            <div class="card form-card">
+                <h2>Register New Stock</h2>
+                <form action="stockmanagement" method="post">
+                    <div class="form-group">
+                        <label>Item Name</label>
+                        <input type="text" name="itemName" placeholder="e.g. Iron Sheets (G28)">
+                    </div>
+                    <div class="form-group-row">
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select name="category">
+                                <option>Roofing</option>
+                                <option>Cement/Binding</option>
+                                <option>Plumbing</option>
+                                <option>Electrical</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Quantity</label>
+                            <input type="number" name="quantity" placeholder="In Stock">
+                        </div>
+                    </div>
+                    <div class="form-group-row">
+                        <div class="form-group">
+                            <label>Cost Price (UGX)</label>
+                            <input type="number" name="costprice" placeholder="Buying price">
+                        </div>
+                        <div class="form-group">
+                            <label>Selling Price (UGX)</label>
+                            <input type="number" name="sellingprice" placeholder="Retail price">
+                        </div>
+                    </div>
+                    <button type="submit">Update Inventory</button>
+                </form>
+            </div>
+
+            <div class="card table-card">
+                <div class="table-header">
+                    <h2>Current Inventory</h2>
+                    <span class="stock-count">Total Items: 142</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Category</th>
+                            <th>Stock Level</th>
+                            <th>Unit Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Hima Cement (50kg)</td>
+                            <td>Binding</td>
+                            <td><span class="stock-status normal">45 bags</span></td>
+                            <td>34,000</td>
+                            <td><button class="btn-edit">Edit</button></td>
+                        </tr>
+                        <tr>
+                            <td>Nails (3-inch)</td>
+                            <td>Hardware</td>
+                            <td><span class="stock-status low">5 kg</span></td>
+                            <td>6,000</td>
+                            <td><button class="btn-edit">Edit</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

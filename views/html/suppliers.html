@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supplier Credit - Nyondo Stock</title>
+    <link rel="stylesheet" href="suppliers.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Nyondo Stock</h2>
+        <a href="#"><i class="fas fa-th-large"></i>Dashboard</a>
+        <a href="#"><i class="fas fa-boxes"></i>Stock</a>
+        <a href="#" class="active"><i class="fas fa-shopping-cart"></i>Sales</a>
+        <a href="#"><i class="fas fa-truck"></i>Suppliers</a>
+        <a href="#"><i class="fas fa-wallet"></i>Deposits</a>
+        <a href="#"><i class="fas fa-boxes"></i>Reports</a>
+        <a href="#"><i class="fas fa-sign-out-alt"></i>Logout</a>
+    </div>
+
+    <div class="main">
+        <header class="header-flex">
+            <h1>Supplier Credit Management</h1>
+            <div class="debt-summary">
+                <p>Total Outstanding Debt</p>
+                <h2 class="debt-amount">UGX 8,200,000</h2>
+            </div>
+        </header>
+
+        <div class="content-grid">
+            <div class="card form-card">
+                <h2>Record New Credit</h2>
+                <form action="suppliers" method="post">
+                    <div class="form-group">
+                        <label>Supplier Name</label>
+                        <select name="supplierName">
+                            <option>Hima Cement Ltd</option>
+                            <option>Roofings Uganda</option>
+                            <option>Uganda Baati</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Invoice Number</label>
+                        <input type="text" name="invoicenumber" placeholder="e.g., INV-9902">
+                    </div>
+                    <div class="form-group">
+                        <label>Credit Amount (UGX)</label>
+                        <input type="number" name="creditamount(UGX)" placeholder="Amount owed">
+                    </div>
+                    <div class="form-group">
+                        <label>Due Date</label>
+                        <input type="date" name="duedate">
+                    </div>
+                    <button type="submit">Add to Ledger</button>
+                </form>
+            </div>
+
+            <div class="card table-card">
+                <h2>Supplier Ledger</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Supplier</th>
+                            <th>Invoice</th>
+                            <th>Owed (UGX)</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Hima Cement</td>
+                            <td>#HC-442</td>
+                            <td>4,500,000</td>
+                            <td>20-04-2026</td>
+                            <td><span class="status-pill warning">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <td>Roofings Ltd</td>
+                            <td>#RF-102</td>
+                            <td>3,700,000</td>
+                            <td>15-04-2026</td>
+                            <td><span class="status-pill danger">Overdue</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

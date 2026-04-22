@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transport Automation - Nyondo Stock</title>
+    <link rel="stylesheet" href="transport.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>Nyondo Stock</h2>
+      <a href="#"><i class="fas fa-th-large"></i>Dashboard</a>
+      <a href="#"><i class="fas fa-boxes"></i>Stock</a>
+      <a href="#"><i class="fas fa-shopping-cart"></i>Sales</a>
+      <a href="#"><i class="fas fa-truck"></i>Suppliers</a>
+      <a href="#"><i class="fas fa-wallet"></i>Deposits</a>
+      <a href="#"><i class="fas fa-chart-line"></i>Reports</a>
+      <a href="#" class="active"
+        ><i class="fas fa-truck-ramp-box"></i>Transport</a
+      >
+      <a href="#"><i class="fas fa-sign-out-alt"></i>Logout</a>
+    </div>
+
+    <div class="main">
+      <h1>Transport & Logistics</h1>
+
+      <div class="transport-grid">
+        <div class="calc-card">
+          <h2>Calculate Charges</h2>
+          <form id="transportForm" action="transport" method="post">
+            <div class="form-group">
+              <label>Delivery Destination</label>
+              <input
+                type="text"
+                name="deliverydestination"
+                placeholder="e.g., Kira Town, Namugongo"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label>Distance (KM)</label>
+              <input
+                type="number"
+                name="distance(km)"
+                id="distance"
+                placeholder="Enter distance"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label>Vehicle Type</label>
+              <select id="vehicle" name="vehicletype">
+                <option value="5000">Motorcycle (Boda)</option>
+                <option value="15000">Small Pickup (Hilux)</option>
+                <option value="40000">Big Truck (Fuso)</option>
+              </select>
+            </div>
+            <div class="total-display">
+              <p>Estimated Fee:</p>
+              <h2 id="fee-result">UGX 0</h2>
+            </div>
+            <button type="button" class="btn-calculate">Record Delivery</button>
+          </form>
+        </div>
+
+        <div class="status-card">
+          <h2>Pending Deliveries</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Vehicle</th>
+                <th>Destination</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Musa Okello</td>
+                <td>Fuso Truck</td>
+                <td>Kira Town</td>
+                <td><span class="badge transit">In Transit</span></td>
+              </tr>
+              <tr>
+                <td>Alice Nakato</td>
+                <td>Small Pickup</td>
+                <td>Bweyogerere</td>
+                <td><span class="badge pending">Pending</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

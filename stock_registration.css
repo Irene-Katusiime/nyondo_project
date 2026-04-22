@@ -1,0 +1,103 @@
+/* 1. Reset and Typography Foundation */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+}
+
+body {
+    background-color: #f4f7f6; /* Matching the dashboard background */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Vertically centered on screen */
+    padding: 40px 20px; /* Crucial padding to prevent heading cut-off */
+}
+
+/* 2. The Form Card (Beautiful Container) */
+.form-container {
+    background: #ffffff;
+    width: 100%;
+    max-width: 500px; /* Perfectly sized for a singular form */
+    padding: 45px;
+    border-radius: 16px; /* Slightly softer corners for elegance */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Soft, floating depth */
+    position: relative;
+    border-top: 5px solid #f39c12; /* Nyondo Orange brand identifier */
+}
+
+/* 3. The Heading (Hierarchy) */
+h2 {
+    color: #2c3e50; /* Professional Dark Blue */
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+/* 4. The Form Itself */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 5. Labels and Inputs (Readability and UX) */
+label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px; /* Space between label and its input */
+    margin-top: 18px; /* Breathing room from the previous input */
+}
+
+input, select {
+    width: 100%;
+    padding: 14px; /* Generous padding for a 'premium' feel */
+    border: 1px solid #ddd;
+    border-radius: 8px; /* Rounded inputs match the container */
+    font-size: 1rem;
+    color: #333;
+    transition: all 0.3s ease; /* Smooth hover/focus animations */
+    outline: none;
+    background-color: #fafafa;
+}
+
+/* Beautiful Interactive State */
+input:focus, select:focus {
+    border-color: #f39c12; /* Nyondo Orange Accent */
+    box-shadow: 0 0 8px rgba(243, 156, 18, 0.2); /* Soft orange glow */
+    background-color: #ffffff;
+}
+
+/* 6. The Submit Button (Call to Action) */
+button {
+    margin-top: 40px;
+    padding: 16px;
+    background-color: #2c3e50; /* Base Blue */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    letter-spacing: 1px;
+}
+
+button:hover {
+    background-color:  #f39c12;
+}
+
+button:active {
+    transform: scale(0.98); /* Small click animation for satisfaction */
+}
+
+/* 7. The Footer Note */
+.note {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    font-style: italic;
+}

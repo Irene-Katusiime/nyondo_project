@@ -1,0 +1,93 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Nyondo Dashboard
+  link(rel='stylesheet' href='/css/dashboard.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css')
+// sidebar
+.sidebar
+  h2 Nyondo Stock
+  p Inventory System
+  a.active(href='#')
+    i.fas.fa-th-large
+    | Dashboard
+  a(href='#')
+    i.fas.fa-boxes
+    | Stock
+  a(href='#')
+    i.fas.fa-shopping-cart
+    | Sales
+  a(href='#')
+    i.fas.fa-truck
+    | Suppliers
+  a(href='#')
+    i.fas.fa-wallet
+    | Deposits
+  a(href='#')
+    i.fas.fa-chart-line
+    | Reports
+  a(href='#')
+    i.fas.fa-sign-out-alt
+    | Logout
+// main
+.main
+  // top bar
+  .topbar
+    h1 Dashboard
+    .user Welcome, Admin
+  // cards
+  .cards
+    .card
+      h3 Total Stock Items
+      h2 1,250
+      p Updated today
+    .card
+      h3 Total Sales
+      h2 UGX 5,800,000
+      p This month revenue
+    .card
+      h3 Supplier Credit
+      h2 UGX 1,200,000
+      p Pending payments
+    .card
+      h3 Customer Deposits
+      h2 UGX 900,000
+      p Savings scheme
+    .card
+      h3 Low Stock Alerts
+      h2 8 Items
+      p Needs restocking
+    .card
+      h3 Profit
+      h2 UGX 2,300,000
+      p Net earnings
+  // table
+  .table-container
+    h3 Recent Sales Activity
+    table
+      tr
+        th Item
+        th Quantity
+        th Price
+        th Total
+        th Status
+      tr
+        td Cement
+        td 10
+        td 35,000
+        td 350,000
+        td Completed
+      tr
+        td Iron Sheets
+        td 5
+        td 60,000
+        td 300,000
+        td Completed
+      tr
+        td Nails
+        td 20
+        td 5,000
+        td 100,000
+        td Pending
+  // </div>

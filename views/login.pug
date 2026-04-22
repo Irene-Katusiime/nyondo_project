@@ -1,0 +1,21 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Login page
+  link(rel='stylesheet' href='/css/login.css')
+.container
+  h2
+    b Nyondo Login
+  form(action='/login' method='post')
+    .form-group
+      label Username
+      input(type='text' name='username' placeholder='Enter your name')
+    .form-group
+      label Password
+      input(type='password' name='password' placeholder='Enter password')
+    button.login-btn(type='submit') Login
+    .extra
+      p
+        | Don&apos;t have an account? 
+        a(href='#') Sign up

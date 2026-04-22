@@ -1,0 +1,27 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Nyondo Sign Up
+link(rel='stylesheet' href='/css/signup.css')
+.signup-container
+  h2 Create Account
+  // This is a form
+  form(action='signup' method='post')
+    .form-group
+      label Full Name
+      input(type='text' name='fullname' placeholder='Enter your name')
+    .form-group
+      label Email
+      input(type='email' name='email' placeholder='Enter your email')
+    .form-group
+      label Password
+      input(type='password' name='password' placeholder='Enter password')
+    .form-group
+      label Confirm password
+      input(type='password' name='confirmpassword' placeholder='Confirm password')
+    button.signup-btn Sign Up
+    .extra
+      p
+        | Already have an account? 
+        a(href='login.html') Login
