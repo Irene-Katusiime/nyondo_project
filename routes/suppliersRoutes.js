@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/suppliers', (req, res)=>{
+router.get('/suppliersform', (req, res)=>{
     res.render('suppliers')
 })
 
-router.post('/stockmanagement',(req ,res)=>{
+router.post('/suppliers',(req ,res)=>{
   console.log(req.body)
 });
 

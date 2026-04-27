@@ -3,7 +3,7 @@ head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   title Supplier Credit - Nyondo Stock
-  link(rel='stylesheet' href='/css/suppliers.css')
+  link(rel='stylesheet' href='css/suppliers.css')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css')
 .sidebar
   h2 Nyondo Stock
@@ -46,13 +46,13 @@ head
             option Uganda Baati
         .form-group
           label Invoice Number
-          input(type='text' name='invoicenumber' placeholder='e.g., INV-9902')
+          input(type='text' name='invoicenumber' placeholder='e.g., INV-9902' required='')
         .form-group
           label Credit Amount (UGX)
-          input(type='number' name='creditamount(UGX)' placeholder='Amount owed')
+          input(type='number' name='creditamount(UGX)' placeholder='Amount owed' required='')
         .form-group
           label Due Date
-          input(type='date' name='duedate')
+          input(type='date' name='duedate' required='')
         button(type='submit') Add to Ledger
     .card.table-card
       h2 Supplier Ledger

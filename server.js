@@ -2,12 +2,17 @@
  const express = require('express');
  const expressSession = require('express-session')
  const path  = require('path')
+ const mongoose = require('mongoose');
+
+ require('dotenv').config();
+ const connectDb = require('./config/db')
 
  //2.Instantiations
 const app = express();
 const port = 3000;
 
 //3.Configurations
+connectDb();
 //Set templating engine to pug
 app.set("view engine","pug");
 app.set("views", path.join(__dirname, "views"))
@@ -23,15 +28,11 @@ app.use(expressSession({
 }))
 
 //5.Routes
-// app.use('/',require('./routes/indexRoutes'))
-app.use('/',require('./routes/dashboardRoutes'))
+app.use('/',require('./routes/authRoutes'))
 app.use('/',require('./routes/depositsRoutes'))
 app.use('/',require('./routes/indexRoutes'))
-app.use('/',require('./routes/loginRoutes'))
 app.use('/',require('./routes/salesRoutes'))
-app.use('/',require('./routes/logoutRoutes'))
-app.use('/',require('./routes/signupRoutes'))
-app.use('/',require('./routes/stockmanagementRoutes'))
+app.use('/',require('./routes/stockRoutes'))
 app.use('/',require('./routes/suppliersRoutes'))
 app.use('/',require('./routes/transportRoutes'))
 

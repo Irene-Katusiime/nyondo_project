@@ -99,7 +99,7 @@ input, select {
 
 .total-display h2 { color: #d35400; font-size: 1.5rem; margin: 0; border: none; padding: 0; }
 
-.btn-calculate {
+button {
     width: 100%;
     padding: 12px;
     background: #2c3e50;
@@ -108,6 +108,10 @@ input, select {
     border-radius: 6px;
     font-weight: bold;
     cursor: pointer;
+}
+
+button :hover{
+  background-color:  #f39c12;
 }
 
 /* Status Badges */

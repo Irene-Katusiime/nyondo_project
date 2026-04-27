@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/sales', (req, res)=>{
+router.get('/salesform', (req, res)=>{
     res.render('sales')
 })
 

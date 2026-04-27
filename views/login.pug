@@ -10,10 +10,10 @@ head
   form(action='/login' method='post')
     .form-group
       label Username
-      input(type='text' name='username' placeholder='Enter your name')
+      input(type='text' name='username' placeholder='Enter your name' required='')
     .form-group
       label Password
-      input(type='password' name='password' placeholder='Enter password')
+      input(type='password' name='password' placeholder='Enter password' required='')
     button.login-btn(type='submit') Login
     .extra
       p

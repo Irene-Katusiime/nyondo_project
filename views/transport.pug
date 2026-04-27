@@ -3,7 +3,7 @@ head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   title Transport Automation - Nyondo Stock
-  link(rel='stylesheet' href='/css/transport.css')
+  link(rel='stylesheet' href='css/transport.css')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css')
 .sidebar
   h2 Nyondo Stock
@@ -45,14 +45,14 @@ head
           input#distance(type='number' name='distance(km)' placeholder='Enter distance' required='')
         .form-group
           label Vehicle Type
-          select#vehicle(name='vehicletype')
+          select#vehicle(name='vehicletype' required='')
             option(value='5000') Motorcycle (Boda)
             option(value='15000') Small Pickup (Hilux)
             option(value='40000') Big Truck (Fuso)
         .total-display
           p Estimated Fee:
           h2#fee-result UGX 0
-        button.btn-calculate(type='button') Record Delivery
+        button(type='button') Record Delivery
     .status-card
       h2 Pending Deliveries
       table

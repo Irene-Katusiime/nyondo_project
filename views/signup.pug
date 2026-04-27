@@ -10,16 +10,16 @@ link(rel='stylesheet' href='/css/signup.css')
   form(action='signup' method='post')
     .form-group
       label Full Name
-      input(type='text' name='fullname' placeholder='Enter your name')
+      input(type='text' name='fullname' placeholder='Enter your full name' required='')
     .form-group
       label Email
-      input(type='email' name='email' placeholder='Enter your email')
+      input(type='email' name='email' placeholder='Enter your email' required='')
     .form-group
-      label Password
-      input(type='password' name='password' placeholder='Enter password')
+      label Phone number
+      input(type='number' name='phonenumber' placeholder='07xxxxxxxx' required='')
     .form-group
-      label Confirm password
-      input(type='password' name='confirmpassword' placeholder='Confirm password')
+      label NIN
+      input(type='text' name='nin' placeholder='CM0000' required='')
     button.signup-btn Sign Up
     .extra
       p

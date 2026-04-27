@@ -33,12 +33,12 @@
                 <form action="stockmanagement" method="post">
                     <div class="form-group">
                         <label>Item Name</label>
-                        <input type="text" name="itemName" placeholder="e.g. Iron Sheets (G28)">
+                        <input type="text" name="itemName" placeholder="e.g. Iron Sheets (G28)" required>
                     </div>
                     <div class="form-group-row">
                         <div class="form-group">
                             <label>Category</label>
-                            <select name="category">
+                            <select name="category" required>
                                 <option>Roofing</option>
                                 <option>Cement/Binding</option>
                                 <option>Plumbing</option>
@@ -47,17 +47,17 @@
                         </div>
                         <div class="form-group">
                             <label>Quantity</label>
-                            <input type="number" name="quantity" placeholder="In Stock">
+                            <input type="number" name="quantity" placeholder="In Stock" required>
                         </div>
                     </div>
                     <div class="form-group-row">
                         <div class="form-group">
                             <label>Cost Price (UGX)</label>
-                            <input type="number" name="costprice" placeholder="Buying price">
+                            <input type="number" name="costprice" placeholder="Buying price" required>
                         </div>
                         <div class="form-group">
                             <label>Selling Price (UGX)</label>
-                            <input type="number" name="sellingprice" placeholder="Retail price">
+                            <input type="number" name="sellingprice" placeholder="Retail price" required>
                         </div>
                     </div>
                     <button type="submit">Update Inventory</button>

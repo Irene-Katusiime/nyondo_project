@@ -3,7 +3,7 @@ head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   title Stock Management - Nyondo Stock
-  link(rel='stylesheet' href='/css/stockmanagement.css')
+  link(rel='stylesheet' href='css/stockmanagement.css')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css')
 .sidebar
   h2 Nyondo Stock
@@ -39,25 +39,25 @@ head
       form(action='stockmanagement' method='post')
         .form-group
           label Item Name
-          input(type='text' name='itemName' placeholder='e.g. Iron Sheets (G28)')
+          input(type='text' name='itemName' placeholder='e.g. Iron Sheets (G28)' required='')
         .form-group-row
           .form-group
             label Category
-            select(name='category')
+            select(name='category' required='')
               option Roofing
               option Cement/Binding
               option Plumbing
               option Electrical
           .form-group
             label Quantity
-            input(type='number' name='quantity' placeholder='In Stock')
+            input(type='number' name='quantity' placeholder='In Stock' required='')
         .form-group-row
           .form-group
             label Cost Price (UGX)
-            input(type='number' name='costprice' placeholder='Buying price')
+            input(type='number' name='costprice' placeholder='Buying price' required='')
           .form-group
             label Selling Price (UGX)
-            input(type='number' name='sellingprice' placeholder='Retail price')
+            input(type='number' name='sellingprice' placeholder='Retail price' required='')
         button(type='submit') Update Inventory
     .card.table-card
       .table-header

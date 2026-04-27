@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/transport', (req, res)=>{
+router.get('/transportation', (req, res)=>{
     res.render('transport')
 })
 

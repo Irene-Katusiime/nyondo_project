@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/deposits', (req, res)=>{
+router.get('/deposit', (req, res)=>{
     res.render('deposits')
 })
 
