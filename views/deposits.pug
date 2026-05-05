@@ -10,16 +10,16 @@ head
   a(href='#')
     i.fas.fa-th-large
     | Dashboard
-  a(href='#')
+  a(href='/stockreg')
     i.fas.fa-boxes
     | Stock
-  a(href='#')
+  a(href='/salesform')
     i.fas.fa-shopping-cart
     | Sales
-  a(href='#')
+  a(href='/suppliersform')
     i.fas.fa-truck
     | Suppliers
-  a.active(href='#')
+  a.active(href='/deposit')
     i.fas.fa-wallet
     | Deposits
   a(href='#')
@@ -38,7 +38,7 @@ head
   .deposit-grid
     .form-card
       h2 Record New Deposit
-      form(action='deposits' method='post')
+      form(action='/deposits' method='post')
         .form-group
           label Customer Name
           input(type='text' name='Customername' placeholder='e.g. John Doe' required='')

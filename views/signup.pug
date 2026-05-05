@@ -7,21 +7,28 @@ link(rel='stylesheet' href='/css/signup.css')
 .signup-container
   h2 Create Account
   // This is a form
-  form(action='signup' method='post')
+  form(action='/signup' method='post')
     .form-group
       label Full Name
       input(type='text' name='fullname' placeholder='Enter your full name' required='')
     .form-group
       label Email
-      input(type='email' name='email' placeholder='Enter your email' required='')
+      input(type='email' name='email' placeholder='example@gmail.com' required='')
     .form-group
       label Phone number
       input(type='number' name='phonenumber' placeholder='07xxxxxxxx' required='')
-    .form-group
-      label NIN
-      input(type='text' name='nin' placeholder='CM0000' required='')
-    button.signup-btn Sign Up
+      .form-group
+      label Role
+      select(name='role')
+        option(value='') Select user role
+        option(value='admin') Admin
+        option(value='store manager') Store manager
+        option(value='sales attendant') Sales attendant
+      .form-group
+      label Password
+       input(type='password' name='password' placeholder='Enter password' required='')
+       button.signup-btn Sign Up
     .extra
       p
         | Already have an account? 
-        a(href='login.html') Login
+        a(href='/login') Login

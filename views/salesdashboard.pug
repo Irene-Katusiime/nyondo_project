@@ -1,0 +1,70 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title NyondoStock - Sales Terminal
+  link(rel='stylesheet' href='/css/salesdashboard.css')
+  link(href='https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap' rel='stylesheet')
+.sales-container
+  nav.sidebar
+    .sidebar-header
+      h3 NS Sales
+    ul.nav-links
+      li.active
+        a(href='/sales') New Sale
+      li
+        a(href='#') Stock Check
+      li
+        a(href='#') My Daily Sales
+      li
+        a(href='#') Price List
+    .sidebar-footer
+      a.logout(href='/logout') Logout
+  main.inventory-section
+    header.sales-header
+      .search-wrapper
+        input.search-bar(type='text' placeholder='Search hardware items...')
+      .user-badge
+        span
+          | Attendant: 
+          strong Sarah
+    .product-grid
+      .product-card
+        h4 Bamburi Cement
+        p.price UGX 32,000
+        p.stock 45 in stock
+        button.add-btn Add to Cart
+      .product-card
+        h4 Iron Sheets G28
+        p.price UGX 45,000
+        p.stock 120 in stock
+        button.add-btn Add to Cart
+      .product-card
+        h4 Nails (3 inch) 1kg
+        p.price UGX 6,500
+        p.stock.warning 8 in stock
+        button.add-btn Add to Cart
+      .product-card
+        h4 Paint - Gloss Red
+        p.price UGX 25,000
+        p.stock 15 in stock
+        button.add-btn Add to Cart
+  aside.receipt-panel
+    h3 Current Cart
+    .cart-items
+      .cart-item
+        span Cement (x1)
+        span 32,000
+    .calculation-area
+      .calc-row
+        span Subtotal:
+        span 32,000
+      .calc-row
+        span Transport:
+        input.transport-input(type='number' placeholder='0')
+      hr
+      .calc-row.total
+        span Total:
+        span#grand-total 32,000
+    button.btn.print Complete &amp; Print Receipt
+    button.btn.clear Clear All

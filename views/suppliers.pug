@@ -37,13 +37,14 @@ head
   .content-grid
     .card.form-card
       h2 Record New Credit
-      form(action='suppliers' method='post')
+      form(action='/suppliers' method='post')
         .form-group
           label Supplier Name
           select(name='supplierName')
-            option Hima Cement Ltd
-            option Roofings Uganda
-            option Uganda Baati
+            option(value='') Select supplierName
+            option(value='Hima Cement Ltd') Hima Cement Ltd
+            option(value='Roofings Uganda') Roofings Uganda
+            option(value='Uganda Baati') Uganda Baati
         .form-group
           label Invoice Number
           input(type='text' name='invoicenumber' placeholder='e.g., INV-9902' required='')

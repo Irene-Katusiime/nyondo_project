@@ -1,0 +1,72 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title NyondoStock - Store Manager
+  link(rel='stylesheet' href='/css/managerdashboard.css')
+  link(href='https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap' rel='stylesheet')
+.manager-container
+  nav.sidebar
+    .sidebar-header
+      h2 NyondoStock
+      p Store Manager
+    ul.nav-links
+      li.active
+        a(href='#') Inventory Overview
+      li
+        a(href='#') Register New Stock
+      li
+        a(href='#') Supplier Credit Ledger
+      li
+        a(href='#') Pricing &amp; Margins
+      li
+        a(href='#') Damage Reports
+    .sidebar-footer
+      a.logout(href='/logout') Logout
+  main.main-content
+    header.top-bar
+      .welcome
+        h1 Inventory Control
+        p Monday, 27th April 2026
+      .quick-actions
+        button.btn-primary + Add New Item
+    section.summary-grid
+      .summary-card
+        h3 Total Items
+        p.value 1,240
+      .summary-card.warning
+        h3 Low Stock Alerts
+        p.value 8
+      .summary-card.debt
+        h3 Supplier Credit
+        p.value UGX 4.2M
+    section.inventory-table
+      .table-header
+        h3 Current Stock Levels
+        input.table-search(type='text' placeholder='Filter by category...')
+      table
+        thead
+          tr
+            th Item Name
+            th Cost Price
+            th Selling Price
+            th In Stock
+            th Reorder Point
+            th Status
+        tbody
+          tr
+            td Cement (Tororo)
+            td 29,000
+            td 33,000
+            td 150
+            td 20
+            td
+              span.badge.success Healthy
+          tr
+            td Iron Sheets (Blue)
+            td 42,000
+            td 48,000
+            td 12
+            td 15
+            td
+              span.badge.danger Restock

@@ -36,7 +36,7 @@ head
   .stock-grid
     .card.form-card
       h2 Register New Stock
-      form(action='stockmanagement' method='post')
+      form(action='/stockreg' method='post')
         .form-group
           label Item Name
           input(type='text' name='itemName' placeholder='e.g. Iron Sheets (G28)' required='')
@@ -44,20 +44,28 @@ head
           .form-group
             label Category
             select(name='category' required='')
-              option Roofing
-              option Cement/Binding
-              option Plumbing
-              option Electrical
+              option(value='') Select category
+              option(value='Roofing') Roofing
+              option(value='Cement/Binding') Cement/Binding
+              option(value='Plumbing') Plumbing
+              option(value='Electrical') Electrical
           .form-group
             label Quantity
             input(type='number' name='quantity' placeholder='In Stock' required='')
         .form-group-row
           .form-group
-            label Cost Price (UGX)
-            input(type='number' name='costprice' placeholder='Buying price' required='')
+            label Unit Price (UGX)
+            input(type='number' name='unitprice' placeholder='Buying price' required='')
           .form-group
             label Selling Price (UGX)
-            input(type='number' name='sellingprice' placeholder='Retail price' required='')
+            input#sellingprice(type='number' name='sellingprice' placeholder='Retail price' required='')
+        .form-group-row  
+          .form-group
+            label Supplier Name
+            input(type='text' name='suppliername' placeholder='Enter full name' required='')
+          .form-group
+            label Transportation cost
+            input(type='number' name='transportationcost' placeholder='Enter cost' required='')
         button(type='submit') Update Inventory
     .card.table-card
       .table-header

@@ -1,0 +1,166 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f0f2f5;
+}
+
+.sales-container {
+    display: grid;
+    grid-template-columns: 240px 1fr 380px;
+    height: 100vh;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    background-color: #1a252f;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.sidebar-header h3 {
+    color: #3498db;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.nav-links {
+    list-style: none;
+    flex-grow: 1;
+}
+
+.nav-links li {
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: 0.2s;
+}
+
+.nav-links li.active, .nav-links li:hover {
+    background-color: #34495e;
+}
+
+.nav-links a {
+    color: #bdc3c7;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.nav-links li.active a { color: white; }
+
+.logout {
+    color: #e74c3c;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+/* Main Section */
+.inventory-section {
+    padding: 25px;
+    overflow-y: auto;
+}
+
+.sales-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.search-bar {
+    width: 400px;
+    padding: 12px 20px;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    outline: none;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    text-align: center;
+}
+
+.price { color: #27ae60; font-weight: bold; font-size: 1.1rem; margin: 10px 0; }
+.stock { color: #7f8c8d; font-size: 0.85rem; margin-bottom: 15px; }
+.stock.warning { color: #e67e22; font-weight: bold; }
+
+.add-btn {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Receipt Panel */
+.receipt-panel {
+    background: white;
+    border-left: 1px solid #ddd;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-items {
+    flex-grow: 1;
+    margin: 20px 0;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.calculation-area {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.calc-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.total { font-weight: bold; font-size: 1.3rem; border-top: 2px solid #ddd; padding-top: 10px; }
+
+.transport-input {
+    width: 100px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    text-align: right;
+}
+
+.btn {
+    padding: 15px;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.print { background: #2ecc71; color: white; }
+.clear { background: #ecf0f1; color: #7f8c8d; }
