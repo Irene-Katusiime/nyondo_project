@@ -3,7 +3,10 @@ const router = express.Router();
 const Sale = require("../models/Sale");
 const Stock = require("../models/Stock");
 
-router.get('/salesform', async (req, res)=>{
+const {isAttendant,isAdmin, isManager} = require('../middleware/auth');
+const { authorizeRoles } = require('../middleware/auth');
+
+router.get('/salesform',authorizeRoles('sales attendant', 'admin'), async (req, res)=>{
   try {
     const items = await Stock.find({ quantity: { $gt: 0}});
     console.log(items)
@@ -14,7 +17,7 @@ router.get('/salesform', async (req, res)=>{
   }
 });
 
-router.post("/salesform", async (req, res) => {
+router.post("/salesform",authorizeRoles('sales attendant','admin'), async (req, res) => {
   try {
     const { itemId, quantity, unitprice, customername, customercontact } =
       req.body;
@@ -38,17 +41,19 @@ router.post("/salesform", async (req, res) => {
       attendant: req.user._id,
       total
     });
+
     console.log(newItem);
     await newItem.save();
     res.redirect("/salesList");
   } catch (error) {
+    const items = await Stock.find({ quantity: { $gt: 0}});
     res.render("addsales", { error: error.message,items });
     console.error(error)
   }
 });
 
 //Get sales from the db
-router.get('/salesList', async(req, res) =>{
+router.get('/salesList',authorizeRoles('sales attendant','admin'), async(req, res) =>{
   try {
     const sales = await Sale.find()
       .populate('itemname','itemName category')

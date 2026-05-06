@@ -19,7 +19,8 @@ const registrationSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    required: true
+    required: true,
+    enum: ['admin','store manager','sales attendant']
   }
 
 });

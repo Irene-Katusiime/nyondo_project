@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const saleSchema = new mongoose.Schema({
 date: {
-    type: String,
+    type: Date,
     required: true,
     default: Date.now
 },

@@ -37,18 +37,27 @@ head
     h2 Sales Records
     table
       tr
-        th Item
+        th Item Name
         th Quantity
-        th Price (UGX)
+        th Unit Price (UGX)
+        th Customer Name 
+        th Customer Contact
+        th Attendant
+        th Date
         th Total
+        th Actions 
       tbody
-        tr
-          td Cement
-          td 10
-          td 15000
-          td 150000
-        tr
-          td Iron Sheets
-          td 5
-          td 40000
-          td 200000
+        each sale in sales 
+          tr
+            td= sale.itemname ? sale.itemname.itemName: ''
+            td= sale.quantity 
+            td= sale.unitprice 
+            td= sale.customername
+            td= sale.customercontact
+            td= sale.attendant ? sale.attendant.fullname: 'attendant was deleted'
+            td= new Date(sale.date).toLocaleDateString() 
+            td= (sale.quantity*sale.unitprice).toLocaleString() 
+              td.text-center(colspan='9') 
+            
+            
+            

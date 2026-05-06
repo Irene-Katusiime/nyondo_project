@@ -52,7 +52,7 @@ app.use('/',require('./routes/depositsRoutes'))
 app.use('/',require('./routes/addsalesRoutes'))
 app.use('/',require('./routes/stockRoutes'))
 app.use('/',require('./routes/suppliersRoutes'))
-app.use('/',require('./routes/transportRoutes'))
+// app.use('/',require('./routes/transportRoutes'))
 app.use('/',require('./routes/dashboardRoutes'))
 
 //This is the second last chunk of code
