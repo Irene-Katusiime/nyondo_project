@@ -2,45 +2,97 @@ doctype html
 head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Stock Management - Nyondo Stock
-  link(rel='stylesheet' href='stockmanagement.css')
-  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css')
-.sidebar
-  h2 Nyondo Stock
-  a(href='#')
-    i.fas.fa-th-large
-    | Dashboard
-  a.active(href='#')
-    i.fas.fa-boxes
-    | Stock
-  a(href='#')
-    i.fas.fa-shopping-cart
-    | Sales
-  a(href='#')
-    i.fas.fa-truck
-    | Suppliers
-  a(href='#')
-    i.fas.fa-wallet
-    | Deposits
-  a(href='#')
-    i.fas.fa-chart-line
-    | Reports
-  a(href='#')
-    i.fas.fa-sign-out-alt
-    | Logout
-    .card.table-card
-      .table-header
-        h2 Current Inventory
-        span.stock-count Total Items: 142
-      table
-        thead
+  title Nyondo-Stock Dashboard
+  link(rel='stylesheet' href='/css/stocklist.css')
+  link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css")
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css')
+body
+// Sidebar
+nav.sidebar
+  .sidebar-header
+    | NYONDO STOCK
+  ul.sidebar-menu
+    li.active
+      i.fas.fa-home
+      span Dashboard
+    li
+      i.fas.fa-plus-circle
+      span Register Stock
+    li
+      i.fas.fa-boxes
+      span Inventory
+    li
+      i.fas.fa-users
+      span Suppliers
+    li
+      i.fas.fa-chart-line
+      span Sales Reports
+    li
+      i.fas.fa-cog
+      span Settings
+  .sidebar-footer
+    | &copy; 2026 Nyondo Ltd
+// Main Content Area
+main.main-content
+  .top-bar
+    h2(style='margin: 0; border: none; padding: 0;') Stock Overview
+    .user-profile
+      i.fas.fa-user-circle
+      |  Admin User
+  // Metrics Section
+  .stats-grid
+    .card
+      i.fas.fa-boxes
+      .card-info
+        h3 Total Items
+        p 1,240
+    .card
+      i.fas.fa-layer-group
+      .card-info
+        h3 Categories
+        p 4
+    .card
+      i.fas.fa-money-bill-wave
+      .card-info
+        h3 Stock Value
+        p UGX 45.2M
+  // Stock Table
+  .table-container
+    div(style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;')
+      h3(style='margin: 0;') Stock Levels
+      button(style='background: var(--success); color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer;')
+        i.fas.fa-download
+        |  Export PDF
+    table
+      thead
+        tr
+          th Item Name
+          th Category
+          th Quantity
+          th Unit Price
+          th Selling Price
+          th Supplier Name 
+          th Supplier Contact
+          th Actions
+      tbody
+        if stocks.length === 0
           tr
-            th Item Name
-            th Category
-            th Quantity
-            th Unit Price
-            th Selling Price 
-            th Suppliername 
-            th Action
-        tbody
-          
+            td.text-center(colspan='8') No stock has been recorded yet.
+        else
+         each item in stocks
+            tr 
+              td= item.itemName
+              td= item.category
+              td= item.quantity 
+              td= item.unitprice
+              td= item.sellingprice 
+              td= item.suppliername
+              td= item.suppliercontact
+              td
+                .d-flex.gap-2
+                  a.btn.btn-sm.btn-outline-warning(href=`/stock/edit/${item._id}`)
+                    i.fas.fa-edit
+                  form.d-inline(action=`/delete/${item._id}` method='post' onsubmit='return confirm("Are you sure you want to delete this item?");')
+                    button.btn.btn-sm.btn-outline-danger(type='submit')
+                      i.fas.fa-trash-alt  
+  

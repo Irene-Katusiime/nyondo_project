@@ -35,5 +35,18 @@ router.post('/stockreg', async(req ,res)=>{
   }
 });
 
+//Get stock from the Db
+router.get('/stocklist', async(req, res) =>{
+  try {
+    const stock = await Stock.find()
+      .populate('itemName category')
+      .sort({date:-1})
+       res.render('stock-list', { stocks:stock });
+  } catch (error) {
+    console.error(error)
+    res.status(400).send('Unable to pick stock from the db')
+  }
+});
+
 
 module.exports = router;

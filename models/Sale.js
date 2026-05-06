@@ -26,7 +26,7 @@ customername: {
     required: true
 },
 customercontact: {
-    type: Number,
+    type: String,
     required: true
 },
 total: {
