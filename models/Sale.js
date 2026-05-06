@@ -8,7 +8,8 @@ date: {
 },
 itemname: {
     type: String,
-    required: true
+    required: true,
+    ref: 'Stock'
 },
 quantity: {
     type: Number,
@@ -27,6 +28,13 @@ customername: {
 customercontact: {
     type: Number,
     required: true
+},
+total: {
+    type: Number
+},
+attendant: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Registration'
 }
 });
 

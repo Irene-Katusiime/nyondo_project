@@ -31,8 +31,6 @@ head
 .main
   header.header-section
     h1 Inventory &amp; Stock
-    .search-bar
-      input(type='text' placeholder='Search items (e.g. Cement)...')
   .stock-grid
     .card.form-card
       h2 Register New Stock
@@ -62,37 +60,8 @@ head
         .form-group-row  
           .form-group
             label Supplier Name
-            input(type='text' name='suppliername' placeholder='Enter full name' required='')
+            input(type='text' name='suppliername' placeholder='Enter supplier name' required='')
           .form-group
             label Transportation cost
             input(type='number' name='transportationcost' placeholder='Enter cost' required='')
         button(type='submit') Update Inventory
-    .card.table-card
-      .table-header
-        h2 Current Inventory
-        span.stock-count Total Items: 142
-      table
-        thead
-          tr
-            th Item Name
-            th Category
-            th Stock Level
-            th Unit Price
-            th Action
-        tbody
-          tr
-            td Hima Cement (50kg)
-            td Binding
-            td
-              span.stock-status.normal 45 bags
-            td 34,000
-            td
-              button.btn-edit Edit
-          tr
-            td Nails (3-inch)
-            td Hardware
-            td
-              span.stock-status.low 5 kg
-            td 6,000
-            td
-              button.btn-edit Edit

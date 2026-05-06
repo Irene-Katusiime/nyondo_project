@@ -35,6 +35,10 @@ transportationcost: {
 datereceived: {
     type: Date,
     default: Date.now
+},
+total: {
+    type: Number,
+    required: true
 }
 });
 

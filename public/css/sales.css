@@ -115,6 +115,15 @@ input {
     transition: border-color 0.3s;
 }
 
+select {
+    padding: 8px;
+     border: 1px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.3s;
+    width: 200px;
+}
+
 input:focus {
     border-color: #f39c12;
 }
