@@ -37,7 +37,15 @@ head
       form(action='/stockreg' method='post')
         .form-group
           label Item Name
-          input(type='text' name='itemName' placeholder='e.g. Iron Sheets (G28)' required='')
+          select(name='itemName' required='')
+            option(value='') Select item name
+            option(value='cement') Cement
+            option(value='ironbars') Iron bars
+            option(value='nails') Nails
+            option(value='wheelbarrows') Wheelbarrows
+            option(value='wiremesh') Wire mesh
+            option(value='barbedwires') Barbed wires
+            option(value='ironsheets') Iron sheets
         .form-group-row
           .form-group
             label Category
@@ -62,6 +70,6 @@ head
             label Supplier Name
             input(type='text' name='suppliername' placeholder='Enter supplier name' required='')
           .form-group
-            label Transportation cost
-            input(type='number' name='transportationcost' placeholder='Enter cost' required='')
+            label Supplier Contact
+            input(type='text' name='suppliercontact' placeholder='Enter supplier number' required='')
         button(type='submit') Update Inventory

@@ -28,8 +28,8 @@ suppliername: {
     type: String,
     required: true
 },
-transportationcost: {
-    type: Number,
+suppliercontact: {
+    type: String,
     required: true
 },
 datereceived: {
