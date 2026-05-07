@@ -1,0 +1,49 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Stock Management - Nyondo Stock
+  link(rel='stylesheet' href='/css/stockmanagement.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css')
+.sidebar
+  h2 Nyondo Stock
+  a(href='#')
+    i.fas.fa-th-large
+    | Dashboard
+  a.active(href='#')
+    i.fas.fa-boxes
+    | Stock
+  a(href='#')
+    i.fas.fa-shopping-cart
+    | Sales
+  a(href='#')
+    i.fas.fa-truck
+    | Suppliers
+  a(href='#')
+    i.fas.fa-wallet
+    | Deposits
+  a(href='#')
+    i.fas.fa-chart-line
+    | Reports
+  a(href='#')
+    i.fas.fa-sign-out-alt
+    | Logout
+.main
+  header.header-section
+    h1 Inventory &amp; Stock
+  .stock-grid
+    .card.form-card
+      h2 Edit Stock
+      form(action=`/stock/edit/${item._id}` method='post')
+        .form-group-row
+          .form-group
+            label Quantity
+            input(type='number' name='quantity' value=item.quantity placeholder='In Stock' required='')
+        .form-group-row
+          .form-group
+            label Unit Price (UGX)
+            input(type='number' name='unitprice' value=item.unitprice placeholder='Buying price' required='')
+          .form-group
+            label Selling Price (UGX)
+            input#sellingprice(type='number' name='sellingprice' value=item.sellingprice placeholder='Retail price' required='')
+        button(type='submit') Update Stock

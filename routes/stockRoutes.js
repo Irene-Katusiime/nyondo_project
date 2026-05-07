@@ -2,8 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Stock = require('../models/Stock');
 
-// const Stock = require('../models/Stock');
-// const {isAttendant,isAdmin, isManager} = require('../middleware/auth');
+const {isAttendant,isAdmin, isManager} = require('../middleware/auth');
 
 
 router.get('/stockreg', (req, res)=>{
@@ -47,6 +46,46 @@ router.get('/stocklist', async(req, res) =>{
     res.status(400).send('Unable to pick stock from the db')
   }
 });
+
+//Update stock
+router.get('/stock/edit/:id',isManager,async(req,res) =>{
+  try {
+    const item = await Stock.findById(req.params.id)
+    if(!item) return res.status(404).send('Stock not found')
+      res.render('stock_edit',{item})
+  } catch (error) {
+    res.status(400).send('Unable to find stock in the Db')
+  }
+});
+
+router.post('/stock/edit/:id',isManager, async(req,res) => {
+  try {
+    const {quantity, sellingprice, unitprice, suppliername} = req.body;
+    const total = quantity*unitprice;
+    await Stock.findByIdAndUpdate(req.params.id,{
+      total,
+      quantity, 
+      sellingprice, 
+      suppliername, 
+      unitprice
+    })
+    res.redirect('/stocklist');
+  } catch (error) {
+    console.error(error.message)
+    const stock = await Stock.findById(req.params.id)
+     res.render('stock_edit', { item });
+  } 
+});
+
+//Delete route
+router.post('/stock/delete/:id',isManager, async(req,res) => {
+  try {
+    await Stock.findByIdAndDelete(req.params.id);
+    res.redirect('/stocklist')
+  } catch (error) {
+    console.error(error)
+  }
+})
 
 
 module.exports = router;

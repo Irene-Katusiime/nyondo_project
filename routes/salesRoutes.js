@@ -96,6 +96,17 @@ router.post('/sale/edit/:id',authorizeRoles("sales attendant", "admin"), async(r
   } 
 });
 
+//Delete route
+router.post('/delete/:id',authorizeRoles("sales attendant", "store manager"), async(req,res) => {
+  try {
+    await Sale.findByIdAndDelete(req.params.id);
+    res.redirect('/salesList')
+  } catch (error) {
+    console.error(error)
+  }
+});
+
+
 
 
 
