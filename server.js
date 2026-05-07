@@ -49,7 +49,7 @@ app.use((req,res,next)=>{
 //5.Routes
 app.use('/',require('./routes/authRoutes'))
 app.use('/',require('./routes/depositsRoutes'))
-app.use('/',require('./routes/addsalesRoutes'))
+app.use('/',require('./routes/salesRoutes'))
 app.use('/',require('./routes/stockRoutes'))
 app.use('/',require('./routes/suppliersRoutes'))
 // app.use('/',require('./routes/transportRoutes'))

@@ -66,6 +66,37 @@ router.get('/salesList',authorizeRoles('sales attendant','admin'), async(req, re
   }
 });
 
+//Update sale
+router.get('/sale/edit/:id',authorizeRoles("sales attendant", "admin"), async(req,res) =>{
+  try {
+    const sale = await Sale.findById(req.params.id)
+    if(!sale) return res.status(404).send('Sale not found')
+      res.render('sale_edit',{sale})
+  } catch (error) {
+      console.log(error)
+      res.status(400).send('Unable to find sale in the Db')
+  }
+});
+router.post('/sale/edit/:id',authorizeRoles("sales attendant", "admin"), async(req,res) => {
+  try {
+    const {quantity, unitprice, customername, customercontact} = req.body;
+    const total = quantity*unitprice;
+    await Sale.findByIdAndUpdate(req.params.id,{
+      total,
+      quantity, 
+      unitprice, 
+      customername, 
+      customercontact
+    })
+    res.redirect('/salesList');
+  } catch (error) {
+    console.error(error.message)
+    const sale = await Sale.findById(req.params.id)
+     res.render('sale_edit', { sale });
+  } 
+});
+
+
 
 
 
