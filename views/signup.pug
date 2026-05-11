@@ -3,7 +3,7 @@ head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   title Nyondo Sign Up
-link(rel='stylesheet' href='/css/signup.css')
+link(rel='stylesheet' href='sign.css')
 .signup-container
   h2 Create Account
   // This is a form
@@ -15,8 +15,11 @@ link(rel='stylesheet' href='/css/signup.css')
       label Email
       input(type='email' name='email' placeholder='example@gmail.com' required='')
     .form-group
+      label NIN
+      input(type='text' name='nin' placeholder='Enter NIN (e.g. CM123456789ABCD)' required='' pattern='^[A-Z]{2}\\d{9}[A-Z]{4}$' maxlength='15' title='NIN must be 2 letters,9 digits,then 4 letters')
+    .form-group
       label Phone number
-      input(type='number' name='phonenumber' placeholder='07xxxxxxxx' required='')
+      input(type='text' name='phonenumber' placeholder='7xxxxxxxx' required='' pattern='[7][0-9]{8}' maxlength='9' inputmode='numeric' title='Enter a valid Ugandan number starting with 7 and 9 digits long')
       .form-group
       label Role
       select(name='role')
@@ -26,8 +29,8 @@ link(rel='stylesheet' href='/css/signup.css')
         option(value='sales attendant') Sales attendant
       .form-group
       label Password
-       input(type='password' name='password' placeholder='Enter password' required='')
-       button.signup-btn Sign Up
+      input(type='password' name='password' placeholder='Enter password' required='')
+    button.signup-btn Sign Up
     .extra
       p
         | Already have an account? 

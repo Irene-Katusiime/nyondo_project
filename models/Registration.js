@@ -13,8 +13,13 @@ const registrationSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
+  nin: {
+    type: String,
+    trim: true,
+    required: true
+  },
   phonenumber: {
-    type: Number,
+    type: String,
     required: true
   },
   role: {

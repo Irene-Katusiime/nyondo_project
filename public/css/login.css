@@ -55,7 +55,7 @@ input {
 
 input:focus {
     outline: none;
-    border-color: #f39c12; /* Nyondo accent color */
+    border-color: #f39c12; 
 }
 
 /* 5. The Login Button */

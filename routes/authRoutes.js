@@ -12,7 +12,17 @@ router.get("/signup", (req, res) => {
 
 router.post("/signup", async (req, res) => {
   try {
-    const { fullname, email, phonenumber, role,} = req.body;
+    const { fullname, email, phonenumber, role, nin } = req.body;
+
+    const ninRegex = /^[A-Z]{2}\d{9}[A-Z]{4}$/;
+    const formattedNin = nin?.toUpperCase().trim();
+
+    if (!ninRegex.test(formattedNin)){
+      return res.render('signup',{
+        error: 'Invalid NIN format'
+      });
+    }
+
     //Check if user already exists
     let existingUser = await Registration.findOne({
       email: email.toLowerCase(),
@@ -22,20 +32,26 @@ router.post("/signup", async (req, res) => {
         error: "Email is already registered" 
       });
     }
+
+    const phone = '+256' + phonenumber;
+
     //create a new user
     const newUser = new Registration({
       fullname,
       email: email.toLowerCase(),
-      phonenumber,
-      role
+      phonenumber: phone,
+      role,
+      nin: formattedNin
     });
     console.log(newUser);
-    await Registration.register(newUser,req.body.password,(err)=>{
-      if(err){
-        return res.redirect('/signup')
-      }
-    });
-    res.redirect("/login");
+
+    await Registration.register(newUser,req.body.password);
+
+    console.log("User registered successfully");
+
+        
+    return res.redirect("/login");
+
   } catch (error) {
     console.error(error);
     res.render("signup", { error: error.message });
