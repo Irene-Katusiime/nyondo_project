@@ -13,23 +13,21 @@ nav.sidebar
     | NYONDO STOCK
   ul.sidebar-menu
     li.active
-      i.fas.fa-home
-      span Dashboard
+      a(href='/stocklist')
+        i.fas.fa-home
+        span Dashboard
     li
-      i.fas.fa-plus-circle
-      span Register Stock
+      a(href='/stockreg')
+        i.fas.fa-plus-circle
+        span Register Stock
     li
-      i.fas.fa-boxes
-      span Inventory
+      a(href='/salesList')
+        i.fas.fa-chart-line
+        span Sales Reports
     li
-      i.fas.fa-users
-      span Suppliers
-    li
-      i.fas.fa-chart-line
-      span Sales Reports
-    li
-      i.fas.fa-cog
-      span Settings
+      a(href='/logout')
+        i.fas.fa-sign-out-alt
+        span Logout
   .sidebar-footer
     | &copy; 2026 Nyondo Ltd
 // Main Content Area
@@ -38,7 +36,7 @@ main.main-content
     h2(style='margin: 0; border: none; padding: 0;') Stock Overview
     .user-profile
       i.fas.fa-user-circle
-      |  Admin User
+      |  #{user.role}
   // Metrics Section
   .stats-grid
     .card
@@ -60,9 +58,6 @@ main.main-content
   .table-container
     div(style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;')
       h3(style='margin: 0;') Stock Levels
-      button(style='background: var(--success); color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer;')
-        i.fas.fa-download
-        |  Export PDF
     table
       thead
         tr

@@ -8,7 +8,8 @@ router.get('/attendantdashboard', (req, res)=>{
     res.render('salesdashboard')
 });
 router.get('/storemanagerdashboard', (req, res)=>{
-    res.render('managerdashboard')
+    // res.render('managerdashboard')
+    res.redirect('/stocklist')
 });
 
 module.exports = router;

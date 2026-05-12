@@ -3,16 +3,20 @@ const router = express.Router();
 const Stock = require('../models/Stock');
 
 const {isAttendant,isAdmin, isManager} = require('../middleware/auth');
+const { authorizeRoles } = require('../middleware/auth');
 
 
-router.get('/stockreg', (req, res)=>{
+router.get('/stockreg',authorizeRoles('store manager','admin'), async (req, res)=>{
     res.render('stockmanagement')
 })
 
-router.post('/stockreg', async(req ,res)=>{
+router.post('/stockreg',authorizeRoles('store manager','admin'), async(req ,res)=>{
   console.log(req.body);
   try {
-    const {itemName,category,quantity,unitprice,sellingprice,suppliername,suppliercontact} =req.body
+    const {itemName,category,quantity,unitprice,sellingprice,suppliername,suppliercontact} =req.body;
+
+    const phone = '+256' + suppliercontact;
+
     const total = parseInt(quantity)*parseFloat(unitprice);
     let newItem = new Stock({
       itemName,
@@ -27,7 +31,7 @@ router.post('/stockreg', async(req ,res)=>{
 
     console.log(newItem)
     await newItem.save();
-    res.redirect('/')
+    res.redirect('/stocklist')
   } catch (error) {
     res.render('stockmanagement',{error:error.message}) 
     console.error(error)
@@ -35,7 +39,7 @@ router.post('/stockreg', async(req ,res)=>{
 });
 
 //Get stock from the Db
-router.get('/stocklist', async(req, res) =>{
+router.get('/stocklist',authorizeRoles('store manager','admin'), async(req, res) =>{
   try {
     const stock = await Stock.find()
       .populate('itemName category')

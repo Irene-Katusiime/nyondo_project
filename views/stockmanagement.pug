@@ -7,25 +7,19 @@ head
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css')
 .sidebar
   h2 Nyondo Stock
-  a(href='#')
+  a(href='stocklist')
     i.fas.fa-th-large
     | Dashboard
-  a.active(href='#')
+  a.active(href='stocklist')
     i.fas.fa-boxes
     | Stock
-  a(href='#')
+  a(href='saleslist')
     i.fas.fa-shopping-cart
     | Sales
   a(href='#')
-    i.fas.fa-truck
-    | Suppliers
-  a(href='#')
     i.fas.fa-wallet
     | Deposits
-  a(href='#')
-    i.fas.fa-chart-line
-    | Reports
-  a(href='#')
+  a(href='logout')
     i.fas.fa-sign-out-alt
     | Logout
 .main
@@ -71,5 +65,5 @@ head
             input(type='text' name='suppliername' placeholder='Enter supplier name' required='')
           .form-group
             label Supplier Contact
-            input(type='text' name='suppliercontact' placeholder='Enter supplier number' required='')
+            input(type='text' name='suppliercontact' placeholder='7xxxxxxxx' required='' pattern='[7][0-9]{8}' maxlength='9' inputmode='numeric'  title='Enter a valid Ugandan number starting with 7 and 9 digits long')
         button(type='submit') Update Stock
