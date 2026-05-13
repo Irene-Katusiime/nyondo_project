@@ -6,7 +6,18 @@ router.get('/deposit', (req, res)=>{
 })
 
 router.post('/deposits',(req ,res)=>{
-  console.log(req.body)
+  console.log(req.body);
+  try {
+    const {customername, NINnumber, phonenumber, amounttodeposit } =req.body;
+
+    const phone = '+256' + phonenumber;
+
+    
+  } catch (error) {
+    
+  }
+ 
+
 });
 
 module.exports = router;

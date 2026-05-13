@@ -29,6 +29,18 @@ customercontact: {
     type: String,
     required: true
 },
+customeraddress: {
+    type: String,
+    required: true
+},
+customerdistance: {
+    type: Number,
+    required: true
+},
+transportcost: {
+    type: Number,
+    
+},
 total: {
     type: Number
 },

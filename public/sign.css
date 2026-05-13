@@ -29,6 +29,7 @@ h2 {
     margin-bottom: 1.5rem;
     font-size: 2.2rem;
     font-weight: 700;
+    color: #f39c12;
 }
 
 .form-group {
@@ -50,13 +51,13 @@ input, select {
     border-radius: 6px;
     font-size: 1rem;
     background-color: #fafbfc;
-    transition: border-color 0.2s;
+    transition: border-color 0.3s ease;
     box-sizing: border-box;
 }
 
 input:focus, select:focus {
     outline: none;
-    border-color: 1px solid #ddd; /* Darker focus border */
+    border-color: #f39c12;
     background-color: #fff;
 }
 
@@ -86,7 +87,7 @@ input:focus, select:focus {
 }
 
 .extra a {
-    color: #2c3e50;
+    color: #f39c12;
     text-decoration: none;
     font-weight: 500;
 }

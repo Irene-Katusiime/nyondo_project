@@ -19,7 +19,7 @@ router.get('/salesform',isAttendant, async (req, res)=>{
 
 router.post("/salesform",isAttendant, async (req, res) => {
   try {
-    const { itemId, quantity, unitprice, customername, customercontact } = req.body;
+    const { itemId, quantity, unitprice, customername, customercontact, customerdistance, customeraddress } = req.body;
     
     const phone = '+256' + customercontact;
 
@@ -28,10 +28,22 @@ router.post("/salesform",isAttendant, async (req, res) => {
     if (item.quantity < quantity) {
       return res.status(400).send("not enough stock available");
     }
+
+    
+
+    
     //Deduct quantity sold from stock quantity and save the new quantity to the stock collection
     item.quantity -= quantity;
     await item.save();
      const total = quantity*unitprice;
+
+
+     let transportcost = 0
+     if (total >= 500000 && customerdistance <= 10){
+      transportcost = 0
+     }else{
+      transportcost = 30000
+     }
 
     //Record the sale
     let newItem = new Sale({
@@ -41,6 +53,9 @@ router.post("/salesform",isAttendant, async (req, res) => {
       customername,
       customercontact: phone,
       attendant: req.user._id,
+      customeraddress,
+      customerdistance,
+      transportcost,
       total
     });
 
@@ -83,12 +98,13 @@ router.post('/sale/edit/:id',authorizeRoles("sales attendant", "admin"), async(r
   try {
     const {quantity, unitprice, customername, customercontact} = req.body;
     const total = quantity*unitprice;
+  
     await Sale.findByIdAndUpdate(req.params.id,{
       total,
       quantity, 
       unitprice, 
       customername, 
-      customercontact: phone
+      customercontact,
     })
     res.redirect('/salesList');
   } catch (error) {

@@ -51,4 +51,17 @@ head
       .form-group
         label Customer Contact
         input(type='text' name='customercontact' placeholder='7xxxxxxxx' required='' pattern='[7][0-9]{8}' maxlength='9' inputmode='numeric'  title='Enter a valid Ugandan number starting with 7 and 9 digits long')
+      .form-group
+        label Customer Address
+        input(type='text' name='customeraddress' placeholder='Enter customer address' required='')
+      .form-group
+        label Customer Distance
+        input(type='number' name='customerdistance' placeholder='Enter customer distance' required='')
+      .form-group
+        label Payment Method
+        select(name='paymentmethod' required='')
+          option(value='') Select payment method 
+          option(value='Cash') Cash 
+          option(value='Mobile Money') Mobile Money
+          option(value='Credit') Credit 
       button(type='submit') Add Sale

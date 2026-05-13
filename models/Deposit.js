@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const depositSchema = new mongoose.Schema({
-Customername: {
+customername: {
     type: String,
     required: true
 },
