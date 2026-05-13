@@ -19,8 +19,10 @@ router.get('/salesform',isAttendant, async (req, res)=>{
 
 router.post("/salesform",isAttendant, async (req, res) => {
   try {
-    const { itemId, quantity, unitprice, customername, customercontact } =
-      req.body;
+    const { itemId, quantity, unitprice, customername, customercontact } = req.body;
+    
+    const phone = '+256' + customercontact;
+
     const item = await Stock.findById(itemId);
     if (!item) return res.status(404).send("Item not found");
     if (item.quantity < quantity) {
@@ -37,7 +39,7 @@ router.post("/salesform",isAttendant, async (req, res) => {
       quantity,
       unitprice,
       customername,
-      customercontact,
+      customercontact: phone,
       attendant: req.user._id,
       total
     });
@@ -86,7 +88,7 @@ router.post('/sale/edit/:id',authorizeRoles("sales attendant", "admin"), async(r
       quantity, 
       unitprice, 
       customername, 
-      customercontact
+      customercontact: phone
     })
     res.redirect('/salesList');
   } catch (error) {
@@ -97,7 +99,7 @@ router.post('/sale/edit/:id',authorizeRoles("sales attendant", "admin"), async(r
 });
 
 //Delete route
-router.post('/delete/:id',authorizeRoles("sales attendant", "store manager"), async(req,res) => {
+router.post('/delete/:id',isAttendant, async(req,res) => {
   try {
     await Sale.findByIdAndDelete(req.params.id);
     res.redirect('/salesList')

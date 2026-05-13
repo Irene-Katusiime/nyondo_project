@@ -4,6 +4,8 @@
  const path  = require('path')
  const mongoose = require('mongoose');
  const passport = require('passport');
+ const MongoStore = require('connect-mongo').default;
+
 
  require('dotenv').config();
  const connectDb = require('./config/db')
@@ -31,6 +33,13 @@ app.use(expressSession({
   secret: "secret",
   resave: false,
   saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl:process.env.DATABASE,
+    collectionName: 'sessionStorage'
+  }),
+  cookie: {
+    maxAge: 1000*60*60*2 //2 hours life for a login session
+  }
 }))
 app.use(passport.initialize())
 app.use(passport.session());

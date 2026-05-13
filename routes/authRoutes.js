@@ -66,7 +66,7 @@ router.post("/login",passport.authenticate('local',{failureRedirect:'/login'}), 
   if(req.user.role==='admin'){
     res.redirect('/admindashboard')
   }else if(req.user.role==='sales attendant'){
-    res.redirect('/attendantdashboard')
+    res.redirect('/salesList')
   }else if(req.user.role==='store manager'){
     res.redirect('/storemanagerdashboard')
   }else{

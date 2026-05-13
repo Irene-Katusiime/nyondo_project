@@ -25,7 +25,7 @@ router.post('/stockreg',authorizeRoles('store manager','admin'), async(req ,res)
       unitprice,
       sellingprice,
       suppliername,
-      suppliercontact,
+      suppliercontact: phone,
       total
     })
 
@@ -41,15 +41,40 @@ router.post('/stockreg',authorizeRoles('store manager','admin'), async(req ,res)
 //Get stock from the Db
 router.get('/stocklist',authorizeRoles('store manager','admin'), async(req, res) =>{
   try {
-    const stock = await Stock.find()
-      .populate('itemName category')
-      .sort({date:-1})
-       res.render('stock-list', { stocks:stock });
+
+    //Get all stock items
+    const stocks = await Stock.find();
+
+    //Total number of items
+    const totalItems = stocks.length;
+
+    //Number of unique categories
+    const categories = [...new Set(stocks.map(item => item.category))].length;
+
+    //Total stock value
+    const stockValue = stocks.reduce((sum, item) => sum +item.total,0);
+
+    res.render('stock-list',{
+      stocks,
+      totalItems,
+      categories,
+      stockValue
+    });
   } catch (error) {
-    console.error(error)
-    res.status(400).send('Unable to pick stock from the db')
+    console.error(error);
+    res.status(500).send('Server Error');
   }
 });
+
+//     const stock = await Stock.find()
+//       .populate('itemName category')
+//       .sort({date:-1})
+//        res.render('stock-list', { stocks:stock });
+//   } catch (error) {
+//     console.error(error)
+//     res.status(400).send('Unable to pick stock from the db')
+//   }
+// });
 
 //Update stock
 router.get('/stock/edit/:id',isManager,async(req,res) =>{
