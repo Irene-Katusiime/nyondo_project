@@ -3,7 +3,7 @@ head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   title Deposit Scheme - Nyondo Stock
-  link(rel='stylesheet' href='/css/deposits.css')
+  link(rel='stylesheet' href='css/deposit.css')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css')
 .sidebar
   h2 Nyondo Stock
@@ -31,10 +31,6 @@ head
 .main
   header.top-bar
     h1 Customer Deposit Scheme
-    .stats-mini
-      span
-        | Total Pool: 
-        strong UGX 12,450,000
   .deposit-grid
     .form-card
       h2 Record New Deposit
@@ -44,36 +40,21 @@ head
           input(type='text' name='customername' placeholder='e.g. John Doe' required='')
         .form-group
           label NIN Number
-          input(type='text' name='NINnumber' placeholder='CM000... (14 characters)' required='')
+          input(type='text' name='NINnumber' placeholder='Enter NIN (e.g. CM12345678ABCD)' required='' pattern='^[A-Z]{2}\\d{9}[A-Z]{4}$' maxlength='15' title='NIN must be 2 letters,9 digits,then 4 letters')
         .form-group
           label Phone Number
-          input(type='tel' name='phonenumber' placeholder='07... (Uganda format)' required='')
+          input(type='text' name='phonenumber' placeholder='7xxxxxxxx' required='' pattern='[7][0-9]{8}' maxlength='9' inputmode='numeric' title='Enter a valid Ugandan number starting with 7 and 9 digits long')
+        .form-group
+          label Item Name
+          select(name='itemname' required='')
+            option(value='') Select Item
+            option(value='Cement') Cement
+            option(value='Ironbars') Iron bars
+            option(value='Ironsheets') Iron sheets
+        .form-group
+          label Quantity
+          input(type='number' name='quantity' placeholder='Enter quantity' required='')
         .form-group
           label Amount to Deposit (UGX)
-          input(type='number' name='amounttodeposit(UGX)' placeholder='Enter amount' required='')
+          input(type='number' name='amounttodeposit' placeholder='Enter amount' required='')
         button.btn-deposit(type='submit') Confirm Deposit
-    .table-card
-      h2 Recent Contributions
-      table
-        thead
-          tr
-            th Customer
-            th Contact
-            th Amount
-            th Date
-            th Balance
-        tbody
-          tr
-            td Kato Samuel
-            td 0701xxxxxx
-            td 50,000
-            td 12-04-2026
-            td
-              strong 450,000
-          tr
-            td Namuli Sarah
-            td 0782xxxxxx
-            td 120,000
-            td 10-04-2026
-            td
-              strong 900,000

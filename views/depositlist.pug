@@ -1,0 +1,50 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Deposit Scheme - Nyondo Stock
+  link(rel='stylesheet' href='/css/deposits.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css')
+.sidebar
+  h2 Nyondo Stock
+  a(href='#')
+    i.fas.fa-th-large
+    | Dashboard
+  a(href='/stockreg')
+    i.fas.fa-boxes
+    | Stock
+  a(href='/salesform')
+    i.fas.fa-shopping-cart
+    | Sales
+  a(href='/suppliersform')
+    i.fas.fa-truck
+    | Suppliers
+  a.active(href='/deposit')
+    i.fas.fa-wallet
+    | Deposits
+  a(href='#')
+    i.fas.fa-chart-line
+    | Reports
+  a(href='#')
+    i.fas.fa-sign-out-alt
+    | Logout
+.main
+  header.top-bar
+    h1 Customer Deposit Scheme
+    .stats-mini
+      span
+        | Total Pool: 
+        strong UGX 12,450,000
+  .deposit-grid
+    .table-card
+      h2 Recent Contributions
+      table
+        thead
+          tr
+            th Customer
+            th Contact
+            th Amount
+            th Date
+            th Balance
+        tbody
+          tr
