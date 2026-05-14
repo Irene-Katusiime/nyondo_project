@@ -7,7 +7,8 @@ customername: {
 },
 NINnumber: {
     type: String,
-    required: true
+    required: true,
+    trim: true
 },
 phonenumber: {
     type: String,
@@ -16,6 +17,18 @@ phonenumber: {
 amounttodeposit: {
     type: Number,
     required: true
+},
+itemname: {
+    type: String,
+    required: true
+},
+quantity: {
+    type: Number,
+    required: true
+},
+date: {
+    type: Date,
+    default: Date.now
 }
 });
 

@@ -43,8 +43,19 @@ head
           tr
             th Customer
             th Contact
-            th Amount
+            th NIN Number 
+            th Item Name 
+            th Quantity
+            th Amount Deposited
             th Date
             th Balance
         tbody
-          tr
+          each deposit in deposits
+            tr
+              td= deposit.customername
+              td= deposit.phonenumber
+              td= deposit.NINnumber
+              td= deposit.itemname
+              td= deposit.quantity
+              td= deposit.amounttodeposit
+              td= new Date(deposit.date).toLocaleDateString()

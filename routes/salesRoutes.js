@@ -28,15 +28,11 @@ router.post("/salesform",isAttendant, async (req, res) => {
     if (item.quantity < quantity) {
       return res.status(400).send("not enough stock available");
     }
-
-    
-
     
     //Deduct quantity sold from stock quantity and save the new quantity to the stock collection
     item.quantity -= quantity;
     await item.save();
      const total = quantity*unitprice;
-
 
      let transportcost = 0
      if (total >= 500000 && customerdistance <= 10){

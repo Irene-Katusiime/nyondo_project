@@ -4,9 +4,9 @@ const router = express.Router();
 router.get('/admindashboard', (req, res)=>{
     res.render('admindashboard')
 });
-router.get('/attendantdashboard', (req, res)=>{
-    res.render('salesdashboard')
-});
+// router.get('/attendantdashboard', (req, res)=>{
+//     res.render('salesdashboard')
+// });
 router.get('/storemanagerdashboard', (req, res)=>{
     // res.render('managerdashboard')
     res.redirect('/stocklist')

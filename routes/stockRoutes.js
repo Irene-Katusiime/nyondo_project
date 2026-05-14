@@ -66,16 +66,6 @@ router.get('/stocklist',authorizeRoles('store manager','admin'), async(req, res)
   }
 });
 
-//     const stock = await Stock.find()
-//       .populate('itemName category')
-//       .sort({date:-1})
-//        res.render('stock-list', { stocks:stock });
-//   } catch (error) {
-//     console.error(error)
-//     res.status(400).send('Unable to pick stock from the db')
-//   }
-// });
-
 //Update stock
 router.get('/stock/edit/:id',isManager,async(req,res) =>{
   try {
