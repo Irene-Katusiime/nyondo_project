@@ -5,6 +5,10 @@ itemName: {
     type: String,
     required: true
 },
+factoryName: {
+    type: String,
+    required: true
+},
 category: {
     type: String,
     required: true
@@ -29,6 +33,10 @@ suppliername: {
     required: true
 },
 suppliercontact: {
+    type: String,
+    required: true
+},
+paymentmethod: {
     type: String,
     required: true
 },

@@ -67,7 +67,7 @@ router.get('/stocklist',authorizeRoles('store manager','admin'), async(req, res)
 });
 
 //Update stock
-router.get('/stock/edit/:id',isManager,async(req,res) =>{
+router.get('/stock/edit/:id',authorizeRoles('store manager','admin'),async(req,res) =>{
   try {
     const item = await Stock.findById(req.params.id)
     if(!item) return res.status(404).send('Stock not found')
@@ -77,7 +77,7 @@ router.get('/stock/edit/:id',isManager,async(req,res) =>{
   }
 });
 
-router.post('/stock/edit/:id',isManager, async(req,res) => {
+router.post('/stock/edit/:id',authorizeRoles('store manager','admin'), async(req,res) => {
   try {
     const {quantity, sellingprice, unitprice, suppliername} = req.body;
     const total = quantity*unitprice;
@@ -97,7 +97,7 @@ router.post('/stock/edit/:id',isManager, async(req,res) => {
 });
 
 //Delete route
-router.post('/stock/delete/:id',isManager, async(req,res) => {
+router.post('/stock/delete/:id',authorizeRoles('store manager','admin'), async(req,res) => {
   try {
     await Stock.findByIdAndDelete(req.params.id);
     res.redirect('/stocklist')

@@ -7,7 +7,7 @@ head
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css')
 .sidebar
   h2 Nyondo Stock
-  a(href='#')
+  a(href='saleslist')
     i.fas.fa-th-large
     | Dashboard
   a(href='/stockreg')
@@ -16,16 +16,13 @@ head
   a(href='/salesform')
     i.fas.fa-shopping-cart
     | Sales
-  a(href='/suppliersform')
-    i.fas.fa-truck
-    | Suppliers
   a.active(href='/deposit')
     i.fas.fa-wallet
-    | Deposits
+    | Deposits List
   a(href='#')
     i.fas.fa-chart-line
     | Reports
-  a(href='#')
+  a(href='logout')
     i.fas.fa-sign-out-alt
     | Logout
 .main
@@ -59,3 +56,4 @@ head
               td= deposit.quantity
               td= deposit.amounttodeposit
               td= new Date(deposit.date).toLocaleDateString()
+              td= (deposit.itemprice * deposit.quantity) - deposit.amounttodeposit

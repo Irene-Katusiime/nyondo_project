@@ -4,16 +4,19 @@ const Deposit = require("../models/Deposit");
 
 const {isAttendant,isAdmin, isManager} = require('../middleware/auth');
 const { authorizeRoles } = require('../middleware/auth');
+const { authorize } = require('passport');
 
-router.get('/deposit', isAttendant,async(req, res)=>{
+router.get('/deposit', isAdmin,async(req, res)=>{
     res.render('deposits')
 })
 
-router.post('/deposits', isAttendant, async (req ,res)=>{
+router.post('/deposits', isAdmin, async (req ,res)=>{
   //  console.log(req.body);
   try {
     const {customername, NINnumber, phonenumber, amounttodeposit, itemname, quantity } = req.body;
     const phone = '+256' + phonenumber;
+
+    
 
     const deposit = new Deposit({
       customername,
@@ -21,11 +24,12 @@ router.post('/deposits', isAttendant, async (req ,res)=>{
       phonenumber: phone,
       amounttodeposit,
       itemname,
-      quantity
+      quantity: Number(quantity),
+      itemprice: Number(itemprice)
     });
     await deposit.save();
 
-    res.redirect('/');
+    res.redirect('/credit');
 
   } catch (error) {
     console.error(error);
@@ -36,7 +40,7 @@ router.post('/deposits', isAttendant, async (req ,res)=>{
 });
 
 //Route to display the deposit list page
-router.get('/credit', isAttendant,async(req,res) => {
+router.get('/credit', isAdmin,async(req,res) => {
   try {
     //Fetch all deposits from Mongodb
     const deposits = await Deposit.find().sort({ date: -1});

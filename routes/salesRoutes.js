@@ -6,7 +6,7 @@ const Stock = require("../models/Stock");
 const {isAttendant,isAdmin, isManager} = require('../middleware/auth');
 const { authorizeRoles } = require('../middleware/auth');
 
-router.get('/salesform',isAttendant, async (req, res)=>{
+router.get('/salesform',authorizeRoles('sales attendant','admin'), async (req, res)=>{
   try {
     const items = await Stock.find({ quantity: { $gt: 0}});
     console.log(items)
@@ -17,7 +17,7 @@ router.get('/salesform',isAttendant, async (req, res)=>{
   }
 });
 
-router.post("/salesform",isAttendant, async (req, res) => {
+router.post("/salesform",authorizeRoles('sales attendant','admin'), async (req, res) => {
   try {
     const { itemId, quantity, unitprice, customername, customercontact, customerdistance, customeraddress } = req.body;
     
@@ -111,7 +111,7 @@ router.post('/sale/edit/:id',authorizeRoles("sales attendant", "admin"), async(r
 });
 
 //Delete route
-router.post('/delete/:id',isAttendant, async(req,res) => {
+router.post('/delete/:id',authorizeRoles("sales attendant", "admin"), async(req,res) => {
   try {
     await Sale.findByIdAndDelete(req.params.id);
     res.redirect('/salesList')

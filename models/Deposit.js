@@ -29,6 +29,13 @@ quantity: {
 date: {
     type: Date,
     default: Date.now
+},
+itemprice: {
+    type: Number,
+    required: true
+},
+total: {
+    type: Number,
 }
 });
 

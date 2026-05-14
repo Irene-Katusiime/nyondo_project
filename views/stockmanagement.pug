@@ -29,17 +29,21 @@ head
     .card.form-card
       h2 Register New Stock
       form(action='/stockreg' method='post')
-        .form-group
-          label Item Name
-          select(name='itemName' required='')
-            option(value='') Select Item 
-            option(value='Cement') Cement
-            option(value='Ironbars') Iron bars
-            option(value='Nails') Nails
-            option(value='Wheelbarrows') Wheelbarrows
-            option(value='Wiremesh') Wire mesh
-            option(value='Barbedwires') Barbed wires
-            option(value='Ironsheets') Iron sheets
+        .form-group-row
+          .form-group
+            label Item Name
+            select(name='itemName' required='')
+              option(value='') Select Item 
+              option(value='Cement') Cement
+              option(value='Ironbars') Iron bars
+              option(value='Nails') Nails
+              option(value='Wheelbarrows') Wheelbarrows
+              option(value='Wiremesh') Wire mesh
+              option(value='Barbedwires') Barbed wires
+              option(value='Ironsheets') Iron sheets
+          .form-group
+            label Factory Name
+            input(type='text' name='factoryName' placeholder='Factory name' required='')
         .form-group-row
           .form-group
             label Category
@@ -66,4 +70,11 @@ head
           .form-group
             label Supplier Contact
             input(type='text' name='suppliercontact' placeholder='7xxxxxxxx' required='' pattern='[7][0-9]{8}' maxlength='9' inputmode='numeric'  title='Enter a valid Ugandan number starting with 7 and 9 digits long')
-        button(type='submit') Update Stock
+          .form-group
+            label Payment Method
+            select(name='paymentmethod' required='')
+              option(value='') Select payment method
+              option(value='Mobilemoney') Mobile Money
+              option(value='Cash') Cash
+              option(value='Credit') Credit
+        button(type='submit') Add Stock
