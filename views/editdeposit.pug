@@ -41,10 +41,13 @@ head
         .form-group
           label Item Price
           input(type='number' name='itemprice' value=deposit.itemprice)
+        //- .form-group
+        //-   label Amount Deposited (UGX)
+        //-   input(type='number' name='amountdeposited' value=deposit.amountdeposited)
         .form-group
-          label Amount to Deposit (UGX)
-          input(type='number' name='amountdeposited' value=deposit.amountdeposited)
+          label Additional Payment (UGX)
+          input(type='number' name='newpayment' min='0' required)
         .form-group
-          label Balance
-          input(type='number' name='balance' value=deposit.balance)
+          label Current Balance
+          input(type='number' value=deposit.balance readonly)
         button.btn-deposit(type='submit') Update Deposit

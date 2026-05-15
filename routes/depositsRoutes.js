@@ -86,14 +86,44 @@ router.get('/deposit/edit/:id', async(req,res) => {
 
 router.post('/deposit/update/:id', async(req,res) => {
   try{
-    const {customername,  amountdeposited,  quantity, itemprice, balance} = req.body;
+    // const {customername,  amountdeposited,  quantity, itemprice} = req.body;
+    const { newpayment } = req.body;
+    const deposit = await Deposit.findById(req.params.id);
+
+    const newPay = Number(newpayment || 0);
+    const previousPaid = Number(deposit.amountdeposited || 0);
+
+    const updatePaid = previousPaid + newPay;
+
+    // //Convert to numbers
+    const qty = Number(deposit.quantity);
+    const price = Number(deposit.itemprice);
+    // // const paid = Number(amountdeposited);
+
+    // //Recalculate balance
+    const total = qty * price;
+    let balance = total - updatePaid;
+
+    // //Prevent negative balances
+    if(balance < 0) {
+      balance = 0;
+    }
+
+    //Automatically determine status
+    let status = 'Pending'
+    if (balance <= 0){
+      status = 'Paid';
+    }else if (updatePaid > 0) {
+      status = 'Partial';
+    }
 
     await Deposit.findByIdAndUpdate(req.params.id,{
-      customername,
-      quantity,
-      itemprice,
-      amountdeposited,
-      balance
+      customername: deposit.customername,
+      quantity: deposit.quantity,
+      itemprice: deposit.itemprice,
+      amountdeposited: updatePaid,
+      balance,
+      status
   });
   res.redirect('/admindashboard');
 }catch(error){
