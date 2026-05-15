@@ -121,6 +121,7 @@ router.post('/deposit/update/:id', async(req,res) => {
       customername: deposit.customername,
       quantity: deposit.quantity,
       itemprice: deposit.itemprice,
+      itemname: deposit.itemname,
       amountdeposited: updatePaid,
       balance,
       status

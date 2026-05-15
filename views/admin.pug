@@ -43,12 +43,12 @@ head
         i.fas.fa-money-bill-wave
         div
           h3 Stock Value
-          p UGX 12,450,000
+          p  UGX #{(stockValue || 0).toLocaleString()}
       .card
         i.fas.fa-shopping-cart
         div
           h3 Sales Today
-          p UGX 2,150,000
+          p  UGX #{(totalSales || 0).toLocaleString()}
       .card
         i.fas.fa-wallet
         div

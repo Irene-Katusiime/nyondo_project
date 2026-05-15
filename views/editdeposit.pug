@@ -39,11 +39,11 @@ head
           label Quantity
           input(type='number' name='quantity' value=deposit.quantity)
         .form-group
+          label Item Name
+          input(type='text' name='itemname' value=deposit.itemname)
+        .form-group
           label Item Price
           input(type='number' name='itemprice' value=deposit.itemprice)
-        //- .form-group
-        //-   label Amount Deposited (UGX)
-        //-   input(type='number' name='amountdeposited' value=deposit.amountdeposited)
         .form-group
           label Additional Payment (UGX)
           input(type='number' name='newpayment' min='0' required)

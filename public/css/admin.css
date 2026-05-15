@@ -173,6 +173,10 @@
       color: #92400e;
     }
 
+    .status.partial {
+      background: red;
+    }
+
     .btn-edit {
   display: inline-block;
   padding: 6px 10px;
