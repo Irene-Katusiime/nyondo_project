@@ -33,8 +33,22 @@ router.get('/admindashboard', async(req, res)=>{
             .sort({ date: -1})
             .limit(5);
 
+            //Calculate total deposits
+            let totalDeposits = 0;
+
+            deposits.forEach(deposit => {
+                totalDeposits += Number(deposit.amountdeposited || 0);
+            });
+
+            //Calculating low stock items
+            const lowStockItems = await Stock.find({
+                quantity: { $lte: 10 }
+            });
+
+            const lowStockCount = lowStockItems.length;
+
         // Send deposits to the admin view
-        res.render('admin', { deposits, stockValue, totalSales });
+        res.render('admin', { deposits, stockValue, totalSales, totalDeposits, lowStockCount });
     } catch (error) {
         console.error('Error fetching deposits:', error);
         res.status(500).send('Server Error')

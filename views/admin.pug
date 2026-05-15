@@ -11,25 +11,22 @@ head
     a.active(href='#')
       i.fas.fa-chart-line
       span Dashboard
-    a(href='#')
+    a(href='stocklist')
       i.fas.fa-boxes
       span Stock
-    a(href='#')
+    a(href='saleslist')
       i.fas.fa-shopping-cart
       span Sales
-    a(href='#')
+    a(href='deposit')
       i.fas.fa-wallet
       span Deposits
     a(href='#')
-      i.fas.fa-truck
-      span Suppliers
-    a(href='#')
       i.fas.fa-file-alt
       span Reports
-    a(href='#')
+    a(href='signup')
       i.fas.fa-users
       span Users
-    a(href='#')
+    a(href='logout')
       i.fas.fa-sign-out-alt
       span Logout
   main.main
@@ -53,12 +50,12 @@ head
         i.fas.fa-wallet
         div
           h3 Total Deposits
-          p UGX 5,600,000
+          p UGX #{(totalDeposits || 0).toLocaleString()}
       .card
         i.fas.fa-exclamation-triangle
         div
           h3 Low Stock Items
-          p 4 Items
+          p #{lowStockCount} Items
     section.section
       h2 Recent Deposits
       table
