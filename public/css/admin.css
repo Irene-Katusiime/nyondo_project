@@ -173,6 +173,20 @@
       color: #92400e;
     }
 
+    .btn-edit {
+  display: inline-block;
+  padding: 6px 10px;
+  background: #166534;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.btn-edit:hover {
+  background: #166531;
+}
+
     /* Responsive */
     @media (max-width: 768px) {
       .sidebar {

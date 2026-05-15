@@ -71,18 +71,23 @@ head
             th Deposited
             th Balance
             th Status
+            th Actions
         tbody
           each deposit in deposits
             tr 
               td= deposit.customername 
               td= deposit.itemname
               td= deposit.quantity 
-              td= deposit.itemprice
+              td= deposit.item
               td UGX #{deposit.amountdeposited.toLocaleString()}
               td UGX #{deposit.balance.toLocaleString()}
               td 
                 - const status = deposit.status || 'Pending'
                 span(class=`status ${status.toLowerCase()}`)= status
+              td 
+                a.btn-edit(href=`/deposit/edit/${deposit._id}`)
+                  i.fas.fa-pen 
+                  | Edit
     //- section.section
     //-   h2 Low Stock Alerts
     //-   table

@@ -71,4 +71,35 @@ router.get('/credit', isAdmin,async(req,res) => {
   }
 });
 
+//The edit route
+router.get('/deposit/edit/:id', async(req,res) => {
+  try{
+  const deposit = await Deposit.findById(req.params.id);
+  if(!deposit) return res.status(404).send('Deposit not found');
+
+  res.render('editdeposit', {deposit});
+  }catch (error){
+    console.error(error);
+    res.status(500).send('Error loading edit page');
+   }
+});
+
+router.post('/deposit/update/:id', async(req,res) => {
+  try{
+    const {customername,  amountdeposited,  quantity, itemprice, balance} = req.body;
+
+    await Deposit.findByIdAndUpdate(req.params.id,{
+      customername,
+      quantity,
+      itemprice,
+      amountdeposited,
+      balance
+  });
+  res.redirect('/admindashboard');
+}catch(error){
+  console.error(error);
+  res.status(500).send('Update error');
+}
+});
+
 module.exports = router;
