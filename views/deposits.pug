@@ -7,12 +7,9 @@ head
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css')
 .sidebar
   h2 Nyondo Stock
-  a(href='/saleslist')
+  a(href='admindashboard')
     i.fas.fa-th-large
     | Dashboard
-  a(href='/stockreg')
-    i.fas.fa-boxes
-    | Stock
   a(href='/saleslist')
     i.fas.fa-shopping-cart
     | Sales
@@ -55,6 +52,15 @@ head
           label Quantity
           input(type='number' name='quantity' placeholder='Enter quantity' required='')
         .form-group
+          label Item Price
+          input(type='number' name='itemprice' placeholder='Enter item price' required='')
+        .form-group
+          label Customer Address
+          input(type='text' name='customeraddress' placeholder='Enter customer address' required='')
+        .form-group
+          label Distance (km)
+          input(type='text' name='distance' placeholder='Enter distance' required='')
+        .form-group
           label Amount to Deposit (UGX)
-          input(type='number' name='amounttodeposit' placeholder='Enter amount' required='')
+          input(type='number' name='amountdeposited' placeholder='Enter amount' required='')
         button.btn-deposit(type='submit') Confirm Deposit

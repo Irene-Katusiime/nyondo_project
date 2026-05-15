@@ -13,20 +13,33 @@ router.get('/deposit', isAdmin,async(req, res)=>{
 router.post('/deposits', isAdmin, async (req ,res)=>{
   //  console.log(req.body);
   try {
-    const {customername, NINnumber, phonenumber, amounttodeposit, itemname, quantity } = req.body;
-    const phone = '+256' + phonenumber;
+    const {customername, NINnumber, phonenumber, amountdeposited, itemname, quantity, itemprice, status, customeraddress, distance } = req.body;
 
-    
+    const phone = '+256' + phonenumber; 
+
+
+    const qty = Number(quantity);
+    const price = Number(itemprice);
+    const paid = Number(amountdeposited);
+
+    const total = price * qty;
+    const balance = total - paid;
+
 
     const deposit = new Deposit({
       customername,
       NINnumber,
       phonenumber: phone,
-      amounttodeposit,
+      amountdeposited: Number(amountdeposited),
       itemname,
       quantity: Number(quantity),
-      itemprice: Number(itemprice)
+      itemprice: Number(itemprice),
+      balance,
+      customeraddress,
+      distance,
+      status: 'Pending'
     });
+
     await deposit.save();
 
     res.redirect('/credit');
@@ -45,8 +58,13 @@ router.get('/credit', isAdmin,async(req,res) => {
     //Fetch all deposits from Mongodb
     const deposits = await Deposit.find().sort({ date: -1});
 
+    //Calculte total amount deposited
+    const totalPool = deposits.reduce((sum, deposit) => {
+      return sum + Number(deposit.amountdeposited || 0);
+    }, 0);
+
     //Render deposits.pug
-    res.render('depositlist', { deposits });
+    res.render('depositlist', { deposits, totalPool });
   } catch (error) {
     console.error(error);
     res.status(500).send('Error loading deposits');

@@ -6,6 +6,8 @@
     --white: #ffffff;
     --text-dark: #333;
     --sidebar-width: 250px;
+    --bg-light: #f4f7f6;
+    --danger: #e74c3c;
     --transition: all 0.3s ease;
 }
 
@@ -18,7 +20,7 @@
 
 body {
     display: flex;
-    background-color: var(--bg-color);
+    background-color: var(--bg-light);
 }
 
 /* --- Sidebar --- */
@@ -104,7 +106,7 @@ label {
     display: block;
     margin-bottom: 8px;
     font-weight: 500;
-    color: #666;
+    color: #555;
     font-size: 0.9rem;
 }
 
@@ -118,7 +120,7 @@ input, select {
 }
 
 input:focus, select:focus {
-    border-color: var(--primary-color);
+    border-color: #f39c12;
     box-shadow: 0 0 5px rgba(52, 152, 219, 0.2);
 }
 

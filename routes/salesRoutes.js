@@ -32,14 +32,16 @@ router.post("/salesform",authorizeRoles('sales attendant','admin'), async (req, 
     //Deduct quantity sold from stock quantity and save the new quantity to the stock collection
     item.quantity -= quantity;
     await item.save();
-     const total = quantity*unitprice;
+     const totalcost = quantity*unitprice;
 
      let transportcost = 0
-     if (total >= 500000 && customerdistance <= 10){
+     if (totalcost >= 500000 && customerdistance <= 10){
       transportcost = 0
      }else{
       transportcost = 30000
      }
+
+     const total = totalcost + transportcost
 
     //Record the sale
     let newItem = new Sale({

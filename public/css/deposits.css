@@ -151,3 +151,40 @@ td {
 }
 
 tr:hover { background-color: #fcfcfc; }
+
+.status {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+  text-transform: capitalize;
+}
+
+/* Pending - Orange */
+.status.pending {
+  background-color: #fff4e5;
+  color: #ff9800;
+  border: 1px solid #ff9800;
+}
+
+/* Paid - Green */
+.status.paid {
+  background-color: #e6f9ed;
+  color: #28a745;
+  border: 1px solid #28a745;
+}
+
+/* Partial - Blue */
+.status.partial {
+  background-color: #e7f1ff;
+  color: #007bff;
+  border: 1px solid #007bff;
+}
+
+/* Overdue - Red */
+.status.overdue {
+  background-color: #ffe6e6;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nyondo Stock - Admin Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>Nyondo Stock</h2>
+      <a href="#" class="active"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
+      <a href="#"><i class="fas fa-boxes"></i> <span>Stock</span></a>
+      <a href="#"><i class="fas fa-shopping-cart"></i> <span>Sales</span></a>
+      <a href="#"><i class="fas fa-wallet"></i> <span>Deposits</span></a>
+      <a href="#"><i class="fas fa-truck"></i> <span>Suppliers</span></a>
+      <a href="#"><i class="fas fa-file-alt"></i> <span>Reports</span></a>
+      <a href="#"><i class="fas fa-users"></i> <span>Users</span></a>
+      <a href="#"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <h1>Admin Dashboard</h1>
+        <div class="admin-info">
+          <i class="fas fa-user-circle"></i>
+          <span>Admin</span>
+        </div>
+      </div>
+
+      <section class="cards">
+        <div class="card">
+          <i class="fas fa-money-bill-wave"></i>
+          <div>
+            <h3>Stock Value</h3>
+            <p>UGX 12,450,000</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <i class="fas fa-shopping-cart"></i>
+          <div>
+            <h3>Sales Today</h3>
+            <p>UGX 2,150,000</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <i class="fas fa-wallet"></i>
+          <div>
+            <h3>Total Deposits</h3>
+            <p>UGX 5,600,000</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <i class="fas fa-exclamation-triangle"></i>
+          <div>
+            <h3>Low Stock Items</h3>
+            <p>4 Items</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Recent Deposits</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Customer</th>
+              <th>Item</th>
+              <th>Deposited</th>
+              <th>Balance</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John Doe</td>
+              <td>Cement</td>
+              <td>UGX 200,000</td>
+              <td>UGX 300,000</td>
+              <td><span class="status pending">Pending</span></td>
+            </tr>
+            <tr>
+              <td>Mary Namusoke</td>
+              <td>Iron Sheets</td>
+              <td>UGX 500,000</td>
+              <td>UGX 0</td>
+              <td><span class="status paid">Paid</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section">
+        <h2>Low Stock Alerts</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Quantity Left</th>
+              <th>Reorder Level</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Cement</td>
+              <td>8 Bags</td>
+              <td>20 Bags</td>
+            </tr>
+            <tr>
+              <td>Iron Bars</td>
+              <td>12 Pieces</td>
+              <td>30 Pieces</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

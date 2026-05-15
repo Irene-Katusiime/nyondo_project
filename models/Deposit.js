@@ -14,7 +14,7 @@ phonenumber: {
     type: String,
     required: true
 },
-amounttodeposit: {
+amountdeposited: {
     type: Number,
     required: true
 },
@@ -34,8 +34,24 @@ itemprice: {
     type: Number,
     required: true
 },
+balance: {
+   type: Number,
+   default: 0 
+},
 total: {
+    type: Number
+},
+status: {
+    type: String,
+    default: 'Pending'
+},
+customeraddress: {
+    type: String,
+    required: true
+},
+distance: {
     type: Number,
+    required: true
 }
 });
 

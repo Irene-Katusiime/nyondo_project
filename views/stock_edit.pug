@@ -37,4 +37,10 @@ head
           .form-group
             label Selling Price (UGX)
             input#sellingprice(type='number' name='sellingprice' value=item.sellingprice placeholder='Retail price' required='')
+          .form-group
+            label Payment Method
+            select(name='paymentmethod' required='')
+              option(value='') Select payment method
+              option(value='Cash') Cash
+              option(value='Credit') Credit
         button(type='submit') Update Stock

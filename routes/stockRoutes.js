@@ -13,7 +13,7 @@ router.get('/stockreg',authorizeRoles('store manager','admin'), async (req, res)
 router.post('/stockreg',authorizeRoles('store manager','admin'), async(req ,res)=>{
   console.log(req.body);
   try {
-    const {itemName,category,quantity,unitprice,sellingprice,suppliername,suppliercontact} =req.body;
+    const {itemName,category,quantity,unitprice,sellingprice,suppliername,suppliercontact, factoryName, paymentmethod } =req.body;
 
     const phone = '+256' + suppliercontact;
 
@@ -26,6 +26,8 @@ router.post('/stockreg',authorizeRoles('store manager','admin'), async(req ,res)
       sellingprice,
       suppliername,
       suppliercontact: phone,
+      factoryName,
+      paymentmethod,
       total
     })
 
@@ -79,14 +81,15 @@ router.get('/stock/edit/:id',authorizeRoles('store manager','admin'),async(req,r
 
 router.post('/stock/edit/:id',authorizeRoles('store manager','admin'), async(req,res) => {
   try {
-    const {quantity, sellingprice, unitprice, suppliername} = req.body;
+    const {quantity, sellingprice, unitprice, suppliername, paymentmethod } = req.body;
     const total = quantity*unitprice;
     await Stock.findByIdAndUpdate(req.params.id,{
       total,
       quantity, 
       sellingprice, 
       suppliername, 
-      unitprice
+      unitprice,
+      paymentmethod
     })
     res.redirect('/stocklist');
   } catch (error) {

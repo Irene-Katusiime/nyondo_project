@@ -65,6 +65,7 @@ main.main-content
           th Category
           th Quantity
           th Unit Price
+          th Total
           th Selling Price
           th Date
           th Actions
@@ -79,8 +80,9 @@ main.main-content
               td= item.category
               td= item.quantity 
               td= item.unitprice
+              td= item.total
               td= item.sellingprice 
-              td= new Date(item.datereceived).toLocaleString()
+              td= new Date(item.datereceived).toLocaleDateString()
               td
                 .d-flex.gap-2
                   a.btn.btn-sm.btn-outline-warning(href=`/stock/edit/${item._id}`)
@@ -99,7 +101,6 @@ main.main-content
 
           th Supplier Name 
           th Supplier Contact
-          th Total 
           th Date
           th Payment Status
           th Actions
@@ -113,8 +114,9 @@ main.main-content
 
               td= item.suppliername
               td= item.suppliercontact
-              td= item.total
-              td= new Date(item.datereceived).toLocaleString()
+              //- td= item.total
+              td= new Date(item.datereceived).toLocaleDateString()
+              td= item.paymentmethod
               td
                 .d-flex.gap-2
                   a.btn.btn-sm.btn-outline-warning(href=`/stock/edit/${item._id}`)

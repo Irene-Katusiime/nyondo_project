@@ -1,0 +1,102 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Nyondo Stock - Admin Dashboard
+  link(rel='stylesheet' href='css/admin.css') 
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css')
+.container
+  aside.sidebar
+    h2 Nyondo Stock
+    a.active(href='#')
+      i.fas.fa-chart-line
+      span Dashboard
+    a(href='#')
+      i.fas.fa-boxes
+      span Stock
+    a(href='#')
+      i.fas.fa-shopping-cart
+      span Sales
+    a(href='#')
+      i.fas.fa-wallet
+      span Deposits
+    a(href='#')
+      i.fas.fa-truck
+      span Suppliers
+    a(href='#')
+      i.fas.fa-file-alt
+      span Reports
+    a(href='#')
+      i.fas.fa-users
+      span Users
+    a(href='#')
+      i.fas.fa-sign-out-alt
+      span Logout
+  main.main
+    .topbar
+      h1 Admin Dashboard
+      .admin-info
+        i.fas.fa-user-circle
+        span Admin
+    section.cards
+      .card
+        i.fas.fa-money-bill-wave
+        div
+          h3 Stock Value
+          p UGX 12,450,000
+      .card
+        i.fas.fa-shopping-cart
+        div
+          h3 Sales Today
+          p UGX 2,150,000
+      .card
+        i.fas.fa-wallet
+        div
+          h3 Total Deposits
+          p UGX 5,600,000
+      .card
+        i.fas.fa-exclamation-triangle
+        div
+          h3 Low Stock Items
+          p 4 Items
+    section.section
+      h2 Recent Deposits
+      table
+        thead
+          tr
+            th Customer
+            th Item
+            th Quantity
+            th Item Price
+            th Deposited
+            th Balance
+            th Status
+        tbody
+          each deposit in deposits
+            tr 
+              td= deposit.customername 
+              td= deposit.itemname
+              td= deposit.quantity 
+              td= deposit.itemprice
+              td UGX #{deposit.amountdeposited.toLocaleString()}
+              td UGX #{deposit.balance.toLocaleString()}
+              td 
+                - const status = deposit.status || 'Pending'
+                span(class=`status ${status.toLowerCase()}`)= status
+    //- section.section
+    //-   h2 Low Stock Alerts
+    //-   table
+    //-     thead
+    //-       tr
+    //-         th Item
+    //-         th Quantity Left
+    //-         th Reorder Level
+    //-     tbody
+    //-       tr
+    //-         td Cement
+    //-         td 8 Bags
+    //-         td 20 Bags
+    //-       tr
+    //-         td Iron Bars
+    //-         td 12 Pieces
+    //-         td 30 Pieces
