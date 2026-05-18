@@ -62,9 +62,9 @@ router.get('/credit', isAdmin,async(req,res) => {
     const totalPool = deposits.reduce((sum, deposit) => {
       return sum + Number(deposit.amountdeposited || 0);
     }, 0);
-
+    
     //Render deposits.pug
-    res.render('depositlist', { deposits, totalPool });
+    res.render('depositlist',{ deposits, totalPool });
   } catch (error) {
     console.error(error);
     res.status(500).send('Error loading deposits');

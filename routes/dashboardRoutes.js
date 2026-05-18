@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Deposit = require('../models/Deposit'); //Importing the deposit model
 const Stock = require('../models/Stock');
-const Sales = require('../models/Sale');
+const Sale = require('../models/Sale');
 
 router.get('/admindashboard', async(req, res)=>{
 
@@ -62,6 +62,42 @@ router.get('/storemanagerdashboard', (req, res)=>{
     // res.render('managerdashboard')
     res.redirect('/stocklist')
 });
+
+router.get('/report', async (req,res) =>{
+    try{
+
+        let stats = {
+            salesRevenue: 0,
+            costRevenue:0,
+            netProfit: 0
+            
+        };
+
+        const salesAgg = await Sale.aggregate(
+            [{$group:{_id:null,grandTotal:{$sum:'$total'}}}]
+        );
+        stats.salesRevenue = salesAgg.length > 0 ? salesAgg[0].grandTotal:0;
+
+
+        const costAgg = await Stock.aggregate(
+            [{$group:{_id:null,grandTotal:{$sum:'$total'}}}]
+        );
+        stats.costRevenue = costAgg.length > 0 ? costAgg[0].grandTotal:0;
+
+        stats.netProfit = stats.salesRevenue - stats.costRevenue;
+
+
+
+        res.render('reports', {stats});
+
+    }catch (error) {
+      console.log(error.message)
+      res.status(400).send('Stats not found')
+    }
+});
+
+
+
 
 module.exports = router;
 

@@ -73,8 +73,16 @@ router.get('/salesList',authorizeRoles('sales attendant','admin','store manager'
     const sales = await Sale.find()
       .populate('itemname','itemName category')
       .populate('attendant','fullname')
-      .sort({date:-1})
-       res.render('sales-list',{sales});
+      .sort({date:-1});
+
+      let grossRevenue = sales.reduce((sum, item) => {
+        return sum + Number(item.total || 0);
+      }, 0);
+      
+
+       res.render('sales-list',{sales, grossRevenue});
+
+
   } catch (error) {
     console.error(error)
     res.status(400).send('Unable to pick sales from the db')

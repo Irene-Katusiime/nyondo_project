@@ -1,0 +1,164 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title NyondoStock | Reports
+  link(rel='stylesheet' href='/css/reports.css')
+  // FontAwesome for the specific icon indicators used in your framework
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css')
+// Sidebar Layout
+aside.sidebar
+  .sidebar-branding
+    i.fa-solid.fa-layer-group
+    div
+      h2 NyondoStock
+      p Hardware Management
+  nav.nav-menu
+    a(href='/admindashboard')
+      i.fa-solid.fa-chart-pie
+      |  Dashboard
+    a(href='/inventory')
+      i.fa-solid.fa-boxes-stacked
+      |  Inventory
+    a(href='/sales')
+      i.fa-solid.fa-cart-shopping
+      |  Record Sale
+    a.active(href='/reports')
+      i.fa-solid.fa-file-invoice-dollar
+      |  Reports
+    a.logout(href='/logout')
+      i.fa-solid.fa-right-from-bracket
+      |  Logout
+// Content Workspace
+main.main-content
+  // Native Top Bar Structure
+  header.top-bar
+    .search-box
+      i.fa-solid.fa-magnifying-glass(style='color: var(--text-muted);')
+      input(type='text' placeholder='Search transactions, customers...')
+    .filter-controls
+      select#timeframe-select.dropdown-filter
+        option(value='7days' selected='') Last 7 Days
+        option(value='30days') Current Month
+        option(value='year') Financial Year
+    .admin-profile
+      .profile-pic A
+      span.profile-name(style='color: var(--primary); font-weight: 600;') Admin
+  // Framework Metrics Grid
+  section.stats-grid
+    .stat-card
+      .stat-info
+        p  Gross Revenue
+        h3 UGX #{stats.salesRevenue.toLocaleString()}
+
+      i.fa-solid.fa-wallet
+    .stat-card
+      .stat-info
+        p Cost of Goods (COGS)
+        h3 UGX #{stats.costRevenue.toLocaleString()} 
+      i.fa-solid.fa-boxes-stacked
+    .stat-card
+      .stat-info
+        p Net Profit
+        h3(style='color: var(--success);') UGX #{stats.netProfit}
+      i.fa-solid.fa-money-bill-trend-up
+    .stat-card
+      .stat-info
+        p Deposits Pipeline
+        h3 UGX 1,450,000
+      i.fa-solid.fa-hand-holding-dollar
+  // Segment Navigation Submenu
+  .report-tabs-menu
+    button.tab-btn.active(onclick="toggleReportTab(event, 'sales-view')") Sales Performance
+    button.tab-btn(onclick="toggleReportTab(event, 'stock-health-view')") Stock Health &amp; Alerts
+    button.tab-btn(onclick="toggleReportTab(event, 'deposits-view')") Deposit Schemes Ledger
+  // TAB 1: Sales Transactions
+  #sales-view.tab-panel.active
+    .table-container
+      table
+        thead
+          tr
+            th Invoice ID
+            th Timestamp
+            th Product Description
+            th Qty
+            th Gross Total
+            th Payment Channel
+        tbody
+          tr
+            td(style='font-weight: 600;') #INV-0982
+            td 18/05/2026 10:14
+            td Bamburi Cement (50Kg)
+            td 20 Bags
+            td(style='font-weight: 600; color: var(--primary);') UGX 760,000
+            td
+              span.status-badge.success-bg Cash
+          tr
+            td(style='font-weight: 600;') #INV-0981
+            td 17/05/2026 15:45
+            td Roofing Nails (2.5 inch)
+            td 3 Boxes
+            td(style='font-weight: 600; color: var(--primary);') UGX 120,000
+            td
+              span.status-badge.info-bg Mobile Money
+  // TAB 2: Inventory Safety Thresholds
+  #stock-health-view.tab-panel
+    .table-container
+      table
+        thead
+          tr
+            th Item Code
+            th Description
+            th Current Inventory
+            th Safety Stock Level
+            th Unit Value (Cost)
+            th Alert State
+        tbody
+          tr
+            td(style='color: var(--text-muted);') HW-CMT-01
+            td Tororo Cement Blue
+            td 4 Bags
+            td 15 Bags
+            td UGX 32,000
+            td
+              span.status-low CRITICAL LOW STOCK
+          tr
+            td(style='color: var(--text-muted);') HW-IRN-G28
+            td Supereco Iron Sheets G28
+            td 84 Pcs
+            td 20 Pcs
+            td UGX 42,000
+            td
+              span.status-ok HEALTHY SUPPLY
+  // TAB 3: Customer Downpayments
+  #deposits-view.tab-panel
+    .table-container
+      table
+        thead
+          tr
+            th Customer Account
+            th Item Reserved
+            th Contract Value
+            th Total Allocated
+            th Outstanding Balance
+            th Fulfillment Completion
+        tbody
+          tr
+            td(style='font-weight: 600; color: var(--primary);') Kassim Mukasa
+            td Maxspan Iron Sheets (30 Pcs)
+            td UGX 1,500,000
+            td(style='color: var(--success); font-weight: 600;') UGX 1,000,000
+            td(style='color: var(--danger); font-weight: 600;') UGX 500,000
+            td
+              .progress-track
+                .progress-fill(style='width: 66.6%;') 66% Paid
+// Tab Control Core Logic
+script.
+  function toggleReportTab(event, targetPanelId) {
+  const panels = document.querySelectorAll('.tab-panel');
+  const buttons = document.querySelectorAll('.tab-btn');
+  panels.forEach(panel => panel.classList.remove('active'));
+  buttons.forEach(btn => btn.classList.remove('active'));
+  document.getElementById(targetPanelId).classList.add('active');
+  event.currentTarget.classList.add('active');
+  }

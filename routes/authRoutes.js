@@ -2,15 +2,19 @@ const express = require("express");
 const router = express.Router();
 const passport = require('passport');
 
+const {isAttendant,isAdmin, isManager} = require('../middleware/auth');
+const { authorizeRoles } = require('../middleware/auth');
+
+
 //Importing a model
 const Registration = require("../models/Registration");
 
 //Signup route
-router.get("/signup", (req, res) => {
+router.get("/signup",isAdmin,async(req, res) => {
   res.render("signup");
 });
 
-router.post("/signup", async (req, res) => {
+router.post("/signup",isAdmin,async (req, res) => {
   try {
     const { fullname, email, phonenumber, role, nin } = req.body;
 
