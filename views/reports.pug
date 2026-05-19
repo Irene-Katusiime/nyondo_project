@@ -64,8 +64,8 @@ main.main-content
       i.fa-solid.fa-money-bill-trend-up
     .stat-card
       .stat-info
-        p Deposits Pipeline
-        h3 UGX 1,450,000
+        p Total Deposits
+        h3 UGX #{(totalDeposits || 0).toLocaleString()}
       i.fa-solid.fa-hand-holding-dollar
   // Segment Navigation Submenu
   .report-tabs-menu
@@ -78,80 +78,82 @@ main.main-content
       table
         thead
           tr
-            th Invoice ID
-            th Timestamp
-            th Product Description
-            th Qty
-            th Gross Total
-            th Payment Channel
+            th Item Name 
+            th Quantity 
+            th Unit Price 
+            th Customer Name 
+            th Customer Contact 
+            th Attendant 
+            th Date 
+            th Total
         tbody
-          tr
-            td(style='font-weight: 600;') #INV-0982
-            td 18/05/2026 10:14
-            td Bamburi Cement (50Kg)
-            td 20 Bags
-            td(style='font-weight: 600; color: var(--primary);') UGX 760,000
-            td
-              span.status-badge.success-bg Cash
-          tr
-            td(style='font-weight: 600;') #INV-0981
-            td 17/05/2026 15:45
-            td Roofing Nails (2.5 inch)
-            td 3 Boxes
-            td(style='font-weight: 600; color: var(--primary);') UGX 120,000
-            td
-              span.status-badge.info-bg Mobile Money
+          each sale in sales
+            tr
+              td= sale.itemname ? sale.itemname.itemName: ''
+              td= sale.quantity 
+              td= sale.unitprice 
+              td= sale.customername 
+              td= sale.customercontact 
+              td= sale.attendant ? sale.attendant.fullname: ''
+              td= new Date(sale.date).toLocaleDateString()
+              td= (sale.quantity*sale.unitprice).toLocaleString()
   // TAB 2: Inventory Safety Thresholds
   #stock-health-view.tab-panel
     .table-container
       table
         thead
           tr
-            th Item Code
-            th Description
-            th Current Inventory
-            th Safety Stock Level
-            th Unit Value (Cost)
+            th Item Name 
+            th Quantity
+            th Unit Price (UGX)
+            th Total (UGX)
+            th Selling Price (UGX)
+            th Date
             th Alert State
         tbody
-          tr
-            td(style='color: var(--text-muted);') HW-CMT-01
-            td Tororo Cement Blue
-            td 4 Bags
-            td 15 Bags
-            td UGX 32,000
-            td
-              span.status-low CRITICAL LOW STOCK
-          tr
-            td(style='color: var(--text-muted);') HW-IRN-G28
-            td Supereco Iron Sheets G28
-            td 84 Pcs
-            td 20 Pcs
-            td UGX 42,000
-            td
-              span.status-ok HEALTHY SUPPLY
+          each item in stocks 
+            tr 
+              td= item.itemName 
+              td= item.quantity
+              td= item.unitprice
+              td= item.total
+              td= item.sellingprice
+              td= new Date(item.datereceived).toLocaleDateString()
+              td
+                span(class=item.alertClass)= item.alertState
   // TAB 3: Customer Downpayments
   #deposits-view.tab-panel
     .table-container
       table
         thead
           tr
-            th Customer Account
-            th Item Reserved
-            th Contract Value
-            th Total Allocated
-            th Outstanding Balance
-            th Fulfillment Completion
+            th Customer Name
+            th Customer Contact 
+            th NIN Number 
+            th Customer Address 
+            th Distance (km)
+            th Item Name 
+            th Item Price
+            th Quantity 
+            th Amount Deposited 
+            th Date 
+            th Balance 
+            th Status
         tbody
-          tr
-            td(style='font-weight: 600; color: var(--primary);') Kassim Mukasa
-            td Maxspan Iron Sheets (30 Pcs)
-            td UGX 1,500,000
-            td(style='color: var(--success); font-weight: 600;') UGX 1,000,000
-            td(style='color: var(--danger); font-weight: 600;') UGX 500,000
-            td
-              .progress-track
-                .progress-fill(style='width: 66.6%;') 66% Paid
+          each deposit in deposits
+            tr
+              td= deposit.customername 
+              td= deposit.phonenumber 
+              td= deposit.NINnumber 
+              td= deposit.customeraddress 
+              td= deposit.distance 
+              td= deposit.itemname 
+              td= deposit.itemprice 
+              td= deposit.quantity 
+              td= deposit.amountdeposited 
+              td= new Date(deposit.date).toLocaleDateString()
+              td= deposit.balance
+              
 // Tab Control Core Logic
 script.
   function toggleReportTab(event, targetPanelId) {

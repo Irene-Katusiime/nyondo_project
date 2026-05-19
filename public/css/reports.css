@@ -93,6 +93,18 @@ body {
     box-shadow: 0 2px 5px rgba(0,0,0,0.03);
 }
 
+.status-ok,
+.status-warning,
+.status-danger {
+    padding: 4px 10px;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.status-ok { background: #e8f8f0; color: var(--success); }
+.status-warning { background: #fff3cd; color: #f39c12; }
+.status-danger { background: #fdecea; color: var(--danger); }
+
 .search-box input { border: none; outline: none; width: 100%; font-size: 0.9rem; }
 
 .admin-profile { display: flex; align-items: center; gap: 10px; }

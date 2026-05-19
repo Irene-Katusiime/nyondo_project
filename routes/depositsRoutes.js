@@ -58,6 +58,14 @@ router.get('/credit', isAdmin,async(req,res) => {
     //Fetch all deposits from Mongodb
     const deposits = await Deposit.find().sort({ date: -1});
 
+    //Fetch all deposits 
+    // const totalDeposits = deposits.reduce((sum, deposit) => {
+    //   return sum + Number(deposit.amountdeposited || 0);
+    // }, 0);
+
+    //Render the reports page
+    // res.render('reports', {deposits, totalDeposits});
+
     //Calculte total amount deposited
     const totalPool = deposits.reduce((sum, deposit) => {
       return sum + Number(deposit.amountdeposited || 0);

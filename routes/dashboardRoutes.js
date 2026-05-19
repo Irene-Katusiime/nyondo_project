@@ -12,7 +12,7 @@ router.get('/admindashboard', async(req, res)=>{
     const endOfDay = new Date();
     endOfDay.setHours(23,59,59,999);
 
-    const sales = await Sales.find();
+    const sales = await Sale.find();
         // date: {$gte: startOfDay, $lte: endOfDay}
 
     let totalSales = 0;
@@ -70,15 +70,50 @@ router.get('/report', async (req,res) =>{
             salesRevenue: 0,
             costRevenue:0,
             netProfit: 0
-            
         };
+
+        //Sales data 
+        const sales = await Sale.find()
+            .populate('itemname')
+            .populate('attendant');
+
+        //Stock data
+        const stocks = await Stock.find();
+
+        const updatedStocks = stocks.map(item => {
+            let alertState = 'HEALTHY';
+            let alertClass = 'status-ok'
+
+            if (item.quantity <= 0) {
+                alertState ='OUT OF STOCK';
+                alertClass = 'status-danger';
+        }
+            else if (item.quantity <= 5) {
+                alertState ='CRITICAL LOW';
+                alertClass = 'status-danger';
+        }
+            else if (item.quantity <= 10) {
+                alertState ='LOW STOCK';
+                alertClass = 'status-warning';
+
+            }
+            
+            return {
+                ...item.toObject(),
+                alertState,
+                alertClass
+            };
+        });
+
+        const deposits = await Deposit.find();
+            
 
         const salesAgg = await Sale.aggregate(
             [{$group:{_id:null,grandTotal:{$sum:'$total'}}}]
         );
         stats.salesRevenue = salesAgg.length > 0 ? salesAgg[0].grandTotal:0;
 
-
+        // Cost of Goods sold
         const costAgg = await Stock.aggregate(
             [{$group:{_id:null,grandTotal:{$sum:'$total'}}}]
         );
@@ -86,9 +121,27 @@ router.get('/report', async (req,res) =>{
 
         stats.netProfit = stats.salesRevenue - stats.costRevenue;
 
+        //Total Deposits
+        const depositAgg = await Deposit.aggregate([
+            {
+            $group: {
+                _id: null,
+                grandTotal: { $sum: '$amountdeposited'}
+            }
+            }
+        ]);
 
+        const totalDeposits = depositAgg.length > 0 ? depositAgg[0].grandTotal : 0;
 
-        res.render('reports', {stats});
+        // console.log(updatedStocks[0]);
+
+        res.render('reports', {stats, 
+            totalDeposits, 
+            sales, 
+            // stocks,
+            stocks: updatedStocks,
+            deposits
+        });
 
     }catch (error) {
       console.log(error.message)
