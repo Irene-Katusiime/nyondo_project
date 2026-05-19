@@ -105,6 +105,36 @@ body {
 .status-warning { background: #fff3cd; color: #f39c12; }
 .status-danger { background: #fdecea; color: var(--danger); }
 
+.status {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    display: inline-block;
+    text-transform: capitalize;
+}
+
+/* Individual status colors */
+.status.pending {
+    background: #fff3cd;
+    color: #f39c12;
+}
+
+.status.partial {
+    background: #e8f4fd;
+    color: #2980b9;
+}
+
+.status.paid {
+    background: #e8f8f0;
+    color: #27ae60;
+}
+
+.status.cancelled {
+    background: #fdecea;
+    color: #e74c3c;
+}
+
 .search-box input { border: none; outline: none; width: 100%; font-size: 0.9rem; }
 
 .admin-profile { display: flex; align-items: center; gap: 10px; }
@@ -198,7 +228,7 @@ body {
 /* Component Table Collections */
 .table-container {
     background: var(--white);
-    padding: 20px;
+    padding: 5px;
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.01);
     border: 1px solid rgba(0,0,0,0.01);
@@ -239,4 +269,63 @@ tr:last-child td { border-bottom: none; }
     text-align: center;
     padding: 3px 0;
     border-radius: 6px;
+}
+
+/*PDF button*/
+.export-btn {
+    background: #e74c3c;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.export-btn:hover {
+    background: #c0392b;
+    color: white;
+}
+
+.admin-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.export-btn {
+    margin-left: 800px;
+}
+
+/*Hide unwanted elements when printing*/
+@media print {
+    .sidebar,
+    .top-bar,
+    .report-tabs-menu,
+    .export-btn {
+        display: none !important;
+    }
+
+    .main-content {
+        margin: 0;
+        width: 100%;
+        padding: 0;
+    }
+
+    .tab-panel {
+        display: block !important;
+    }
+
+    body {
+        background: white;
+    }
+
+    .table-container,
+    .stat-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
 }

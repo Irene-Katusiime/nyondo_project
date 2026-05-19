@@ -11,18 +11,18 @@ head
   a(href='/saleslist')
     i.fas.fa-th-large
     | Dashboard
-  a(href='#')
-    i.fas.fa-boxes
-    | Stock
+  //- a(href='#')
+  //-   i.fas.fa-boxes
+  //-   | Stock
   a.active(href='/salesform')
     i.fas.fa-shopping-cart
     | New Sale
   a(href='salesList')
     i.fas.fa-shopping-cart
     | Sales
-  a(href='deposit')
-    i.fas.fa-wallet
-    | Deposits
+  //- a(href='deposit')
+  //-   i.fas.fa-wallet
+  //-   | Deposits
   a(href='logout')
     i.fas.fa-sign-out-alt
     | Logout
@@ -63,4 +63,33 @@ head
           option(value='') Select payment method 
           option(value='Cash') Cash 
           option(value='Mobile Money') Mobile Money
-      button(type='submit') Add Sale
+
+    button(type='submit') Add to Cart 
+
+    //Shopping Cart
+    .table-container 
+      h2 Shopping Cart 
+
+      if cart.length > 0
+        table 
+          thead 
+            tr 
+              th Item 
+              th Quantity 
+              th Unit Price 
+              th Total 
+        tbody 
+          each cartItem in cart 
+            tr 
+              td= cartItem.itemName 
+              td= cartItem.quantity
+              td UGX #{cartItem.unitprice.toLocaleString()}
+              td UGX #{cartItem.total.toLocaleString()}
+
+      h3 Grand Total: UGX #{cartTotal.toLocaleString()}
+
+      form(action='/cart/checkout' method='post')
+
+        button(type='submit') Complete  Sale
+    //- else 
+    //- p No items in cart.

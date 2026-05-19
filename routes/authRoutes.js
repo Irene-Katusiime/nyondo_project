@@ -54,7 +54,7 @@ router.post("/signup",isAdmin,async (req, res) => {
     console.log("User registered successfully");
 
         
-    return res.redirect("/login");
+    return res.redirect("/admindashboard");
 
   } catch (error) {
     console.error(error);

@@ -17,7 +17,7 @@ aside.sidebar
     a(href='/admindashboard')
       i.fa-solid.fa-chart-pie
       |  Dashboard
-    a(href='/inventory')
+    a(href='/stocklist')
       i.fa-solid.fa-boxes-stacked
       |  Inventory
     a(href='/sales')
@@ -31,19 +31,13 @@ aside.sidebar
       |  Logout
 // Content Workspace
 main.main-content
-  // Native Top Bar Structure
   header.top-bar
-    .search-box
-      i.fa-solid.fa-magnifying-glass(style='color: var(--text-muted);')
-      input(type='text' placeholder='Search transactions, customers...')
-    .filter-controls
-      select#timeframe-select.dropdown-filter
-        option(value='7days' selected='') Last 7 Days
-        option(value='30days') Current Month
-        option(value='year') Financial Year
     .admin-profile
       .profile-pic A
       span.profile-name(style='color: var(--primary); font-weight: 600;') Admin
+      a.export-btn(href='#' onclick='window.print(); return false;')
+        i.fa-solid.fa-file-pdf 
+        | Export PDF
   // Framework Metrics Grid
   section.stats-grid
     .stat-card
@@ -153,6 +147,9 @@ main.main-content
               td= deposit.amountdeposited 
               td= new Date(deposit.date).toLocaleDateString()
               td= deposit.balance
+              td 
+                - const status = (deposit.status || 'Pending').toLowerCase()
+                span(class=`status ${status}`)= deposit.status || 'Pending'
               
 // Tab Control Core Logic
 script.

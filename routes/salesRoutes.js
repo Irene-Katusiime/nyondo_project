@@ -9,13 +9,43 @@ const { authorizeRoles } = require('../middleware/auth');
 router.get('/salesform',authorizeRoles('sales attendant','admin'), async (req, res)=>{
   try {
     const items = await Stock.find({ quantity: { $gt: 0}});
-    console.log(items)
-    res.render('addsales',{items})
+
+    if(!req.session.cart) req.session.cart = [];
+    res.render('addsales', {
+      items,
+      cart: req.session.cart,
+      cartTotal: 0
+    });
+    // console.log(items)
+    // res.render('addsales',{items})
   } catch (error) {
     res.status(500).send('server error');
     console.error('error', error.message);
   }
 });
+
+//Cart routes
+router.post('/cart/checkout', async (req, res) => {
+  const cart = req.session.cart || [];
+
+  for(const item of cart){
+    await Sale.create({
+      itemname: item.itemId,
+      quantity: item.quantity,
+      unitprice: item.unitprice,
+      total: item.total,
+      customername: item.customername,
+      customercontact: item.customercontact
+    });
+
+    //Reduce stock
+    await Stock.findByIdAndUpdate(item.itemId, {
+      $inc: { quantity: -item.quantity }
+    });
+  }
+   req.session.cart = [];
+   res.redirect('/salesList');
+})
 
 router.post("/salesform",authorizeRoles('sales attendant','admin'), async (req, res) => {
   try {
@@ -129,6 +159,8 @@ router.post('/delete/:id',authorizeRoles("sales attendant", "admin"), async(req,
     console.error(error)
   }
 });
+
+
 
 
 

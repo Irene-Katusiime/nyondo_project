@@ -9,21 +9,21 @@ head
 // Sidebar
 .sidebar
   h2 Nyondo Stock
-  a.active(href='#')
+  a.active(href='')
     i.fas.fa-th-large
     | Dashboard
-  a(href='#')
-    i.fas.fa-boxes
-    | Stock
+  //- a(href='#')
+  //-   i.fas.fa-boxes
+  //-   | Stock
   a(href='salesform')
     i.fas.fa-shopping-cart
-    | New Sales
-  a(href='deposit')
-    i.fas.fa-wallet
-    | Deposits
-  a(href='#')
-    i.fas.fa-chart-line
-    | Reports
+    | Add Sale
+  //- a(href='deposit')
+  //-   i.fas.fa-wallet
+  //-   | Deposits
+  //- a(href='#')
+  //-   i.fas.fa-chart-line
+  //-   | Reports
   a(href='logout')
     i.fas.fa-sign-out-alt
     | Logout
@@ -42,7 +42,7 @@ head
         th Customer Contact
         th Attendant
         th Date
-        th Total
+        th Total (UGX)
         th Actions 
       tbody
         each sale in sales 
