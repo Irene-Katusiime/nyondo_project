@@ -32,7 +32,7 @@ head
   // sales form
   .form-container
     h2 Record Sale
-    form(action='/salesform' method='post')
+    form(action='/cart/add' method='post')
       .form-group
         label Item Name
           select(name='itemId')
@@ -64,7 +64,7 @@ head
           option(value='Cash') Cash 
           option(value='Mobile Money') Mobile Money
 
-    button(type='submit') Add to Cart 
+      button(type='submit') Add to Cart 
 
     //Shopping Cart
     .table-container 
@@ -76,20 +76,51 @@ head
             tr 
               th Item 
               th Quantity 
-              th Unit Price 
-              th Total 
-        tbody 
-          each cartItem in cart 
-            tr 
-              td= cartItem.itemName 
-              td= cartItem.quantity
-              td UGX #{cartItem.unitprice.toLocaleString()}
-              td UGX #{cartItem.total.toLocaleString()}
+              th Unit Price (UGX)
+              th Total (UGX)
+              th Customer Name 
+              th Customer Contact 
+              th Customer Address
+              th Customer Distance (km)
+          tbody 
+            each cartItem in cart 
+              tr 
+                td= cartItem.itemname ? cartItem.itemname: 'Unkown Item'
+                td= cartItem.quantity
+                td  #{(cartItem.unitprice || 0).toLocaleString()}
+                td  #{(cartItem.total || 0).toLocaleString()}
+                td= cartItem.customername 
+                td= cartItem.customercontact 
+                td= cartItem.customeraddress 
+                td= cartItem.customerdistance
 
       h3 Grand Total: UGX #{cartTotal.toLocaleString()}
 
       form(action='/cart/checkout' method='post')
+        .form-group
+          label Customer Name
+          input(type='text' name='customername' required)
 
-        button(type='submit') Complete  Sale
+        .form-group
+          label Customer Contact
+          input(type='text' name='customercontact' required)
+
+        .form-group
+          label Customer Address
+          input(type='text' name='customeraddress' required)
+
+        .form-group
+          label Distance
+          input(type='number' name='customerdistance' required)
+
+        .form-group
+          label Payment Method
+          select(name='paymentmethod' required)
+            option(value='Cash') Cash
+            option(value='Mobile Money') Mobile Money
+
+        button(type='submit') Checkout
+
+        //- button(type='submit') Complete  Sale
     //- else 
     //- p No items in cart.

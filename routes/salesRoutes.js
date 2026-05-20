@@ -11,10 +11,14 @@ router.get('/salesform',authorizeRoles('sales attendant','admin'), async (req, r
     const items = await Stock.find({ quantity: { $gt: 0}});
 
     if(!req.session.cart) req.session.cart = [];
+    const cart = req.session.cart;
+    const cartTotal = cart.reduce((sum, item) => {
+      return sum + (item.total || 0);
+    }, 0);
     res.render('addsales', {
       items,
       cart: req.session.cart,
-      cartTotal: 0
+      cartTotal
     });
     // console.log(items)
     // res.render('addsales',{items})
@@ -25,29 +29,188 @@ router.get('/salesform',authorizeRoles('sales attendant','admin'), async (req, r
 });
 
 //Cart routes
+
+router.get('/cart', (req, res) => {
+  const cart = req.session.cart || [];
+  const cartTotal = cart.reduce((sum, item) => sum + item.total, 0);
+  res.render('addsales', {
+    items: [],
+    cart,
+    cartTotal
+  });
+});
+
+// router.post('/cart/add', async (req, res) => {
+//  const { itemId, quantity, unitprice } = req.body;
+
+//  if(!req.session.cart) req.session.cart = [];
+
+//  req.session.cart=[]
+//  return req.session.save(()=>{
+//   res.redirect('/salesList');
+//  })
+
+
+//  req.session.cart.push({
+//   itemId,
+//   quantity: Number(quantity),
+//   unitprice: Number(unitprice),
+//   total: Number(quantity) * Number(unitprice)
+//  });
+//   return res.redirect('/salesList')
+// });
+
+
+
+
+router.post('/cart/add', async (req, res) => {
+  const {
+    itemId,
+    quantity,
+    unitprice,
+    customername,
+    customercontact,
+    customeraddress,
+    customerdistance,
+    paymentmethod
+  } = req.body;
+
+  if (!req.session.cart) {
+    req.session.cart = [];
+  }
+
+  
+
+  const item = await Stock.findById(itemId);
+
+  if (!item) {
+    return res.status(404).send("Item not found");
+  }
+
+  const total = Number(quantity) * Number(unitprice);
+
+  req.session.cart.push({
+    itemId,
+    itemname: item.itemName,
+    quantity: Number(quantity),
+    unitprice: Number(unitprice),
+    customername,
+    customercontact,
+    customeraddress,
+    customerdistance,
+    paymentmethod,
+    total
+  });
+
+  res.redirect('/salesform');
+});
+
+
+//  router.post('/cart/checkout' ,async (req, res) => {
+//   const cart = req.session.cart || [];
+
+// if(cart.length === 0) {
+//   return res.redirect('/salesform');
+// }
+
+// for (const item of cart) {
+//     await Sale.create({
+//       itemname: item.itemId,
+//       quantity: item.quantity,
+//       unitprice: item.unitprice,
+//       total: item.total
+//     });
+
+  
+//     //Reduce stock
+//     await Stock.findByIdAndUpdate(item.itemId, {
+//       $inc: { quantity: -item.quantity }
+//     });
+//   }
+//    req.session.cart = [];
+//    res.redirect('/salesList');
+// })
+
 router.post('/cart/checkout', async (req, res) => {
+  try{
   const cart = req.session.cart || [];
 
-  for(const item of cart){
-    await Sale.create({
-      itemname: item.itemId,
-      quantity: item.quantity,
-      unitprice: item.unitprice,
-      total: item.total,
-      customername: item.customername,
-      customercontact: item.customercontact
-    });
+  if (cart.length === 0) {
+    return res.redirect('/salesform');
+  }
 
-    //Reduce stock
-    await Stock.findByIdAndUpdate(item.itemId, {
-      $inc: { quantity: -item.quantity }
+  const {
+    customername,
+    customercontact,
+    customeraddress,
+    customerdistance,
+    paymentmethod
+  } = req.body;
+
+// const customername = cart[0].customername;
+// const customercontact = cart[0].customercontact;
+// const customeraddress = cart[0].customeraddress;
+// const customerdistance = cart[0].customerdistance;
+// const paymentmethod = cart[0].paymentmethod;
+
+  //Calculate grand total
+  const grandTotal = cart.reduce((sum, item)=> {
+   return sum + Number(item.total || 0); },0);
+  
+  
+  //Number of different items
+  const numberOfItems = cart.length;
+
+  //Reduce stock for each item
+  for (const item of cart) {
+
+    const stockItem = await Stock.findById(item.itemId);
+
+    if (!stockItem) {
+      continue;
+    }
+
+    // check stock
+    if (stockItem.quantity < item.quantity) {
+      return res.send(`Not enough stock for ${stockItem.itemName}`);
+    }
+
+    //reduce stock
+    stockItem.quantity -= item.quantity;
+    await stockItem.save();
+
+    // save sale
+    await Sale.create({
+      customername,
+      customercontact,
+      customeraddress,
+      customerdistance,
+      paymentmethod,
+      attendant: req.user._id,
+
+      items: cart.map(item => ({
+        itemname: item.itemId,
+        quantity: item.quantity,
+        unitprice: item.unitprice,
+        total: item.total
+      })),
+
+
+      grandTotal,
+      numberOfItems
     });
   }
-   req.session.cart = [];
-   res.redirect('/salesList');
-})
+  // clear cart
+  req.session.cart = [];
 
-router.post("/salesform",authorizeRoles('sales attendant','admin'), async (req, res) => {
+  res.redirect('/salesList');
+}catch(error){
+  console.error(error);
+  res.status(500).send('Checkout failed');
+}
+});
+
+router.post("/direct-sale",authorizeRoles('sales attendant','admin'), async (req, res) => {
   try {
     const { itemId, quantity, unitprice, customername, customercontact, customerdistance, customeraddress } = req.body;
     
@@ -101,7 +264,7 @@ router.post("/salesform",authorizeRoles('sales attendant','admin'), async (req, 
 router.get('/salesList',authorizeRoles('sales attendant','admin','store manager'), async(req, res) =>{
   try {
     const sales = await Sale.find()
-      .populate('itemname','itemName category')
+      .populate('items.itemname','itemName category')
       .populate('attendant','fullname')
       .sort({date:-1});
 

@@ -43,6 +43,7 @@ app.use(expressSession({
 }))
 app.use(passport.initialize())
 app.use(passport.session());
+app.use(express.json());
 
 //Passport configurations
 passport.use(Registration.createStrategy());

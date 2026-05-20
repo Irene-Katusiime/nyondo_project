@@ -6,21 +6,21 @@ date: {
     required: true,
     default: Date.now
 },
-itemname: {
-    type: String,
-    required: true,
-    ref: 'Stock'
-},
-quantity: {
-    type: Number,
-    trim: true,
-    required: true
-},
-unitprice: {
-    type: Number,
-    trim: true,
-    required: true
-},
+// itemname: {
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref: 'Stock',
+//     required: true
+// },
+// quantity: {
+//     type: Number,
+//     trim: true,
+//     required: true
+// },
+// unitprice: {
+//     type: Number,
+//     trim: true,
+//     required: true
+// },
 customername: {
     type: String,
     required: true
@@ -41,9 +41,43 @@ transportcost: {
     type: Number,
     
 },
-total: {
-    type: Number
+paymentmethod: {
+    type: String
 },
+items: [
+    {
+        itemname: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Stock',
+            required: true
+        },
+        quantity: {
+            type: Number,
+            required: true
+        },
+        unitprice: {
+            type: Number,
+            required: true
+        },
+        total: {
+            type: Number,
+            required: true
+        }
+    }
+],
+
+numberOfItems: {
+    type: Number,
+    default: 0
+},
+
+grandTotal: {
+    type: Number,
+    required: true
+},
+// total: {
+//     type: Number
+// },
 attendant: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Registration'
