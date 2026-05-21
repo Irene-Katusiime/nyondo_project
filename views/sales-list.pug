@@ -43,13 +43,14 @@ head
         th Attendant
         th Date
         th Total (UGX)
+        th Payment Method
         th Actions 
       tbody
         each sale in sales 
           tr
             td
               each item in sale.items 
-                div= item.itemname
+                div= item.itemname.itemName
             td
               each item in sale.items 
                 div= item.quantity 
@@ -61,6 +62,7 @@ head
             td= sale.attendant ? sale.attendant.fullname: 'attendant was deleted'
             td= new Date(sale.date).toLocaleDateString() 
             td= (sale.grandTotal || 0).toLocaleString()
+            td= sale.paymentmethod
               td
                 .d-flex.gap-2
                   a.btn.btn-sm.btn-outline-warning(href=`/sale/edit/${sale._id}`)

@@ -82,6 +82,7 @@ head
               th Customer Contact 
               th Customer Address
               th Customer Distance (km)
+              th Payment Method
           tbody 
             each cartItem in cart 
               tr 
@@ -93,6 +94,7 @@ head
                 td= cartItem.customercontact 
                 td= cartItem.customeraddress 
                 td= cartItem.customerdistance
+                td= cartItem.paymentmethod
 
       h3 Grand Total: UGX #{cartTotal.toLocaleString()}
 
@@ -116,6 +118,7 @@ head
         .form-group
           label Payment Method
           select(name='paymentmethod' required)
+            option(value='') Select Payment Method
             option(value='Cash') Cash
             option(value='Mobile Money') Mobile Money
 

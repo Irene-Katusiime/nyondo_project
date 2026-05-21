@@ -20,8 +20,7 @@ router.get('/salesform',authorizeRoles('sales attendant','admin'), async (req, r
       cart: req.session.cart,
       cartTotal
     });
-    // console.log(items)
-    // res.render('addsales',{items})
+
   } catch (error) {
     res.status(500).send('server error');
     console.error('error', error.message);
@@ -39,29 +38,6 @@ router.get('/cart', (req, res) => {
     cartTotal
   });
 });
-
-// router.post('/cart/add', async (req, res) => {
-//  const { itemId, quantity, unitprice } = req.body;
-
-//  if(!req.session.cart) req.session.cart = [];
-
-//  req.session.cart=[]
-//  return req.session.save(()=>{
-//   res.redirect('/salesList');
-//  })
-
-
-//  req.session.cart.push({
-//   itemId,
-//   quantity: Number(quantity),
-//   unitprice: Number(unitprice),
-//   total: Number(quantity) * Number(unitprice)
-//  });
-//   return res.redirect('/salesList')
-// });
-
-
-
 
 router.post('/cart/add', async (req, res) => {
   const {
@@ -105,34 +81,9 @@ router.post('/cart/add', async (req, res) => {
   res.redirect('/salesform');
 });
 
-
-//  router.post('/cart/checkout' ,async (req, res) => {
-//   const cart = req.session.cart || [];
-
-// if(cart.length === 0) {
-//   return res.redirect('/salesform');
-// }
-
-// for (const item of cart) {
-//     await Sale.create({
-//       itemname: item.itemId,
-//       quantity: item.quantity,
-//       unitprice: item.unitprice,
-//       total: item.total
-//     });
-
-  
-//     //Reduce stock
-//     await Stock.findByIdAndUpdate(item.itemId, {
-//       $inc: { quantity: -item.quantity }
-//     });
-//   }
-//    req.session.cart = [];
-//    res.redirect('/salesList');
-// })
-
 router.post('/cart/checkout', async (req, res) => {
   try{
+
   const cart = req.session.cart || [];
 
   if (cart.length === 0) {
@@ -147,15 +98,24 @@ router.post('/cart/checkout', async (req, res) => {
     paymentmethod
   } = req.body;
 
-// const customername = cart[0].customername;
-// const customercontact = cart[0].customercontact;
-// const customeraddress = cart[0].customeraddress;
-// const customerdistance = cart[0].customerdistance;
-// const paymentmethod = cart[0].paymentmethod;
-
+  let phone = customercontact;
+  if (!phone.startsWith('+256')) {
+    phone = '+256' + phone.replace(/^0/, '');
+  }
   //Calculate grand total
   const grandTotal = cart.reduce((sum, item)=> {
    return sum + Number(item.total || 0); },0);
+
+    //Transport calculation
+    let transportcost = 0
+     if (grandTotal >= 500000 && Number(customerdistance)<= 10){
+      transportcost = 0
+     }else{
+      transportcost = 30000
+     }
+
+     const finalTotal = grandTotal + transportcost
+
   
   
   //Number of different items
@@ -178,11 +138,12 @@ router.post('/cart/checkout', async (req, res) => {
     //reduce stock
     stockItem.quantity -= item.quantity;
     await stockItem.save();
+    }
 
     // save sale
     await Sale.create({
       customername,
-      customercontact,
+      customercontact: phone,
       customeraddress,
       customerdistance,
       paymentmethod,
@@ -196,10 +157,11 @@ router.post('/cart/checkout', async (req, res) => {
       })),
 
 
-      grandTotal,
-      numberOfItems
+      grandTotal: finalTotal,
+      numberOfItems: cart.length,
+      transportcost
     });
-  }
+
   // clear cart
   req.session.cart = [];
 
@@ -213,8 +175,11 @@ router.post('/cart/checkout', async (req, res) => {
 router.post("/direct-sale",authorizeRoles('sales attendant','admin'), async (req, res) => {
   try {
     const { itemId, quantity, unitprice, customername, customercontact, customerdistance, customeraddress } = req.body;
-    
-    const phone = '+256' + customercontact;
+
+    let phone = customercontact;
+    if(!phone.startWith('+256')) {
+      phone = '+256' + phone.replace(/^0/, '');
+    }
 
     const item = await Stock.findById(itemId);
     if (!item) return res.status(404).send("Item not found");
@@ -226,15 +191,6 @@ router.post("/direct-sale",authorizeRoles('sales attendant','admin'), async (req
     item.quantity -= quantity;
     await item.save();
      const totalcost = quantity*unitprice;
-
-     let transportcost = 0
-     if (totalcost >= 500000 && customerdistance <= 10){
-      transportcost = 0
-     }else{
-      transportcost = 30000
-     }
-
-     const total = totalcost + transportcost
 
     //Record the sale
     let newItem = new Sale({
@@ -299,13 +255,19 @@ router.post('/sale/edit/:id',authorizeRoles("sales attendant", "admin"), async(r
     const total = quantity*unitprice;
   
     await Sale.findByIdAndUpdate(req.params.id,{
-      total,
-      quantity, 
-      unitprice, 
       customername, 
       customercontact,
-    })
+
+      $set : {
+        'items.0.quantity': quantity,
+        'items.0.unitprice': unitprice,
+        'items.0.total': total,
+        grandTotal: total
+      }
+    });
+
     res.redirect('/salesList');
+
   } catch (error) {
     console.error(error.message)
     const sale = await Sale.findById(req.params.id)
@@ -323,9 +285,8 @@ router.post('/delete/:id',authorizeRoles("sales attendant", "admin"), async(req,
   }
 });
 
-
-
-
+//Receipt route
+router.get('/receipt/:id')
 
 
 

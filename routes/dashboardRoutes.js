@@ -5,19 +5,19 @@ const Stock = require('../models/Stock');
 const Sale = require('../models/Sale');
 
 router.get('/admindashboard', async(req, res)=>{
-
     const startOfDay = new Date();
-    startOfDay.setHours(0,0,0,0);
+    startOfDay.setUTCHours(0,0,0,0);
 
     const endOfDay = new Date();
-    endOfDay.setHours(23,59,59,999);
+    endOfDay.setUTCHours(23,59,59,999);
 
-    const sales = await Sale.find();
-        // date: {$gte: startOfDay, $lte: endOfDay}
+    const sales = await Sale.find({
+        date: {$gte: startOfDay, $lte: endOfDay}
+    });
 
     let totalSales = 0;
     sales.forEach(sale => {
-        totalSales += Number(sale.total || 0);
+        totalSales += Number(sale.grandTotal || 0);
     });
 
     const stocks = await Stock.find();
@@ -74,7 +74,7 @@ router.get('/report', async (req,res) =>{
 
         //Sales data 
         const sales = await Sale.find()
-            .populate('itemname')
+            .populate('items.itemname')
             .populate('attendant');
 
         //Stock data
@@ -109,7 +109,7 @@ router.get('/report', async (req,res) =>{
             
 
         const salesAgg = await Sale.aggregate(
-            [{$group:{_id:null,grandTotal:{$sum:'$total'}}}]
+            [{$group:{_id:null,grandTotal:{$sum:'$grandTotal'}}}]
         );
         stats.salesRevenue = salesAgg.length > 0 ? salesAgg[0].grandTotal:0;
 

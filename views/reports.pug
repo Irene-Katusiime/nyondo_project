@@ -83,14 +83,20 @@ main.main-content
         tbody
           each sale in sales
             tr
-              td= sale.itemname ? sale.itemname.itemName: ''
-              td= sale.quantity 
-              td= sale.unitprice 
+              td
+                each item in sale.items 
+                  div= item.itemname.itemName 
+              td
+                each item in sale.items 
+                  div= item.quantity 
+              td
+                each item in sale .items 
+                  div= item.unitprice 
               td= sale.customername 
               td= sale.customercontact 
               td= sale.attendant ? sale.attendant.fullname: ''
               td= new Date(sale.date).toLocaleDateString()
-              td= (sale.quantity*sale.unitprice).toLocaleString()
+              td= sale.grandTotal.toLocaleString()
   // TAB 2: Inventory Safety Thresholds
   #stock-health-view.tab-panel
     .table-container
