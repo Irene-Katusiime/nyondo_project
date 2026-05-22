@@ -1,0 +1,93 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title  Nyondo Receipt
+  link(rel='stylesheet' href='/css/receipt.css')
+  // Font Awesome for clean layout iconography
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css')
+.receipt-wrapper
+  // Action Control (Hidden during physical print execution)
+  .no-print-actions
+    button.btn-print(onclick='window.print()')
+      i.fa-solid.fa-print
+      |  Print Receipt
+    a.btn-back(href='/salesform') Back to Sales
+  // Document Core Container
+  .receipt-card
+    // Company Branding / Header Info
+    header.receipt-header
+      .brand-block
+        h1 Nyondo General Hardware
+        p.tagline Quality Tools, Building Materials &amp; General Supplies
+        p.contact-line
+          i.fa-solid.fa-location-dot
+          |  Plot 24, Complex Block, Kampala - Jinja Rd, Seeta
+        p.contact-line
+          i.fa-solid.fa-phone
+          |  +256 767 954565 | +256 703 647896
+      .document-badge
+        h2 RECEIPT
+        span.invoice-number #{sale.invoiceNumber}
+    hr.divider
+    // Transaction Metadata Grid
+    section.meta-grid
+      .meta-block
+        h3 Issued To:
+        p.client-name #{sale.customername}
+        p Address: #{sale.customeraddress}
+        p Tel: #{sale.customercontact}
+      .meta-block.text-right
+        h3 Transaction Details:
+        p
+          strong Date:
+          |  #{new Date(sale.date).toLocaleString()}
+        p
+          strong Payment Mode:
+          |  #{sale.paymentmethod}
+        p
+          strong Served By:
+          |  #{attendantName}
+    // Line Items Ledger Table
+    table.receipt-table
+      thead
+        tr
+          th Item Name
+          th Quantity
+          th Unit Cost (UGX)
+          th Total Amount
+      tbody
+         each item in sale.items 
+          tr 
+            td= item.itemname.itemName
+            td= item.quantity
+            td UGX #{item.unitprice.toLocaleString()}
+            td UGX #{item.total.toLocaleString()}
+
+    // Financial Calculation Totals Summary Section
+    - const subtotal = sale.items.reduce((sum, item) => sum + item.total, 0)
+    section.totals-section
+      .calculations-box
+        .calc-row
+          span Subtotal:
+          span UGX #{subtotal.toLocaleString()}
+        .calc-row
+          span Transport:
+          span UGX #{sale.transportcost.toLocaleString()}
+        .calc-row.total-row
+          span Grand Total:
+          span UGX #{sale.grandTotal.toLocaleString()}
+        //- .calc-row.highlight-paid
+        //-   span Amount Paid Today:
+        //-   span UGX 700,000
+        //- .calc-row.highlight-balance
+        //-   span Outstanding Balance:
+        //-   span UGX 330,000
+    hr.divider
+    // Footnote / Verification Section
+    footer.receipt-footer
+      p.thanks-message Thank you for doing business with Nyondo General Hardware!
+      p
+        | Goods once cleared and collected in full cannot be returned after 7 business days.
+    //-   .stamp-signature-area
+    //-     .sign-line Issued Stamp / Signature

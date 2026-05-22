@@ -52,6 +52,18 @@ customeraddress: {
 distance: {
     type: Number,
     required: true
+},
+issuedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Registration'
+},
+invoiceNumber: {
+    type: String,
+    required: true,
+    unique: true
+},
+transportcost: {
+    type: Number,
 }
 });
 

@@ -84,6 +84,9 @@ router.post('/cart/add', async (req, res) => {
 router.post('/cart/checkout', async (req, res) => {
   try{
 
+    const count = await Sale.countDocuments();
+    const invoiceNumber = `INV-${new Date().getFullYear()}-${String(count + 1).padStart(6, '0')}`;
+
   const cart = req.session.cart || [];
 
   if (cart.length === 0) {
@@ -141,12 +144,13 @@ router.post('/cart/checkout', async (req, res) => {
     }
 
     // save sale
-    await Sale.create({
+    const newItem = await Sale.create({
       customername,
       customercontact: phone,
       customeraddress,
       customerdistance,
       paymentmethod,
+      invoiceNumber,
       attendant: req.user._id,
 
       items: cart.map(item => ({
@@ -165,7 +169,8 @@ router.post('/cart/checkout', async (req, res) => {
   // clear cart
   req.session.cart = [];
 
-  res.redirect('/salesList');
+  res.redirect(`/sales/receipt/${newItem._id}`);
+
 }catch(error){
   console.error(error);
   res.status(500).send('Checkout failed');
@@ -208,10 +213,14 @@ router.post("/direct-sale",authorizeRoles('sales attendant','admin'), async (req
 
     console.log(newItem);
     await newItem.save();
-    res.redirect("/salesList");
+
+    res.redirect(`/sales/receipt/${newItem._id}`);
+
   } catch (error) {
     const items = await Stock.find({ quantity: { $gt: 0}});
+
     res.render("addsales", { error: error.message,items });
+
     console.error(error)
   }
 });
@@ -285,8 +294,23 @@ router.post('/delete/:id',authorizeRoles("sales attendant", "admin"), async(req,
   }
 });
 
-//Receipt route
-router.get('/receipt/:id')
+//View and print receipt
+router.get('/sales/receipt/:id', async (req,res) => {
+  try {
+    const sale = await Sale.findById(req.params.id)
+    .populate('items.itemname','itemName category')
+    .populate('attendant','fullname');
+
+    const attendantName = sale.attendant ? sale.attendant.fullname : 'unkown';
+
+    if(!sale) return res.status(404).send('Receipt not found')
+    res.render('receipt', {sale, attendantName});
+
+  } catch (error) {
+    console.error(error)
+     res.status(400).send('Unable to view receipt')
+  }
+});
 
 
 

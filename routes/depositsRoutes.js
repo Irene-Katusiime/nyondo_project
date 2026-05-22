@@ -5,6 +5,7 @@ const Deposit = require("../models/Deposit");
 const {isAttendant,isAdmin, isManager} = require('../middleware/auth');
 const { authorizeRoles } = require('../middleware/auth');
 const { authorize } = require('passport');
+const Sale = require('../models/Sale');
 
 router.get('/deposit', isAdmin,async(req, res)=>{
     res.render('deposits')
@@ -22,8 +23,26 @@ router.post('/deposits', isAdmin, async (req ,res)=>{
     const price = Number(itemprice);
     const paid = Number(amountdeposited);
 
-    const total = price * qty;
-    const balance = total - paid;
+    const subtotal = price * qty;
+    // const balance = total - paid;
+
+    const count = await Deposit.countDocuments();
+
+    // const transportcost = Number(req.body.transportcost || 0);
+
+    //Transport calculation
+
+    let transportcost = 0
+     if (subtotal >= 500000 && Number(distance)<= 10){
+      transportcost = 0
+     }else{
+      transportcost = 30000
+     }
+
+     const grandTotal = subtotal + transportcost;
+     const balance = grandTotal - paid
+
+    const invoiceNumber = `INV-${new Date().getFullYear()}-${String(count + 1).padStart(6, '0')}`;
 
 
     const deposit = new Deposit({
@@ -37,12 +56,17 @@ router.post('/deposits', isAdmin, async (req ,res)=>{
       balance,
       customeraddress,
       distance,
-      status: 'Pending'
+      transportcost,
+      subtotal,
+      invoiceNumber,
+      grandTotal,
+      status: 'Pending',
+      issuedBy: req.user._id
     });
 
     await deposit.save();
 
-    res.redirect('/credit');
+    res.redirect(`/deposits/receipt/${deposit._id}`);
 
   } catch (error) {
     console.error(error);
@@ -86,6 +110,7 @@ router.get('/deposit/edit/:id', async(req,res) => {
   if(!deposit) return res.status(404).send('Deposit not found');
 
   res.render('editdeposit', {deposit});
+
   }catch (error){
     console.error(error);
     res.status(500).send('Error loading edit page');
@@ -139,6 +164,25 @@ router.post('/deposit/update/:id', async(req,res) => {
   console.error(error);
   res.status(500).send('Update error');
 }
+});
+
+//View and print receipt
+router.get('/deposits/receipt/:id', async (req,res) => {
+  try {
+    const deposit = await Deposit.findById(req.params.id)
+    .populate('issuedBy', 'fullname');
+
+    const adminName = deposit.issuedBy ? deposit.issuedBy.fullname : 'Admin';
+
+    if(!deposit){
+      return res.status(404).send('Receipt not found');
+    }
+    res.render('depositreceipts', {deposit,adminName});
+
+  } catch (error) {
+    console.error(error)
+     res.status(400).send('Unable to view receipt')
+  }
 });
 
 module.exports = router;

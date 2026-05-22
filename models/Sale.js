@@ -6,21 +6,6 @@ date: {
     required: true,
     default: Date.now
 },
-// itemname: {
-//     type: mongoose.Schema.Types.ObjectId,
-//     ref: 'Stock',
-//     required: true
-// },
-// quantity: {
-//     type: Number,
-//     trim: true,
-//     required: true
-// },
-// unitprice: {
-//     type: Number,
-//     trim: true,
-//     required: true
-// },
 customername: {
     type: String,
     required: true
@@ -75,9 +60,12 @@ grandTotal: {
     type: Number,
     required: true
 },
-// total: {
-//     type: Number
-// },
+
+invoiceNumber: {
+    type: String,
+    unique: true
+},
+
 attendant: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Registration'
