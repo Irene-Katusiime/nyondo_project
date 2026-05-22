@@ -85,20 +85,21 @@ head
                 a.btn-edit(href=`/deposit/edit/${deposit._id}`)
                   i.fas.fa-pen 
                   | Edit
-    //- section.section
-    //-   h2 Low Stock Alerts
-    //-   table
-    //-     thead
-    //-       tr
-    //-         th Item
-    //-         th Quantity Left
-    //-         th Reorder Level
-    //-     tbody
-    //-       tr
-    //-         td Cement
-    //-         td 8 Bags
-    //-         td 20 Bags
-    //-       tr
-    //-         td Iron Bars
-    //-         td 12 Pieces
-    //-         td 30 Pieces
+    section.section 
+      h2 Registered Users 
+      table 
+        thead 
+          tr 
+            th Full Name 
+            th Email Address
+            th Phone Number 
+            th Role 
+            th Date Registered 
+        tbody 
+          each user in users 
+            tr 
+              td= user.fullname 
+              td= user.email 
+              td= user.phonenumber 
+              td= user.role 
+              td= new Date(user.date).toLocaleDateString()

@@ -1,0 +1,21 @@
+doctype html
+head
+  title Registered Users
+  link(rel='stylesheet' href='/css/admin-users.css')
+h1 Registered Users
+table(border='1')
+  thead
+    tr
+      th Full Name
+      th Email Address
+      th Phone NUmber
+      th Role
+      th Date Registered
+  tbody
+    each user in users
+      tr 
+        td= user.fullname 
+        td= user.email 
+        td= user.phone 
+        td= user.role 
+        td= new Date(user.date).toLocaleDateString()

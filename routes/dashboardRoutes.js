@@ -3,6 +3,7 @@ const router = express.Router();
 const Deposit = require('../models/Deposit'); //Importing the deposit model
 const Stock = require('../models/Stock');
 const Sale = require('../models/Sale');
+const Registration = require('../models/Registration');
 
 router.get('/admindashboard', async(req, res)=>{
     const startOfDay = new Date();
@@ -28,6 +29,9 @@ router.get('/admindashboard', async(req, res)=>{
     });
 
     try {
+
+        const users = await Registration.find();
+
         //Fetch the 5 most recent deposits
         const deposits = await Deposit.find()
             .sort({ date: -1})
@@ -48,7 +52,9 @@ router.get('/admindashboard', async(req, res)=>{
             const lowStockCount = lowStockItems.length;
 
         // Send deposits to the admin view
-        res.render('admin', { deposits, stockValue, totalSales, totalDeposits, lowStockCount });
+
+        res.render('admin', { deposits, stockValue, totalSales, totalDeposits, lowStockCount,users });
+
     } catch (error) {
         console.error('Error fetching deposits:', error);
         res.status(500).send('Server Error')

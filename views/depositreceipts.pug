@@ -65,13 +65,6 @@ head
             //- td UGX #{deposit.balance.toLocaleString()}
 
     // Financial Calculation Totals Summary Section
-    //- - const subtotal = deposit.quantity * deposit.itemprice
-    //- - const depositPaid = deposit.amountdeposited || 0
-    //- - const balance = grandtotal- depositPaid
-    //- - const transport = Number(deposit.transportcost || 0)
-    //- - const grandTotal = subtotal + transport
-
-    // calculations FIRST
     - const subtotal = deposit.quantity * deposit.itemprice
     - const transport = Number(deposit.transportcost || 0)
     - const grandTotal = subtotal + transport

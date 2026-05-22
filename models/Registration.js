@@ -26,8 +26,11 @@ const registrationSchema = new mongoose.Schema({
     type: String,
     required: true,
     enum: ['admin','store manager','sales attendant']
+  },
+  date: {
+    type: Date,
+    default: Date.now
   }
-
 });
 registrationSchema.plugin(passportLocalMongoose,{
   usernameField: 'email'
