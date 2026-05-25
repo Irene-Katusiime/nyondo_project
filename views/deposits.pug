@@ -8,7 +8,7 @@ head
 .sidebar
   h2 Nyondo Stock
   a(href='admindashboard')
-    i.fas.fa-th-large
+    i.fas.fa-home
     | Dashboard
   a(href='/saleslist')
     i.fas.fa-shopping-cart
@@ -63,4 +63,10 @@ head
         .form-group
           label Amount to Deposit (UGX)
           input(type='number' name='amountdeposited' placeholder='Enter amount' required='')
+        .form-group 
+          label.transport-label Transport Needed?
+          select(name='needsTransport')
+            option(value='') Choose either yes or no
+            option(value='yes') Yes 
+            option(value='no') No
         button.btn-deposit(type='submit') Confirm Deposit

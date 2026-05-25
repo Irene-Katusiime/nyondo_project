@@ -15,7 +15,7 @@ aside.sidebar
       p Hardware Management
   nav.nav-menu
     a(href='/admindashboard')
-      i.fa-solid.fa-chart-pie
+      i.fas.fa-home
       |  Dashboard
     a(href='/stocklist')
       i.fa-solid.fa-boxes-stacked
@@ -51,11 +51,6 @@ main.main-content
         p Cost of Goods (COGS)
         h3 UGX #{stats.costRevenue.toLocaleString()} 
       i.fa-solid.fa-boxes-stacked
-    .stat-card
-      .stat-info
-        p Net Profit
-        h3(style='color: var(--success);') UGX #{stats.netProfit}
-      i.fa-solid.fa-money-bill-trend-up
     .stat-card
       .stat-info
         p Total Deposits
@@ -138,7 +133,6 @@ main.main-content
             th Amount Deposited 
             th Date 
             th Balance 
-            th Status
         tbody
           each deposit in deposits
             tr
@@ -153,10 +147,6 @@ main.main-content
               td= deposit.amountdeposited 
               td= new Date(deposit.date).toLocaleDateString()
               td= deposit.balance
-              td 
-                - const status = (deposit.status || 'Pending').toLowerCase()
-                span(class=`status ${status}`)= deposit.status || 'Pending'
-              
 // Tab Control Core Logic
 script.
   function toggleReportTab(event, targetPanelId) {

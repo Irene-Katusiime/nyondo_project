@@ -64,7 +64,11 @@ invoiceNumber: {
 },
 transportcost: {
     type: Number,
-}
+},
+needsTransport: {
+    type: Boolean,
+    default: false
+},
 });
 
 

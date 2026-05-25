@@ -7,18 +7,15 @@ head
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css')
 .sidebar
   h2 Nyondo Stock
-  a(href='stocklist')
-    i.fas.fa-th-large
+  a(href='/stocklist')
+    i.fas.fa-home
     | Dashboard
-  a.active(href='stocklist')
+  a.active(href='/stocklist')
     i.fas.fa-boxes
     | Stock
-  a(href='saleslist')
+  a(href='/saleslist')
     i.fas.fa-shopping-cart
     | Sales
-  a(href='#')
-    i.fas.fa-wallet
-    | Deposits
   a(href='logout')
     i.fas.fa-sign-out-alt
     | Logout

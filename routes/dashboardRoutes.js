@@ -111,7 +111,6 @@ router.get('/report', async (req,res) =>{
         let stats = {
             salesRevenue: 0,
             costRevenue:0,
-            netProfit: 0
         };
 
         //Sales data 
@@ -160,8 +159,6 @@ router.get('/report', async (req,res) =>{
             [{$group:{_id:null,grandTotal:{$sum:'$total'}}}]
         );
         stats.costRevenue = costAgg.length > 0 ? costAgg[0].grandTotal:0;
-
-        stats.netProfit = stats.salesRevenue - stats.costRevenue;
 
         //Total Deposits
         const depositAgg = await Deposit.aggregate([

@@ -43,11 +43,13 @@ body {
 
 .sidebar a {
     display: block;
-    color: #bdc3c7;
-    padding: 15px 25px;
+    color: white;
+    gap: 12px;
+    padding: 14px 24px;
     text-decoration: none;
-    transition: var(--transition);
+    transition: 0.3s;
     font-size: 1rem;
+    border-radius: 8px;
 }
 
 .sidebar a i {
@@ -57,9 +59,13 @@ body {
 
 .sidebar a:hover, .sidebar a.active {
     background-color: #34495e;
-    color: #f39c12;
+    color: white;
     border-left: 4px solid #f39c12;
 }
+
+a.active i {
+color: #f39c12;
+    }
 
 /* --- Main Content --- */
 .main {

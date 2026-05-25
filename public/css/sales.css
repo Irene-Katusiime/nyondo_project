@@ -55,6 +55,7 @@ body {
 .sidebar a:hover, .sidebar a.active {
     background-color: #34495e;
     color: white;
+    border-left: 4px solid #f39c12;
 }
 
 /* Space between icon and text */
@@ -66,7 +67,7 @@ a i {
 
 /* Make the active icon a different color */
 a.active i {
-  color: #f39c12; /* Or your preferred theme color */
+  color: #f39c12;
 }
 
 /* 3. Main Content Area */
@@ -79,6 +80,7 @@ a.active i {
 h1 {
     color: #2c3e50;
     margin-bottom: 30px;
+    font-size: 28px;
 }
 
 /* 4. The Form Card */
@@ -171,9 +173,10 @@ button:hover {
 /* 5. The Table Card */
 .table-container {
     background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+    overflow-x: auto;
 }
 
 .table-container h2 {
@@ -187,20 +190,20 @@ table {
 }
 
 th {
-    background-color: #2c3e50;
+    background-color: var(--primary);
     text-align: left;
     padding: 15px;
-    color: #f4f7f6;
+    color: white;
     font-size: 0.9rem;
     border-bottom: 2px solid #eee;
 }
 
 td {
     padding: 15px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #e5e7eb;
     color: #2c3e50;
 }
 
 tr:hover {
-    background-color: #fcfcfc;
+    background-color: #f9f9f9;
 }

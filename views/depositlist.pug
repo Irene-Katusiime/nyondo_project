@@ -8,7 +8,7 @@ head
 .sidebar
   h2 Nyondo Stock
   a(href='/admindashboard')
-    i.fas.fa-th-large
+    i.fas.fa-home
     | Dashboard
   a(href='/deposit')
     i.fas.fa-boxes
@@ -50,7 +50,7 @@ head
             th Date
             th Balance
             th Status
-            //- th Actions
+            th Actions
         tbody
           each deposit in deposits
             tr
@@ -70,10 +70,10 @@ head
                 - const status = (deposit.status || 'Pending').toLowerCase()
                 span(class=`status ${status}`)= deposit.status || 'Pending'
 
-              //- td 
-              //-   .d-flex.gap-2
-              //-     a.btn.btn-sm.btn-outline-warning(href=`/deposit/edit/${deposit._id}`)
-              //-       i.fas.fa-edit
-              //-     form.d-inline(action=`/deposit/delete/${deposit._id}` method='post' onsubmit='return confirm("Are you sure you want to delete this deposit?");')
-              //-       button.btn.btn-sm.btn-outline-danger(type='submit')
-              //-         i.fas.fa-trash-alt 
+              td 
+                .d-flex.gap-2
+                  a.btn.btn-sm.btn-outline-warning(href=`/deposit/edit/${deposit._id}`)
+                    i.fas.fa-edit
+                  //- form.d-inline(action=`/deposit/delete/${deposit._id}` method='post' onsubmit='return confirm("Are you sure you want to delete this deposit?");')
+                  //-   button.btn.btn-sm.btn-outline-danger(type='submit')
+                  //-     i.fas.fa-trash-alt 

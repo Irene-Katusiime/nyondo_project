@@ -28,16 +28,20 @@ router.post('/deposits', isAdmin, async (req ,res)=>{
 
     const count = await Deposit.countDocuments();
 
-    // const transportcost = Number(req.body.transportcost || 0);
+    const needsTransport = req.body.needsTransport;
 
     //Transport calculation
 
-    let transportcost = 0
+    let transportcost = 0;
+    if(needsTransport === 'no'){
+      transportcost = 0;
+    } else {
      if (subtotal >= 500000 && Number(distance)<= 10){
       transportcost = 0
      }else{
       transportcost = 30000
      }
+    }
 
      const grandTotal = subtotal + transportcost;
      const balance = grandTotal - paid
@@ -56,6 +60,7 @@ router.post('/deposits', isAdmin, async (req ,res)=>{
       balance,
       customeraddress,
       distance,
+      needsTransport : req.body.hasTransport ? true : false,
       transportcost,
       subtotal,
       invoiceNumber,
@@ -81,14 +86,6 @@ router.get('/credit', isAdmin,async(req,res) => {
   try {
     //Fetch all deposits from Mongodb
     const deposits = await Deposit.find().sort({ date: -1});
-
-    //Fetch all deposits 
-    // const totalDeposits = deposits.reduce((sum, deposit) => {
-    //   return sum + Number(deposit.amountdeposited || 0);
-    // }, 0);
-
-    //Render the reports page
-    // res.render('reports', {deposits, totalDeposits});
 
     //Calculte total amount deposited
     const totalPool = deposits.reduce((sum, deposit) => {
@@ -159,7 +156,7 @@ router.post('/deposit/update/:id', async(req,res) => {
       balance,
       status
   });
-  res.redirect('/admindashboard');
+  res.redirect(`/deposits/receipt/${deposit._id}`);
 }catch(error){
   console.error(error);
   res.status(500).send('Update error');
