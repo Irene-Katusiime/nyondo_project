@@ -212,4 +212,23 @@
         gap: 10px;
       }
     }
+    .btn-delete{
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  background: #e74c3c;   /* red */
+  color: white;
+
+  padding: 6px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-delete:hover{
+  background: #c0392b;   /* darker red on hover */
+}
   

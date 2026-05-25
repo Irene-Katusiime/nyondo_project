@@ -1,0 +1,17 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Edit User
+  link(rel='stylesheet' href='/css/edit-user.css')
+form(method='POST' action=`/users/edit/${user._id}`)
+  h1 Edit User
+  label(for='fullname') Full Name
+  input(type='text' name='fullname', value=user.fullname)
+  label(for='email') Email
+  input(type='email' name='email', value=user.email )
+  label(for='phonenumber') Phone Number
+  input(type='text' name='phonenumber', value=user.phonenumber)
+  label(for='role') Role
+  input(type='text' name='role', value=user.role)
+  button(type='submit') Update

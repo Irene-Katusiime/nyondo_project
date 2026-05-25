@@ -50,8 +50,12 @@ router.get('/stocklist',authorizeRoles('store manager','admin'), async(req, res)
     //Total number of items
     const totalItems = stocks.length;
 
-    //Number of unique categories
-    const categories = [...new Set(stocks.map(item => item.category))].length;
+    //Calculating low stock items
+    const lowStockItems = await Stock.find({
+      quantity: {$lte: 10}
+    });
+
+    const lowStockCount = lowStockItems.length;
 
     //Total stock value
     const stockValue = stocks.reduce((sum, item) => sum +item.total,0);
@@ -59,7 +63,7 @@ router.get('/stocklist',authorizeRoles('store manager','admin'), async(req, res)
     res.render('stock-list',{
       stocks,
       totalItems,
-      categories,
+      lowStockCount,
       stockValue
     });
   } catch (error) {

@@ -114,6 +114,13 @@ head
         .form-group
           label Distance
           input(type='number' name='customerdistance' required)
+        
+        .form-group 
+          label.transport-label Transport Needed?
+          select(name='needsTransport')
+            option(value='') Choose either yes or no
+            option(value='yes') Yes 
+            option(value='no') No
 
         .form-group
           label Payment Method

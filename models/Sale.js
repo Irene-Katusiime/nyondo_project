@@ -23,11 +23,14 @@ customerdistance: {
     required: true
 },
 transportcost: {
-    type: Number,
-    
+    type: Number,  
 },
 paymentmethod: {
     type: String
+},
+hasTransport: {
+    type: Boolean,
+    default: false
 },
 items: [
     {

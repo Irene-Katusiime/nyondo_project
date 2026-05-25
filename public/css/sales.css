@@ -138,6 +138,19 @@ input:focus {
     border-color: #f39c12;
 }
 
+.transport-check{
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.transport-label{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+}
+
 button {
     grid-column: 1 / -1; /* Makes button stretch across all columns */
     padding: 12px;

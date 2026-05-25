@@ -109,15 +109,23 @@ router.post('/cart/checkout', async (req, res) => {
   const grandTotal = cart.reduce((sum, item)=> {
    return sum + Number(item.total || 0); },0);
 
-    //Transport calculation
-    let transportcost = 0
-     if (grandTotal >= 500000 && Number(customerdistance)<= 10){
-      transportcost = 0
-     }else{
-      transportcost = 30000
-     }
+   const needsTransport = req.body.needsTransport;
 
+    //Transport calculation
+    let transportcost = 0;
+
+    if (needsTransport === 'no') {
+      transportcost = 0;
+    } else {
+     if (grandTotal >= 500000 && Number(customerdistance)<= 10){
+      transportcost = 0;
+     }else{
+      transportcost = 30000;
+     }
+    }
      const finalTotal = grandTotal + transportcost
+
+     console.log(req.body);
 
   
   
@@ -207,8 +215,9 @@ router.post("/direct-sale",authorizeRoles('sales attendant','admin'), async (req
       attendant: req.user._id,
       customeraddress,
       customerdistance,
+      hasTransport : req.body.hasTransport ? true : false,
       transportcost,
-      total
+      finaltotal
     });
 
     console.log(newItem);

@@ -5,6 +5,42 @@ const Stock = require('../models/Stock');
 const Sale = require('../models/Sale');
 const Registration = require('../models/Registration');
 
+//Show edit form
+router.get('/users/edit/:id', async(req,res) => {
+    try{
+        const user = await Registration.findById(req.params.id);
+        res.render('edituser',{user});
+    }catch(error){
+        console.error(error);
+        res.send('Error loading edit page');
+    }
+});
+
+router.post('/users/edit/:id', async(req,res) => {
+    try{
+        await Registration.findByIdAndUpdate(req.params.id,{
+            fullname: req.body.fullname,
+            email: req.body.email,
+            phonenumber: req.body.phonenumber,
+            role: req.body.role
+        });
+        res.redirect('/admindashboard');
+    }catch(error){
+        console.log(error);
+        res.send('Update failed');
+    }
+});
+
+router.get('/users/delete/:id', async(req, res) => {
+    try{
+        await Registration.findByIdAndDelete(req.params.id);
+        res.redirect('/admindashboard');
+    }catch(error){
+        console.log(error);
+        res.send('Delete failed');
+    }
+});
+
 router.get('/admindashboard', async(req, res)=>{
     const startOfDay = new Date();
     startOfDay.setUTCHours(0,0,0,0);

@@ -18,12 +18,6 @@ head
   a(href='salesform')
     i.fas.fa-shopping-cart
     | Add Sale
-  //- a(href='deposit')
-  //-   i.fas.fa-wallet
-  //-   | Deposits
-  //- a(href='#')
-  //-   i.fas.fa-chart-line
-  //-   | Reports
   a(href='logout')
     i.fas.fa-sign-out-alt
     | Logout
@@ -38,6 +32,7 @@ head
         th Item Name
         th Quantity
         th Unit Price (UGX)
+        th Transport Cost (UGX)
         th Customer Name 
         th Customer Contact
         th Attendant
@@ -50,26 +45,30 @@ head
           tr
             td
               each item in sale.items 
-                div= item.itemname.itemName
+                div= item.itemname ? item.itemname.itemName: 'Item deleted'
             td
               each item in sale.items 
                 div= item.quantity 
             td
               each item in sale.items 
                 div= item.unitprice
+            td= sale.transportcost
             td= sale.customername
             td= sale.customercontact
             td= sale.attendant ? sale.attendant.fullname: 'attendant was deleted'
             td= new Date(sale.date).toLocaleDateString() 
             td= (sale.grandTotal || 0).toLocaleString()
             td= sale.paymentmethod
-              td
-                .d-flex.gap-2
-                  a.btn.btn-sm.btn-outline-warning(href=`/sale/edit/${sale._id}`)
-                    i.fas.fa-edit
-                  form.d-inline(action=`/delete/${sale._id}` method='post' onsubmit='return confirm("Are you sure you want to delete this item?");')
-                    button.btn.btn-sm.btn-outline-danger(type='submit')
-                      i.fas.fa-trash-alt
+            td
+              .d-flex.gap-2
+                a.btn.btn-sm.btn-success(
+                  href=`/sales/receipt/${sale._id}`
+                ) View
+                a.btn.btn-sm.btn-outline-warning(href=`/sale/edit/${sale._id}`)
+                  i.fas.fa-edit
+                form.d-inline(action=`/delete/${sale._id}` method='post' onsubmit='return confirm("Are you sure you want to delete this item?");')
+                  button.btn.btn-sm.btn-outline-danger(type='submit')
+                    i.fas.fa-trash-alt
             if sales.length === 0
               tr
                 td.text-center(colspan='9') No sales have been recorded yet.
