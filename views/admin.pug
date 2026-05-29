@@ -2,12 +2,12 @@ doctype html
 head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Nyondo Stock - Admin Dashboard
+  title Nyondo Hardware - Admin Dashboard
   link(rel='stylesheet' href='css/admin.css') 
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css')
 .container
   aside.sidebar
-    h2 Nyondo Stock
+    h2 Nyondo Hardware
     a.active(href='#')
       i.fas.fa-home
       span Dashboard
@@ -52,7 +52,7 @@ head
           h3 Total Deposits
           p UGX #{(totalDeposits || 0).toLocaleString()}
       .card
-        i.fas.fa-exclamation-triangle
+        i.fas.fa-exclamation-triangle.low-stock-icon
         div
           h3 Low Stock Items
           p #{lowStockCount} Items
@@ -64,9 +64,10 @@ head
             th Customer
             th Item
             th Quantity
-            th Item Price
-            th Deposited
-            th Balance
+            th Item Price (UGX)
+            th Total Price (UGX)
+            th Amount Deposited (UGX)
+            th Balance (UGX)
             th Status
             th Actions
         tbody
@@ -76,6 +77,7 @@ head
               td= deposit.itemname
               td= deposit.quantity 
               td= deposit.itemprice
+              td UGX #{(deposit.quantity * deposit.itemprice).toLocaleString()}
               td UGX #{deposit.amountdeposited.toLocaleString()}
               td UGX #{deposit.balance.toLocaleString()}
               td 

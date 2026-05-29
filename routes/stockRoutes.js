@@ -64,7 +64,8 @@ router.get('/stocklist',authorizeRoles('store manager','admin'), async(req, res)
       stocks,
       totalItems,
       lowStockCount,
-      stockValue
+      stockValue,
+      user: req.user
     });
   } catch (error) {
     console.error(error);

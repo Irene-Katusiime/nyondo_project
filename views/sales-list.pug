@@ -8,19 +8,30 @@ head
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css')
 // Sidebar
 .sidebar
-  h2 Nyondo Stock
+  h2 Nyondo Hardware
   a.active(href='')
     i.fas.fa-home
     | Dashboard
   a(href='salesform')
     i.fas.fa-shopping-cart
     | Add Sale
+  if user && user.role === 'admin'
+    a(href='/admindashboard')
+      i.fas.fa-sign-out-alt
+      | Back
   a(href='logout')
     i.fas.fa-sign-out-alt
     | Logout
 // Main content
 .main
   h1 Sales Management
+  .card-container 
+    .card 
+        h3 Total Sales 
+        p UGX #{(totalSales || 0).toLocaleString()}
+    .card
+        h3 Sales Today 
+        p UGX #{(todayTotal || 0).toLocaleString()}
   // Sales Table
   .table-container
     h2 Sales Records

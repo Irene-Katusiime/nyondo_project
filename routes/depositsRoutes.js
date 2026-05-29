@@ -144,7 +144,7 @@ router.post('/deposit/update/:id', async(req,res) => {
     if (balance <= 0){
       status = 'Paid';
     }else if (updatePaid > 0) {
-      status = 'Partial';
+      status = 'Pending';
     }
 
     await Deposit.findByIdAndUpdate(req.params.id,{

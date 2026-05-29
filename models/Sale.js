@@ -68,7 +68,6 @@ invoiceNumber: {
     type: String,
     unique: true
 },
-
 attendant: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Registration'

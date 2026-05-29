@@ -2,11 +2,11 @@ doctype html
 head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Deposit Scheme - Nyondo Stock
+  title Deposit Scheme - Nyondo Hadware
   link(rel='stylesheet' href='css/deposit.css')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css')
 .sidebar
-  h2 Nyondo Stock
+  h2 Nyondo Hardware
   a(href='admindashboard')
     i.fas.fa-home
     | Dashboard
@@ -34,7 +34,7 @@ head
       form(action='/deposits' method='post')
         .form-group
           label Customer Name
-          input(type='text' name='customername' placeholder='e.g. John Doe' required='')
+          input(type='text' name='customername' placeholder='e.g. Katusiime Irene' required='')
         .form-group
           label NIN Number
           input(type='text' name='NINnumber' placeholder='Enter NIN (e.g. CM12345678ABCD)' required='' pattern='^[A-Z]{2}\\d{9}[A-Z]{4}$' maxlength='15' title='NIN must be 2 letters,9 digits,then 4 letters')

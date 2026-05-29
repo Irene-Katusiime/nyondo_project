@@ -55,8 +55,6 @@ router.post('/cart/add', async (req, res) => {
     req.session.cart = [];
   }
 
-  
-
   const item = await Stock.findById(itemId);
 
   if (!item) {
@@ -237,17 +235,32 @@ router.post("/direct-sale",authorizeRoles('sales attendant','admin'), async (req
 //Get sales from the db
 router.get('/salesList',authorizeRoles('sales attendant','admin','store manager'), async(req, res) =>{
   try {
-    const sales = await Sale.find()
+    const allSales = await Sale.find()
       .populate('items.itemname','itemName category')
       .populate('attendant','fullname')
       .sort({date:-1});
-
-      let grossRevenue = sales.reduce((sum, item) => {
-        return sum + Number(item.total || 0);
-      }, 0);
       
+      const grossRevenue = allSales.reduce((sum, sale) => {
+          return sum + Number(sale.grandTotal || 0);
+        }, 0);
 
-       res.render('sales-list',{sales, grossRevenue});
+        const totalSales = grossRevenue;
+
+        // TODAY RANGE
+        const startOfDay = new Date();
+        startOfDay.setHours(0,0,0,0);
+
+        const endOfDay = new Date();
+        endOfDay.setHours(23,59,59,999);
+
+        const todaySales = await Sale.find({
+          date: { $gte: startOfDay, $lte: endOfDay }
+        });
+
+        const todayTotal = todaySales.reduce((sum, sale) => {
+          return sum + Number(sale.grandTotal || 0);},0);
+
+       res.render('sales-list',{sales: allSales, grossRevenue, totalSales, todaySales, todayTotal, user: req.user});
 
 
   } catch (error) {

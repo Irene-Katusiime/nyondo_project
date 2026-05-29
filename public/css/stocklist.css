@@ -192,6 +192,10 @@
             font-size: 1.1rem;
             margin-right: 10px;
         }
+        
+        .card i.low-stock-icon {
+            color: var(--danger) !important;
+        }
 
         .action-btn:hover { color: var(--accent); }
 

@@ -2,17 +2,15 @@ doctype html
 head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title NyondoStock | Reports
+  title NyondoHardware | Reports
   link(rel='stylesheet' href='/css/reports.css')
   // FontAwesome for the specific icon indicators used in your framework
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css')
 // Sidebar Layout
 aside.sidebar
   .sidebar-branding
-    i.fa-solid.fa-layer-group
     div
-      h2 NyondoStock
-      p Hardware Management
+      h2 Nyondo Hardware
   nav.nav-menu
     a(href='/admindashboard')
       i.fas.fa-home
@@ -80,7 +78,7 @@ main.main-content
             tr
               td
                 each item in sale.items 
-                  div= item.itemname.itemName 
+                  div= item.itemname ? item.itemname.itemName: 'Item deleted' 
               td
                 each item in sale.items 
                   div= item.quantity 

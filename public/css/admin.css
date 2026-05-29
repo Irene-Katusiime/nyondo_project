@@ -66,6 +66,10 @@
       color: #f39c12;
     }
 
+     .card i.low-stock-icon {
+          color: var(--danger) !important;
+        }
+
     /* Main Content */
     .main {
       margin-left: 250px;
