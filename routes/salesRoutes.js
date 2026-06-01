@@ -6,7 +6,7 @@ const Stock = require("../models/Stock");
 const {isAttendant,isAdmin, isManager} = require('../middleware/auth');
 const { authorizeRoles } = require('../middleware/auth');
 
-router.get('/salesform',authorizeRoles('sales attendant','admin'), async (req, res)=>{
+router.get('/salesform',isAttendant, async (req, res)=>{
   try {
     const items = await Stock.find({ quantity: { $gt: 0}});
 
@@ -233,7 +233,7 @@ router.post("/direct-sale",authorizeRoles('sales attendant','admin'), async (req
 });
 
 //Get sales from the db
-router.get('/salesList',authorizeRoles('sales attendant','admin','store manager'), async(req, res) =>{
+router.get('/salesList',authorizeRoles('sales attendant','admin'), async(req, res) =>{
   try {
     const allSales = await Sale.find()
       .populate('items.itemname','itemName category')
@@ -270,7 +270,7 @@ router.get('/salesList',authorizeRoles('sales attendant','admin','store manager'
 });
 
 //Update sale
-router.get('/sale/edit/:id',authorizeRoles("sales attendant", "admin"), async(req,res) =>{
+router.get('/sale/edit/:id',isAttendant, async(req,res) =>{
   try {
     const sale = await Sale.findById(req.params.id)
     if(!sale) return res.status(404).send('Sale not found')
@@ -280,7 +280,7 @@ router.get('/sale/edit/:id',authorizeRoles("sales attendant", "admin"), async(re
       res.status(400).send('Unable to find sale in the Db')
   }
 });
-router.post('/sale/edit/:id',authorizeRoles("sales attendant", "admin"), async(req,res) => {
+router.post('/sale/edit/:id',isAttendant, async(req,res) => {
   try {
     const {quantity, unitprice, customername, customercontact} = req.body;
     const total = quantity*unitprice;
@@ -307,7 +307,7 @@ router.post('/sale/edit/:id',authorizeRoles("sales attendant", "admin"), async(r
 });
 
 //Delete route
-router.post('/delete/:id',authorizeRoles("sales attendant", "admin"), async(req,res) => {
+router.post('/delete/:id',isAttendant, async(req,res) => {
   try {
     await Sale.findByIdAndDelete(req.params.id);
     res.redirect('/salesList')

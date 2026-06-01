@@ -6,11 +6,11 @@ const {isAttendant,isAdmin, isManager} = require('../middleware/auth');
 const { authorizeRoles } = require('../middleware/auth');
 
 
-router.get('/stockreg',authorizeRoles('store manager','admin'), async (req, res)=>{
+router.get('/stockreg',isManager, async (req, res)=>{
     res.render('stockmanagement')
 })
 
-router.post('/stockreg',authorizeRoles('store manager','admin'), async(req ,res)=>{
+router.post('/stockreg',isManager, async(req ,res)=>{
   console.log(req.body);
   try {
     const {itemName,category,quantity,unitprice,sellingprice,suppliername,suppliercontact, factoryName, paymentmethod } =req.body;
@@ -74,7 +74,7 @@ router.get('/stocklist',authorizeRoles('store manager','admin'), async(req, res)
 });
 
 //Update stock
-router.get('/stock/edit/:id',authorizeRoles('store manager','admin'),async(req,res) =>{
+router.get('/stock/edit/:id',isManager,async(req,res) =>{
   try {
     const item = await Stock.findById(req.params.id)
     if(!item) return res.status(404).send('Stock not found')
@@ -84,7 +84,7 @@ router.get('/stock/edit/:id',authorizeRoles('store manager','admin'),async(req,r
   }
 });
 
-router.post('/stock/edit/:id',authorizeRoles('store manager','admin'), async(req,res) => {
+router.post('/stock/edit/:id',isManager, async(req,res) => {
   try {
     const {quantity, sellingprice, unitprice, suppliername, paymentmethod } = req.body;
     const total = quantity*unitprice;
@@ -105,7 +105,7 @@ router.post('/stock/edit/:id',authorizeRoles('store manager','admin'), async(req
 });
 
 //Delete route
-router.post('/stock/delete/:id',authorizeRoles('store manager','admin'), async(req,res) => {
+router.post('/stock/delete/:id',isManager, async(req,res) => {
   try {
     await Stock.findByIdAndDelete(req.params.id);
     res.redirect('/stocklist')

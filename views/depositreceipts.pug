@@ -54,7 +54,6 @@ head
           th Unit Cost (UGX)
           th Total Cost (UGX)
           th Amount Paid (UGX)
-          //- th Balance (UGX)
       tbody
           tr 
             td= deposit.itemname 
@@ -62,7 +61,6 @@ head
             td UGX #{deposit.itemprice.toLocaleString()}
             td UGX #{(deposit.quantity * deposit.itemprice).toLocaleString()}
             td UGX #{deposit.amountdeposited.toLocaleString()}
-            //- td UGX #{deposit.balance.toLocaleString()}
 
     // Financial Calculation Totals Summary Section
     - const subtotal = deposit.quantity * deposit.itemprice
@@ -82,7 +80,7 @@ head
           span Grand Total:
           span UGX #{grandTotal.toLocaleString()}
         .calc-row.highlight-paid
-          span Amount Paid Today:
+          span Amount Paid:
           span UGX #{depositPaid.toLocaleString()}
         .calc-row.highlight-balance
           span Outstanding Balance:
@@ -94,5 +92,3 @@ head
       p.thanks-message Thank you for doing business with Nyondo General Hardware!
       p
         | Goods once cleared and collected in full cannot be returned after 7 business days.
-    //-   .stamp-signature-area
-    //-     .sign-line Issued Stamp / Signature

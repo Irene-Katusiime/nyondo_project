@@ -12,7 +12,7 @@ head
     | Dashboard
   a.active(href='/stocklist')
     i.fas.fa-boxes
-    | Stock
+    | Register Stock
   a(href='logout')
     i.fas.fa-sign-out-alt
     | Logout
@@ -28,9 +28,9 @@ head
             label Item Name
             select(name='itemName' required='')
               option(value='') Select Item 
-              option(value='Cement') Cement
+              option(value='Cement') Cement (bags)
               option(value='Ironbars') Iron bars
-              option(value='Nails') Nails
+              option(value='Nails') Nails(boxes)
               option(value='Wheelbarrows') Wheelbarrows
               option(value='Wiremesh') Wire mesh
               option(value='Barbedwires') Barbed wires
