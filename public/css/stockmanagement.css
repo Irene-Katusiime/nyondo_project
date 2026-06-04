@@ -130,7 +130,13 @@ input:focus, select:focus {
     box-shadow: 0 0 5px rgba(52, 152, 219, 0.2);
 }
 
-/* --- Button --- */
+/* This guarantees the border stays red even when the user clicks inside the input */
+input.error, select.error,
+input.error:focus, select.error:focus {
+    border: 2px solid red !important;
+}
+
+/*Button*/
 button[type='submit'] {
     background-color: var( --primary-color);
     color: white;

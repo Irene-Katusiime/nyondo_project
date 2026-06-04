@@ -58,6 +58,13 @@ input:focus {
     border-color: #f39c12; 
 }
 
+/* This guarantees the border stays red even when the user clicks inside the input */
+input.error, select.error,
+input.error:focus, select.error:focus {
+    border: 2px solid red !important;
+}
+
+
 /* 5. The Login Button */
 .login-btn {
     width: 100%;

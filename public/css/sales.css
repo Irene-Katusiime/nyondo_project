@@ -170,6 +170,13 @@ input:focus {
   font-size: 16px;
 }
 
+/* This guarantees the border stays red even when the user clicks inside the input */
+input.error, select.error,
+input.error:focus, select.error:focus {
+    border: 2px solid red !important;
+}
+
+
 button {
     grid-column: 1 / -1; /* Makes button stretch across all columns */
     padding: 12px;

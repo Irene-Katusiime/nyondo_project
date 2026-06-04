@@ -7,14 +7,37 @@ head
 .container
   h2
     b Nyondo Login
-  form(action='/login' method='post')
+  form#loginForm(action='/login' method='post')
     .form-group
       label Email
-      input(type='email' name='email' placeholder='example@gmail.com' required='')
+      input(type='email' name='email' placeholder='example@gmail.com')
     .form-group
       label Password
-      input(type='password' name='password' placeholder='Enter password' required='')
+      input(type='password' name='password' placeholder='Enter password')
     button.login-btn(type='submit') Login
     .extra
       p
         | Don&apos;t have an account? Contact the admin
+script.
+    console.log("Login JS is running");
+
+    document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("loginForm").addEventListener("submit", function (e) {
+            const inputs = this.querySelectorAll("input, select");
+
+            let hasEmpty = false;
+
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.classList.add("error");
+                    hasEmpty = true;
+                } else {
+                    input.classList.remove("error");
+                }
+            });
+
+            if (hasEmpty) {
+                e.preventDefault();
+            }
+        });
+    });

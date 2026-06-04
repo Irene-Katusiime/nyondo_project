@@ -23,7 +23,7 @@ head
   // sales form
   .form-container
     h2 Record Sale
-    form(action='/cart/add' method='post')
+    form#salesForm(action='/cart/add' method='post')
       .form-group
         label Item Name
           select(name='itemId')
@@ -32,25 +32,25 @@ head
               option(value=item._id) #{item.itemName} (stock: #{item.quantity} | price: #{item.sellingprice} UGX)
       .form-group
         label Quantity
-        input(type='number' name='quantity' placeholder='Enter quantity' required='')
+        input(type='number' name='quantity' placeholder='Enter quantity')
       .form-group
         label Unit Price (UGX)
-        input(type='number' name='unitprice' placeholder='Enter price' required='')
+        input(type='number' name='unitprice' placeholder='Enter price')
       .form-group
         label Customer Name
-        input(type='text' name='customername' placeholder='Enter customer name' required='')
+        input(type='text' name='customername' placeholder='Enter customer name')
       .form-group
         label Customer Contact
-        input(type='text' name='customercontact' placeholder='7xxxxxxxx' required='' pattern='[7][0-9]{8}' maxlength='9' inputmode='numeric'  title='Enter a valid Ugandan number starting with 7 and 9 digits long')
+        input(type='text' name='customercontact' placeholder='7xxxxxxxx' pattern='[7][0-9]{8}' maxlength='9' inputmode='numeric'  title='Enter a valid Ugandan number starting with 7 and 9 digits long')
       .form-group
         label Customer Address
-        input(type='text' name='customeraddress' placeholder='Enter customer address' required='')
+        input(type='text' name='customeraddress' placeholder='Enter customer address')
       .form-group
         label Customer Distance (km)
-        input(type='number' name='customerdistance' placeholder='Enter customer distance' required='')
+        input(type='number' name='customerdistance' placeholder='Enter customer distance')
       .form-group
         label Payment Method
-        select(name='paymentmethod' required='')
+        select(name='paymentmethod')
           option(value='') Select payment method 
           option(value='Cash') Cash 
           option(value='Mobile Money') Mobile Money
@@ -92,19 +92,19 @@ head
       form(action='/cart/checkout' method='post')
         .form-group
           label Customer Name
-          input(type='text' name='customername' required)
+          input(type='text' name='customername')
 
         .form-group
           label Customer Contact
-          input(type='text' name='customercontact' required)
+          input(type='text' name='customercontact')
 
         .form-group
           label Customer Address
-          input(type='text' name='customeraddress' required)
+          input(type='text' name='customeraddress')
 
         .form-group
           label Distance
-          input(type='number' name='customerdistance' required)
+          input(type='number' name='customerdistance')
         
         .form-group 
           label.transport-label Transport Needed?
@@ -115,13 +115,33 @@ head
 
         .form-group
           label Payment Method
-          select(name='paymentmethod' required)
+          select(name='paymentmethod')
             option(value='') Select Payment Method
             option(value='Cash') Cash
             option(value='Mobile Money') Mobile Money
 
         button(type='submit') Checkout
+script.
+    console.log("Sales JS is running");
 
-        //- button(type='submit') Complete  Sale
-    //- else 
-    //- p No items in cart.
+    document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("salesForm").addEventListener("submit", function (e) {
+            const inputs = this.querySelectorAll("input, select");
+
+            let hasEmpty = false;
+
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.classList.add("error");
+                    hasEmpty = true;
+                } else {
+                    input.classList.remove("error");
+                }
+            });
+
+            if (hasEmpty) {
+                e.preventDefault();
+            }
+        });
+    });
+

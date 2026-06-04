@@ -7,6 +7,7 @@ const { authorizeRoles } = require('../middleware/auth');
 const { authorize } = require('passport');
 const Sale = require('../models/Sale');
 
+//Route to add deposits
 router.get('/deposit', isAdmin,async(req, res)=>{
     res.render('deposits')
 })

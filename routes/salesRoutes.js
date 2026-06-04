@@ -6,6 +6,7 @@ const Stock = require("../models/Stock");
 const {isAttendant,isAdmin, isManager} = require('../middleware/auth');
 const { authorizeRoles } = require('../middleware/auth');
 
+//Route to add sales
 router.get('/salesform',isAttendant, async (req, res)=>{
   try {
     const items = await Stock.find({ quantity: { $gt: 0}});
